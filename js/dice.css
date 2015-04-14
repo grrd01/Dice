@@ -1,0 +1,16 @@
+/*!
+* grrd's Dice
+* Copyright (c) 2015 Gerard Tyedmers, grrd@gmx.net
+* Licensed under the MPL License
+*/
+
+td.lineup { border-top: medium solid #444444; }
+td.score { text-align: right; }
+div.score { text-align: right;float: right; }
+a.active { display: none; }
+div.passive { display: block; }
+img.header { margin-top:0px; margin-bottom:0px }
+img.settings { margin-left:-20px;margin-right:-20px;margin-top:-4px; }
+a.btsmall { padding:-20px; height: 35px;width: 55px; }
+img.btsmall { margin-top:-5px;margin-left:-10px;height: 25px;width: 25px; }
+div.popup { width:250px;height:80px;display:block;text-decoration:none;color:white }

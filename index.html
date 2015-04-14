@@ -12,6 +12,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" >
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" >
 		<link rel="stylesheet" href="js/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="js/dice.css" />
 		<link rel="apple-touch-icon" type="image/x-icon" href="Images/apple-touch-icon-57x57.png" >
 		<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" >
 		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" >
@@ -26,15 +27,20 @@
 			<div data-role="content">
 				<img id="img_title" src="images/title.png" alt="grrd's" style="width:100%;margin-top:-10px;" />
 				<img id="img_title2" src="images/title2.png" alt="Dice" style="width:100%;margin-top:-40px;" />
+				<img id="img_title3q" src="images/dice.png" alt="grrd's Dice" style="width:calc(20% - 2px);margin-bottom:20px;" />
 				<noscript> is a 3D Dice Roller app.</noscript>
 				<div data-role="controlgroup" data-type="horizontal" style="float:right;margin-top:-20px;">
-					<a href="#popupInfo" data-role="button" data-rel="dialog" data-transition="pop" style="padding:-20px; height: 35px;width: 55px;"><img src="images/info.png" alt="about" style="margin-top:-5px;margin-left:-10px;height: 25px;width: 25px;"/></a>
-					<a href="#popupSettings" data-role="button" data-rel="dialog" data-transition="pop" style="padding:-20px;height: 35px;width: 55px;"><img src="images/settings.png" alt="settings" style="margin-top:-5px;margin-left:-10px;height: 25px;width: 25px;"/></a>
+					<a href="#popupInfo" class="btsmall" data-role="button" data-rel="dialog" data-transition="pop"><img class="btsmall" src="images/info.png" alt="about"/></a>
+					<a href="#popupSettings" class="btsmall" data-role="button" data-rel="dialog" data-transition="pop"><img class="btsmall" src="images/settings.png" alt="settings"/></a>
 				</div>
-				<img id="img_title3" src="images/dice.png" alt="grrd's Dice" style="display: block;margin-left: auto;margin-right: auto;margin-top:40px;margin-bottom:20px;width: 10em;clear:left" />
-				<a id="start" href="#" onclick="display_dice(); return false;" style="position:absolute;bottom:10px;" data-role="button" data-theme="b"><div data-l10n-id="btstart">Start</div></a>
+				<img id="img_title3h" src="images/dice.png" alt="grrd's Dice" style="display: block;margin-left: auto;margin-right: auto;margin-top:40px;margin-bottom:20px;width: 10em;clear:left" />
+				<a   data-theme="b"></a>
+				<div data-role="controlgroup" data-type="horizontal" style="width:100%;position:absolute;bottom:10px;">
+					<a id="btdice" href="#" onclick="display_dice(false); return false;" data-role="button"><div data-l10n-id="btdice"></div></a>
+					<a id="btyahtzee" href="#" onclick="display_dice(true); return false;" data-role="button"><div data-l10n-id="btyahtzee"></div></a>
+				</div>
 			</div>
-			<div id="popupWebGL" data-role="popup" data-theme="a" style="width:250px;height:80px;display:block;text-decoration:none;color:white" >
+			<div id="popupWebGL" class="popup" data-role="popup" data-theme="a">
 				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
 				<p data-l10n-id="lbwebgl" style="margin-top:-1px;"><br>Your browser does not support WebGL!</p>
 			</div>
@@ -42,24 +48,32 @@
 
 		<div data-role="page" id="dice" data-theme="a" style="position:relative;margin-top:-4px;" onmousedown="$('#popupSwipe').popup('close')">
 			<a href="#" onclick="quit_dice(); return false;" data-iconpos="notext" data-icon="delete" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;right:0;">Back</a>
-
-			<div id="popupSwipe" data-role="popup" data-theme="a" style="width:250px;height:80px;display:block;text-decoration:none;color:white" >
+			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0px;pointer-events:none;"></div>
+			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0px;right:0;pointer-events:none;"></div>
+			<div id="popupSwipe" class="popup" data-role="popup" data-theme="a">
 				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
 				<p data-l10n-id="lbswipe" style="margin-top:-1px;"><br>Swipe or shake to roll the dice!</p>
+			</div>
+			<div id="popupLock" class="popup" data-role="popup" data-theme="a">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<p data-l10n-id="lblock" style="margin-top:-1px;"><br>Tap to lock a dice!</p>
 			</div>
 		</div><!-- /page -->
 
 		<!-- Start of 4th page: #popupInfo -->
 		<div data-role="page" id="popupInfo">
 			<div data-role="header" data-theme="a" style="text-align:center;">
-				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/dice.png" alt="dice" style="width:12%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
+				<img src="images/title.png" class="header" alt="grrd's" style="width:38%;" data-inline="true"/>
+				<img src="images/title2.png" class="header" alt="dice" style="width:28%;" data-inline="true"/>
+				<img src="images/dice.png" class="header" alt="dice" style="width:12%;" data-inline="true"/>
 			</div>
 			<div data-role="content" data-theme="d">
 				<table>
 					<tr>
-						<td colspan="2"  style="padding-top:10px;"><span data-l10n-id="lbdev">Developed by Gerard Tyedmers with <a href="http://jquerymobile.com/" target="_blank">jQuery mobile</a><span>, </span><a href="https://github.com/alexgibson/shake.js/" target="_blank">shake.js</a> <span data-l10n-id="lband"> and </span> <a href="http://threejs.org/" target="_blank">three.js</a><span>. </span></span></td>
+						<td colspan="2"  style="padding-top:10px;"><span data-l10n-id="lbdev">Developed by Gerard Tyedmers with <a href="http://jquerymobile.com/" target="_blank">jQuery mobile</a><span>, </span><a href="https://github.com/alexgibson/shake.js/" target="_blank">shake.js</a> <span data-l10n-id="lband"> and </span> <a href="http://threejs.org/" target="_blank">three.js</a><span>. </span><br>
+						<span data-l10n-id="lbmodel">3D-Model created with <a href="https://www.tinkercad.com/" target="_blank">tinkercad</a><span>. </span>
+						</span>
+						</td>
 					</tr>
 					<tr>
 						<td width="20%" style="text-align: center;padding-top:15px;"><a href="mailto:grrd@gmx.net"><img src="images/mail.png" alt="mail" style="width: 80%;"/></a></td>
@@ -69,6 +83,10 @@
 						<td width="20%" style="text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank"><img src="images/puzzle.png" alt="puzzle" style="width: 80%;"/></a></td>
 						<td width="80%" style="padding-left:10px;"><span data-l10n-id="lbpuzzle">Try my other game: <a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank">grrd's Puzzle</a></span></td>
 					</tr>
+					<tr>
+						<td width="20%" style="text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/4inaRow" target="_blank"><img src="images/4inarow.png" alt="puzzle" style="width: 80%;"/></a></td>
+						<td width="80%" style="padding-left:10px;"><span data-l10n-id="lband">and <a href="http://homepage.hispeed.ch/grrds_games/4inaRow/" target="_blank">grrd's 4 in a Row</a></span></td>
+					</tr>
 				</table>
 				<a href="#title" data-l10n-id="btclose" data-role="button" data-theme="c" data-icon="delete">Close</a>
 			</div>
@@ -76,45 +94,426 @@
 
 		<div data-role="page" id="popupSettings" data-theme="a">
 			<div data-role="header" data-theme="a" style="text-align:center;">
-				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/dice.png" alt="dice" style="width:12%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
+				<img src="images/title.png" class="header" alt="grrd's" style="width:38%;" data-inline="true"/>
+				<img src="images/title2.png" class="header" alt="dice" style="width:28%;" data-inline="true"/>
+				<img src="images/dice.png" class="header" alt="dice" style="width:12%;" data-inline="true"/>
 			</div>
 			<div id="dice_content" data-role="content" data-theme="d">
 				<div data-l10n-id="lbcolor">Color</div>
 				<div style='display:block;width:100%;'>
 					<fieldset data-role="controlgroup" data-type="horizontal" style="width:100%;" >
 						<input type="radio" name="color" id="color1" value="0xCC002F" checked="checked"/>
-							<label id="radio1" for="color1"><img id="img_color1" src="images/dice_color.png" style="background-color: #CC002F;margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radio1" for="color1"><img id="img_color1" class="settings" src="images/dice_chance.png" style="background-color: #CC002F;" alt="red"/></label>
 						<input type="radio" name="color" id="color2" value="0x6666FF" />
-							<label id="radio2" for="color2"><img id="img_color2" src="images/dice_color.png" style="background-color: #6666FF;margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radio2" for="color2"><img id="img_color2" class="settings" src="images/dice_chance.png" style="background-color: #6666FF;" alt="blue"/></label>
 						<input type="radio" name="color" id="color3" value="0xFFA319" />
-							<label id="radio3" for="color3"><img id="img_color3" src="images/dice_color.png" style="background-color: #FFA319;margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radio3" for="color3"><img id="img_color3" class="settings" src="images/dice_chance.png" style="background-color: #FFA319;" alt="yellow"/></label>
 						<input type="radio" name="color" id="color4" value="0x33D633" />
-							<label id="radio4" for="color4"><img id="img_color4" src="images/dice_color.png" style="background-color: #33D633;margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radio4" for="color4"><img id="img_color4" class="settings" src="images/dice_chance.png" style="background-color: #33D633;" alt="green"/></label>
 						<input type="radio" name="color" id="color5" value="0xBBBBBB" />
-							<label id="radio5" for="color5"><img id="img_color5" src="images/dice_color.png" style="background-color: #BBBBBB;margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radio5" for="color5"><img id="img_color5" class="settings" src="images/dice_chance.png" style="background-color: #BBBBBB;" alt="white"/></label>
 					</fieldset>
 				</div>
 				<div data-l10n-id="lbanz">Number of dices:</div>
 				<div style='display:block;width:100%;'>
 					<fieldset data-role="controlgroup" data-type="horizontal" style="width:100%;" >
 						<input type="radio" name="anzahl" id="anzahl1" value=1 checked="checked"/>
-							<label id="radioanz1" for="anzahl1"><img id="img_anzahl1" src="images/dice_1.png" style=";margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radioanz1" for="anzahl1"><img id="img_anzahl1" class="settings" src="images/dice_1.png" alt="1"/></label>
 						<input type="radio" name="anzahl" id="anzahl2" value=2 />
-							<label id="radioanz2" for="anzahl2"><img id="img_anzahl2" src="images/dice_2.png" style=";margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radioanz2" for="anzahl2"><img id="img_anzahl2" class="settings" src="images/dice_2.png" alt="2"/></label>
 						<input type="radio" name="anzahl" id="anzahl3" value=3 />
-							<label id="radioanz3" for="anzahl3"><img id="img_anzahl3" src="images/dice_3.png" style="margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radioanz3" for="anzahl3"><img id="img_anzahl3" class="settings" src="images/dice_3.png" alt="3"/></label>
 						<input type="radio" name="anzahl" id="anzahl4" value=4 />
-							<label id="radioanz4" for="anzahl4"><img id="img_anzahl4" src="images/dice_4.png" style=";margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radioanz4" for="anzahl4"><img id="img_anzahl4" class="settings" src="images/dice_4.png" alt="4"/></label>
 						<input type="radio" name="anzahl" id="anzahl5" value=5 />
-							<label id="radioanz5" for="anzahl5"><img id="img_anzahl5" src="images/dice_color.png" style="margin-left:-20px;margin-right:-20px;margin-top:-4px;" alt=""/></label>
+							<label id="radioanz5" for="anzahl5"><img id="img_anzahl5" class="settings" src="images/dice_5.png" alt="5"/></label>
 					</fieldset>
 				</div>
-
+				<div data-l10n-id="lbanzpl">Number of players:</div>
+				<div style='display:block;width:100%;'>
+					<fieldset data-role="controlgroup" data-type="horizontal" style="width:100%;" >
+						<input type="radio" name="anzahlp" id="anzahlp1" value=1 checked="checked"/>
+							<label id="radioanzp1" for="anzahlp1"><img id="img_anzahlp1" class="settings" src="images/dice_1.png" alt="1"/></label>
+						<input type="radio" name="anzahlp" id="anzahlp2" value=2 />
+							<label id="radioanzp2" for="anzahlp2"><img id="img_anzahlp2" class="settings" src="images/dice_2.png" alt="2"/></label>
+						<input type="radio" name="anzahlp" id="anzahlp3" value=3 />
+							<label id="radioanzp3" for="anzahlp3"><img id="img_anzahlp3" class="settings" src="images/dice_3.png" alt="3"/></label>
+						<input type="radio" name="anzahlp" id="anzahlp4" value=4 />
+							<label id="radioanzp4" for="anzahlp4"><img id="img_anzahlp4" class="settings" src="images/dice_4.png" alt="4"/></label>
+						<input type="radio" name="anzahlp" id="anzahlp5" value=5 />
+							<label id="radioanzp5" for="anzahlp5"><img id="img_anzahlp5" class="settings" src="images/dice_5.png" alt="5"/></label>
+					</fieldset>
+				</div>
 				<a id="btback" onclick="close_settings(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			</div><!-- /content -->
 		</div><!-- /page Settings -->
+
+		<div data-role="page" id="popupYahtzee" data-theme="a">
+			<div data-role="header" data-theme="a" style="text-align:center;">
+				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0px; margin-bottom:0px" data-inline="true"/>
+				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
+				<img src="images/dice.png" alt="dice" style="width:12%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
+			</div>
+			<div id="dice_content" data-role="content" data-theme="d">
+				<table style="margin-left:-10px;margin-right:-10px;margin-top:-4px;border-collapse: collapse;">
+					<tr>
+						<td style="width:16%"></td>
+						<td style="width:16%"><img src="images/dice_1.png" style="width:100%" alt="Player 1"/></td>
+						<td style="width:16%"><img src="images/dice_2.png" style="width:100%" alt="Player 2"/></td>
+						<td style="width:16%"><img src="images/dice_3.png" style="width:100%" alt="Player 3"/></td>
+						<td style="width:16%"><img src="images/dice_4.png" style="width:100%" alt="Player 4"/></td>
+						<td style="width:16%"><img src="images/dice_5.png" style="width:100%" alt="Player 5"/></td>
+					</tr>
+
+					<tr>
+						<td class="lineup"><a onclick="show_help('lb1'); return false;"><img src="images/dice_1.png" style="width:100%" alt="1"/></a></td>
+						<td class="lineup">
+							<a class="active" id="bt0p1" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb0p1"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt0p2" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb0p2"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt0p3" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb0p3"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt0p4" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb0p4"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt0p5" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb0p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb2'); return false;"><img src="images/dice_2.png" style="width:100%" alt="2"/></a></td>
+						<td>
+							<a class="active" id="bt1p1" onclick="yahtzee_setvalue(1); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb1p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt1p2" onclick="yahtzee_setvalue(1); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb1p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt1p3" onclick="yahtzee_setvalue(1); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb1p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt1p4" onclick="yahtzee_setvalue(1); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb1p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt1p5" onclick="yahtzee_setvalue(1); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb1p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb3'); return false;"><img src="images/dice_3.png" style="width:100%" alt="3"/></a></td>
+						<td>
+							<a class="active" id="bt2p1" onclick="yahtzee_setvalue(2); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb2p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt2p2" onclick="yahtzee_setvalue(2); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb2p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt2p3" onclick="yahtzee_setvalue(2); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb2p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt2p4" onclick="yahtzee_setvalue(2); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb2p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt2p5" onclick="yahtzee_setvalue(2); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb2p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb4'); return false;"><img src="images/dice_4.png" style="width:100%" alt="4"/></a></td>
+						<td>
+							<a class="active" id="bt3p1" onclick="yahtzee_setvalue(3); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb3p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt3p2" onclick="yahtzee_setvalue(3); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb3p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt3p3" onclick="yahtzee_setvalue(3); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb3p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt3p4" onclick="yahtzee_setvalue(3); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb3p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt3p5" onclick="yahtzee_setvalue(3); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb3p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb5'); return false;"><img src="images/dice_5.png" style="width:100%" alt="5"/></a></td>
+						<td>
+							<a class="active" id="bt4p1" onclick="yahtzee_setvalue(4); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb4p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt4p2" onclick="yahtzee_setvalue(4); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb4p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt4p3" onclick="yahtzee_setvalue(4); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb4p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt4p4" onclick="yahtzee_setvalue(4); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb4p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt4p5" onclick="yahtzee_setvalue(4); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb4p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb6'); return false;"><img src="images/dice_6.png" style="width:100%" alt="6"/></a></td>
+						<td>
+							<a class="active" id="bt5p1" onclick="yahtzee_setvalue(5); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb5p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt5p2" onclick="yahtzee_setvalue(5); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb5p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt5p3" onclick="yahtzee_setvalue(5); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb5p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt5p4" onclick="yahtzee_setvalue(5); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb5p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt5p5" onclick="yahtzee_setvalue(5); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb5p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="lineup"><a onclick="show_help('lbsum1'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Upper Total"/></a></td>
+						<td class="score lineup" id="lbsum1p1">63</td>
+						<td class="score lineup" id="lbsum1p2">63</td>
+						<td class="score lineup" id="lbsum1p3">63</td>
+						<td class="score lineup" id="lbsum1p4">63</td>
+						<td class="score lineup" id="lbsum1p5">63</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbbonus'); return false;"><img src="images/dice_plus.png" style="width:100%" alt="Bonus"/></a></td>
+						<td class="score" id="lbbonusp1">35</td>
+						<td class="score" id="lbbonusp2">35</td>
+						<td class="score" id="lbbonusp3">35</td>
+						<td class="score" id="lbbonusp4">35</td>
+						<td class="score" id="lbbonusp5">35</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbsum2'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Upper Total"/></a></td>
+						<td class="score" id="lbsum2p1">99</td>
+						<td class="score" id="lbsum2p2">99</td>
+						<td class="score" id="lbsum2p3">99</td>
+						<td class="score" id="lbsum2p4">99</td>
+						<td class="score" id="lbsum2p5">99</td>
+					</tr>
+					<tr>
+						<td class="lineup"><a onclick="show_help('lb3kind'); return false;"><img src="images/dice_3kind.png" style="width:100%" alt="3 of a kind"/></a></td>
+						<td class="lineup">
+							<a class="active" id="bt7p1" onclick="yahtzee_setvalue(7); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb7p1"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt7p2" onclick="yahtzee_setvalue(7); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb7p2"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt7p3" onclick="yahtzee_setvalue(7); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb7p3"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt7p4" onclick="yahtzee_setvalue(7); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb7p4"></div>
+						</td>
+						<td class="lineup">
+							<a class="active" id="bt7p5" onclick="yahtzee_setvalue(7); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb7p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lb4kind'); return false;"><img src="images/dice_4kind.png" style="width:100%" alt="4 of a kind"/></a></td>
+						<td>
+							<a class="active" id="bt8p1" onclick="yahtzee_setvalue(8); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb8p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt8p2" onclick="yahtzee_setvalue(8); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb8p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt8p3" onclick="yahtzee_setvalue(8); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb8p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt8p4" onclick="yahtzee_setvalue(8); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb8p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt8p5" onclick="yahtzee_setvalue(8); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb8p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbfullhouse'); return false;"><img src="images/dice_fullh.png" style="width:100%" alt="Full House"/></a></td>
+						<td>
+							<a class="active" id="bt9p1" onclick="yahtzee_setvalue(9); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb9p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt9p2" onclick="yahtzee_setvalue(9); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb9p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt9p3" onclick="yahtzee_setvalue(9); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb9p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt9p4" onclick="yahtzee_setvalue(9); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb9p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt9p5" onclick="yahtzee_setvalue(9); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb9p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbsmallstr'); return false;"><img src="images/dice_smstr.png" style="width:100%" alt="Small Straight"/></a></td>
+						<td>
+							<a class="active" id="bt10p1" onclick="yahtzee_setvalue(10); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb10p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt10p2" onclick="yahtzee_setvalue(10); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb10p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt10p3" onclick="yahtzee_setvalue(10); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb10p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt10p4" onclick="yahtzee_setvalue(10); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb10p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt10p5" onclick="yahtzee_setvalue(10); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb10p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbbigstr'); return false;"><img src="images/dice_lgstr.png" style="width:100%" alt="Large Straight"/></a></td>
+						<td>
+							<a class="active" id="bt11p1" onclick="yahtzee_setvalue(11); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb11p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt11p2" onclick="yahtzee_setvalue(11); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb11p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt11p3" onclick="yahtzee_setvalue(11); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb11p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt11p4" onclick="yahtzee_setvalue(11); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb11p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt11p5" onclick="yahtzee_setvalue(11); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb11p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbyahtzee'); return false;"><img src="images/dice_yahtzee.png" style="width:100%" alt="Yahtzee"/></a></td>
+						<td>
+							<a class="active" id="bt12p1" onclick="yahtzee_setvalue(12); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb12p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt12p2" onclick="yahtzee_setvalue(12); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb12p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt12p3" onclick="yahtzee_setvalue(12); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb12p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt12p4" onclick="yahtzee_setvalue(12); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb12p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt12p5" onclick="yahtzee_setvalue(12); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb12p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbchance'); return false;"><img src="images/dice_chance.png" style="width:100%" alt="Chance"/></a></td>
+						<td>
+							<a class="active" id="bt13p1" onclick="yahtzee_setvalue(13); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb13p1"></div>
+						</td>
+						<td>
+							<a class="active" id="bt13p2" onclick="yahtzee_setvalue(13); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb13p2"></div>
+						</td>
+						<td>
+							<a class="active" id="bt13p3" onclick="yahtzee_setvalue(13); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb13p3"></div>
+						</td>
+						<td>
+							<a class="active" id="bt13p4" onclick="yahtzee_setvalue(13); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb13p4"></div>
+						</td>
+						<td>
+							<a class="active" id="bt13p5" onclick="yahtzee_setvalue(13); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
+							<div class="passive score" id="lb13p5"></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="lineup"><a onclick="show_help('lbsum3'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Lower Total"/></a></td>
+						<td class="score lineup">150</td>
+						<td class="score lineup">150</td>
+						<td class="score lineup">150</td>
+						<td class="score lineup">150</td>
+						<td class="score lineup">150</td>
+					</tr>
+					<tr>
+						<td><a onclick="show_help('lbsum4'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Grand Total"/></a></td>
+						<td class="score">200</td>
+						<td class="score">200</td>
+						<td class="score">200</td>
+						<td class="score">200</td>
+						<td class="score">200</td>
+					</tr>
+				</table>
+				<a id="btback" onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+			</div><!-- /content -->
+			<div id="popupHelp" class="popup" data-role="popup" data-theme="a">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<p id="helptit" style="padding-top:7px; font-weight: bold;">Aces</p>
+				<p id="helptxt" style="padding-top:0px">Count and add only aces</p>
+			</div>
+		</div><!-- /page Yahtzee -->
+
 
 		<script src="js/build/three.min.js"></script>
 		<script src="js/loaders/STLLoader.js"></script>

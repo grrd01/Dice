@@ -18,6 +18,7 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" >
 		<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png" >
 		<link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x480.png" >
+		<link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" >
 		<link rel="resource" type="application/l10n" href="locales/locales.ini" />
 		<style>.ui-dialog .ui-header .ui-btn-icon-notext { display:none;}</style>
 	</head>
@@ -50,6 +51,11 @@
 			<a href="#" onclick="quit_dice(); return false;" data-iconpos="notext" data-icon="delete" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;right:0;">Back</a>
 			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0px;pointer-events:none;"></div>
 			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0px;right:0;pointer-events:none;"></div>
+			<img id="imglock3" src="images/lock.png" style="position:absolute; top: 50px; left: 50px; pointer-events:none;"/>
+			<img id="imglock0" src="images/lock.png" style="position:absolute; top: 50px; left:180px; pointer-events:none;"/>
+			<img id="imglock2" src="images/lock.png" style="position:absolute; top:200px; left:100px; pointer-events:none;"/>
+			<img id="imglock4" src="images/lock.png" style="position:absolute; top:350px; left: 50px; pointer-events:none;"/>
+			<img id="imglock1" src="images/lock.png" style="position:absolute; top:350px; left:180px; pointer-events:none;"/>
 			<div id="popupSwipe" class="popup" data-role="popup" data-theme="a">
 				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
 				<p data-l10n-id="lbswipe" style="margin-top:-1px;"><br>Swipe or shake to roll the dice!</p>
@@ -158,11 +164,11 @@
 				<table style="margin-left:-10px;margin-right:-10px;margin-top:-4px;border-collapse: collapse;">
 					<tr>
 						<td style="width:16%"></td>
-						<td style="width:16%"><img src="images/dice_1.png" style="width:100%" alt="Player 1"/></td>
-						<td style="width:16%"><img src="images/dice_2.png" style="width:100%" alt="Player 2"/></td>
-						<td style="width:16%"><img src="images/dice_3.png" style="width:100%" alt="Player 3"/></td>
-						<td style="width:16%"><img src="images/dice_4.png" style="width:100%" alt="Player 4"/></td>
-						<td style="width:16%"><img src="images/dice_5.png" style="width:100%" alt="Player 5"/></td>
+						<td style="width:16%"><img id="imgp1" src="images/dice_1.png" style="width:100%" alt="Player 1"/></td>
+						<td style="width:16%"><img id="imgp2" src="images/dice_2.png" style="width:100%" alt="Player 2"/></td>
+						<td style="width:16%"><img id="imgp3" src="images/dice_3.png" style="width:100%" alt="Player 3"/></td>
+						<td style="width:16%"><img id="imgp4" src="images/dice_4.png" style="width:100%" alt="Player 4"/></td>
+						<td style="width:16%"><img id="imgp5" src="images/dice_5.png" style="width:100%" alt="Player 5"/></td>
 					</tr>
 
 					<tr>
@@ -173,7 +179,7 @@
 						</td>
 						<td class="lineup">
 							<a class="active" id="bt0p2" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
-							<div class="passive score" id="lb0p2"></div>
+							<div class="passive score" id="lb0p2"> </div>
 						</td>
 						<td class="lineup">
 							<a class="active" id="bt0p3" onclick="yahtzee_setvalue(0); return false;" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
@@ -305,27 +311,27 @@
 					</tr>
 					<tr>
 						<td class="lineup"><a onclick="show_help('lbsum1'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Upper Total"/></a></td>
-						<td class="score lineup" id="lbsum1p1">63</td>
-						<td class="score lineup" id="lbsum1p2">63</td>
-						<td class="score lineup" id="lbsum1p3">63</td>
-						<td class="score lineup" id="lbsum1p4">63</td>
-						<td class="score lineup" id="lbsum1p5">63</td>
+						<td class="score lineup" id="lbsum1p1"></td>
+						<td class="score lineup" id="lbsum1p2"></td>
+						<td class="score lineup" id="lbsum1p3"></td>
+						<td class="score lineup" id="lbsum1p4"></td>
+						<td class="score lineup" id="lbsum1p5"></td>
 					</tr>
 					<tr>
 						<td><a onclick="show_help('lbbonus'); return false;"><img src="images/dice_plus.png" style="width:100%" alt="Bonus"/></a></td>
-						<td class="score" id="lbbonusp1">35</td>
-						<td class="score" id="lbbonusp2">35</td>
-						<td class="score" id="lbbonusp3">35</td>
-						<td class="score" id="lbbonusp4">35</td>
-						<td class="score" id="lbbonusp5">35</td>
+						<td class="score" id="lbbonusp1"></td>
+						<td class="score" id="lbbonusp2"></td>
+						<td class="score" id="lbbonusp3"></td>
+						<td class="score" id="lbbonusp4"></td>
+						<td class="score" id="lbbonusp5"></td>
 					</tr>
 					<tr>
 						<td><a onclick="show_help('lbsum2'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Upper Total"/></a></td>
-						<td class="score" id="lbsum2p1">99</td>
-						<td class="score" id="lbsum2p2">99</td>
-						<td class="score" id="lbsum2p3">99</td>
-						<td class="score" id="lbsum2p4">99</td>
-						<td class="score" id="lbsum2p5">99</td>
+						<td class="score" id="lbsum2p1"></td>
+						<td class="score" id="lbsum2p2"></td>
+						<td class="score" id="lbsum2p3"></td>
+						<td class="score" id="lbsum2p4"></td>
+						<td class="score" id="lbsum2p5"></td>
 					</tr>
 					<tr>
 						<td class="lineup"><a onclick="show_help('lb3kind'); return false;"><img src="images/dice_3kind.png" style="width:100%" alt="3 of a kind"/></a></td>
@@ -490,19 +496,19 @@
 					</tr>
 					<tr>
 						<td class="lineup"><a onclick="show_help('lbsum3'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Lower Total"/></a></td>
-						<td class="score lineup">150</td>
-						<td class="score lineup">150</td>
-						<td class="score lineup">150</td>
-						<td class="score lineup">150</td>
-						<td class="score lineup">150</td>
+						<td class="score lineup" id="lbsum3p1"></td>
+						<td class="score lineup" id="lbsum3p2"></td>
+						<td class="score lineup" id="lbsum3p3"></td>
+						<td class="score lineup" id="lbsum3p4"></td>
+						<td class="score lineup" id="lbsum3p5"></td>
 					</tr>
 					<tr>
 						<td><a onclick="show_help('lbsum4'); return false;"><img src="images/dice_sum.png" style="width:100%" alt="Grand Total"/></a></td>
-						<td class="score">200</td>
-						<td class="score">200</td>
-						<td class="score">200</td>
-						<td class="score">200</td>
-						<td class="score">200</td>
+						<td class="score" id="lbsum4p1" style="font-weight: bold;"></td>
+						<td class="score" id="lbsum4p2" style="font-weight: bold;"></td>
+						<td class="score" id="lbsum4p3" style="font-weight: bold;"></td>
+						<td class="score" id="lbsum4p4" style="font-weight: bold;"></td>
+						<td class="score" id="lbsum4p5" style="font-weight: bold;"></td>
 					</tr>
 				</table>
 				<a id="btback" onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>

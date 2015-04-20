@@ -489,6 +489,9 @@ function onDocumentTouchLeave( event ) {
 }
 
 function TouchEnd_TouchLeave(event) {
+	mouseX = event.touches[ 0 ].pageX - windowHalfX;
+	mouseY = event.touches[ 0 ].pageY - windowHalfY;
+
 	if (mouseX - mouseXOnMouseDown < 10 && mouseY - mouseYOnMouseDown < 10 && new Date() - timeOnMouseDown < 500 && in_yahtzee)
 	{
 		lock_dice();
@@ -575,6 +578,11 @@ function content_formatting() {"use strict";
 		$("#img_title2").attr("style","width:100%;margin-top:-40px;");
 		$("#img_title3h").show();
 		$("#img_title3q").hide();
+		$("#btdiceyahtzee").attr("style","width:100%;position:absolute;bottom:10px;");
+		$("#btdice").attr("style","width:" + (g_windowswidth/2-16) + "px;");
+		$("#btyahtzee").attr("style","width:" + (g_windowswidth/2-16) + "px;");
+		$("#btdice_pad").attr("style","");
+		$("#btyahtzee_pad").attr("style","");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
 			switch (anz_dices) {
 				case 1:
@@ -620,6 +628,11 @@ function content_formatting() {"use strict";
 		$("#img_title2").attr("style","width:calc(34% - 5px);margin-top:0px;margin-bottom:20px;");
 		$("#img_title3h").hide();
 		$("#img_title3q").show();
+		$("#btdiceyahtzee").attr("style","width:100%;position:absolute;bottom:" + ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px;");
+		$("#btdice").attr("style","width:" + (g_windowswidth/2-16) + "px;height:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px;");
+		$("#btyahtzee").attr("style","width:" + (g_windowswidth/2-16) + "px;height:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px;");
+		$("#btdice_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
+		$("#btyahtzee_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
 			switch (anz_dices) {
 				case 1:
@@ -655,8 +668,6 @@ function content_formatting() {"use strict";
 			} 
 		}
 	}
-	$("#btdice").attr("style","width:" + (g_windowswidth/2-16) + "px;");
-	$("#btyahtzee").attr("style","width:" + (g_windowswidth/2-16) + "px;");
 	$('#popupSwipe').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#popupWebGL').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#start').css('width', (g_windowswidth - 30) + 'px');

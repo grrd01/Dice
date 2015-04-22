@@ -134,8 +134,8 @@ function init() {
 
 	// Lights
 	scene.add( new THREE.AmbientLight( 0x777777 ) );
-	addShadowedLight( -1, 1, 1, 0xffffff, 1.35 );
 	addShadowedLight( 0.5, 1, -1, 0xffffff, 1 );
+	addShadowedLight( -1, 1, 1, 0xffffff, 1.35 );
 
 	// renderer
 	renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
@@ -151,7 +151,6 @@ function init() {
 	container.addEventListener( 'touchstart', onDocumentTouchStart, false );
 	container.addEventListener( 'touchmove', onDocumentTouchMove, false );
 	container.addEventListener( 'touchend', onDocumentTouchEnd, false );
-	container.addEventListener( 'touchleave', onDocumentTouchLeave, false );
 
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -481,14 +480,6 @@ function onDocumentTouchMove( event ) {
 }
 
 function onDocumentTouchEnd( event ) {
-	TouchEnd_TouchLeave();
-}
-
-function onDocumentTouchLeave( event ) {
-	TouchEnd_TouchLeave();
-}
-
-function TouchEnd_TouchLeave(event) {
 	mouseX = event.touches[ 0 ].pageX - windowHalfX;
 	mouseY = event.touches[ 0 ].pageY - windowHalfY;
 

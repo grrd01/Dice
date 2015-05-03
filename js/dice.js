@@ -45,6 +45,7 @@ var in_dice = false;
 var anz_dices = 1;
 var in_yahtzee = true;
 var in_lock = false;
+var in_move = false;
 var anz_player = 2;
 var cur_player = 1;
 var cur_try = 1;
@@ -67,6 +68,7 @@ var myShakeEvent = new Shake({
 window.addEventListener('shake', shakeEventDidOccur, false);
 function shakeEventDidOccur () {
 	$('#popupSwipe').popup('close');
+	$('#popupLock').popup('close');
 	$("#lbtotwert").hide();
 	$("#lbtry").hide();
 	for (var i = 0; i < anz_dices; ++i) {
@@ -439,15 +441,16 @@ function MouseOut_MouseUp( event ) {
 			targetRotationZ[i]=Math.round((targetRotationZ[i])/Math.PI*2)*Math.PI/2;
 		}
 	}
-	
 	rolling = true;
 }
 
 function onDocumentTouchStart( event ) {
+	timeOnMouseDown = new Date();
+	in_move = false;
 	if ( event.touches.length === 1 ) {
+		event.preventDefault();
 		$("#lbtotwert").hide();
 		$("#lbtry").hide();
-		event.preventDefault();
 		mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
 		mouseYOnMouseDown = event.touches[ 0 ].pageY - windowHalfY;
 		timeOnMouseDown = new Date();
@@ -465,8 +468,10 @@ function onDocumentTouchStart( event ) {
 }
 
 function onDocumentTouchMove( event ) {
+	in_move = true;
 	if ( event.touches.length === 1 ) {
 		event.preventDefault();
+		$("#lbtry").html("move");
 		mouseX = event.touches[ 0 ].pageX - windowHalfX;
 		mouseY = event.touches[ 0 ].pageY - windowHalfY;
 		for (var i = 0; i < anz_dices; ++i) {
@@ -480,11 +485,11 @@ function onDocumentTouchMove( event ) {
 }
 
 function onDocumentTouchEnd( event ) {
-	mouseX = event.touches[ 0 ].pageX - windowHalfX;
-	mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
-	if (mouseX - mouseXOnMouseDown < 10 && mouseY - mouseYOnMouseDown < 10 && new Date() - timeOnMouseDown < 500 && in_yahtzee)
+	event.preventDefault();
+	if (in_move == false && new Date() - timeOnMouseDown < 500 && in_yahtzee)
 	{
+		mouseX = mouseXOnMouseDown;
+		mouseY = mouseYOnMouseDown;
 		lock_dice();
 	}
 	for (var i = 0; i < anz_dices; ++i) {
@@ -498,6 +503,13 @@ function onDocumentTouchEnd( event ) {
 }
 
 function lock_dice () {"use strict";
+	for (var i = 0; i < anz_dices; ++i) {
+		if (!locked[i]) {
+			targetRotationX[i] = targetRotationXOnMouseDown[i];
+			targetRotationY[i] = targetRotationYOnMouseDown[i];
+			targetRotationZ[i] = targetRotationZOnMouseDown[i];
+		}
+	}
 	if (cur_try == 1){ return; }
 	if (rolling){ return; }
 	in_lock = true;
@@ -660,6 +672,7 @@ function content_formatting() {"use strict";
 		}
 	}
 	$('#popupSwipe').css('max-width', (g_windowswidth - 10) + 'px');
+	$('#popupLock').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#popupWebGL').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#start').css('width', (g_windowswidth - 30) + 'px');
 	

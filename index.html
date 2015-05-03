@@ -18,7 +18,7 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" >
 		<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png" >
 		<link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x480.png" >
-		<link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" >
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" >
 		<link rel="resource" type="application/l10n" href="locales/locales.ini" />
 		<style>.ui-dialog .ui-header .ui-btn-icon-notext { display:none;}</style>
 	</head>
@@ -47,7 +47,7 @@
 			</div>
 		</div><!-- /page  -->
 
-		<div data-role="page" id="dice" data-theme="a" style="position:relative;margin-top:-4px;" onmousedown="$('#popupSwipe').popup('close')">
+		<div data-role="page" id="dice" data-theme="a" style="position:relative;margin-top:-4px;" onmousedown="$('#popupSwipe').popup('close');$('#popupLock').popup('close');">
 			<a href="#" onclick="quit_dice(); return false;" data-iconpos="notext" data-icon="delete" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;right:0;">Back</a>
 			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0px;pointer-events:none;"></div>
 			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0px;right:0;pointer-events:none;"></div>

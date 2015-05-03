@@ -425,7 +425,7 @@ function onDocumentMouseOut( event ) {
 function MouseOut_MouseUp( event ) {
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
-	if (mouseX - mouseXOnMouseDown < 10 && mouseY - mouseYOnMouseDown < 10 && new Date() - timeOnMouseDown < 500 && in_yahtzee)
+	if (Math.abs(mouseX - mouseXOnMouseDown) < 5 && Math.abs(mouseY - mouseYOnMouseDown) < 5 && new Date() - timeOnMouseDown < 300 && in_yahtzee)
 	{
 		lock_dice();
 	}

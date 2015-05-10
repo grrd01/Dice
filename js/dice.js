@@ -32,7 +32,7 @@ var rotY;
 var rotZ;
 var rolling = false;
 var wert =  [0, 0, 0, 0, 0];
-var locked = [false, false, false, false, false]
+var locked = [false, false, false, false, false];
 var wert_count =  [0, 0, 0, 0, 0, 0];
 var current_score = new Array(14);
 var player_score = new Array(5);
@@ -60,6 +60,14 @@ var windowHalfY = window.innerHeight / 2;
 var g_windowsheight;
 var g_windowswidth;
 
+var $lbtry = $("#lbtry");
+var $lbtotwert = $("#lbtotwert");
+var $imglock0 = $("#imglock0");
+var $imglock1 = $("#imglock1");
+var $imglock2 = $("#imglock2");
+var $imglock3 = $("#imglock3");
+var $imglock4 = $("#imglock4");
+
 var myShakeEvent = new Shake({
 	threshold: 8, // 15 - optional, shake strength threshold
 	timeout: 1000 // optional, determines the frequency of event generation
@@ -69,8 +77,8 @@ window.addEventListener('shake', shakeEventDidOccur, false);
 function shakeEventDidOccur () {
 	$('#popupSwipe').popup('close');
 	$('#popupLock').popup('close');
-	$("#lbtotwert").hide();
-	$("#lbtry").hide();
+	$lbtotwert.hide();
+	$lbtry.hide();
 	for (var i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
 			targetRotationX[i]=Math.round((targetRotationX[i] + 30 * Math.random()-15)/Math.PI*2)*Math.PI/2;
@@ -78,7 +86,7 @@ function shakeEventDidOccur () {
 			targetRotationZ[i]=Math.round((targetRotationZ[i] + 30 * Math.random()-15)/Math.PI*2)*Math.PI/2;
 		}
 	}
-	rolling = true;	
+	rolling = true;
 }
 
 $(document).on("pageshow","#dice",function(){
@@ -86,7 +94,7 @@ $(document).on("pageshow","#dice",function(){
 		$("#popupSwipe").popup("open");
 		pop_swipe_shown = true;
 	}
-	
+
 });
 
 if ( ! Detector.webgl ) {
@@ -99,8 +107,8 @@ content_formatting();
 setTimeout(function() {content_formatting();},500);
 
 function init() {
-	$("#lbtotwert").hide();
-	$("#lbtry").hide();
+	$lbtotwert.hide();
+	$lbtry.hide();
 	container = document.createElement( 'div' );
 	document.getElementById("dice").appendChild( container );
 
@@ -160,7 +168,7 @@ function init() {
 function addShadowedLight( x, y, z, color, intensity ) {
 
 	var directionalLight = new THREE.DirectionalLight( color, intensity );
-	directionalLight.position.set( x, y, z )
+	directionalLight.position.set( x, y, z );
 	scene.add( directionalLight );
 
 	directionalLight.castShadow = true;
@@ -195,8 +203,9 @@ function animate() {
 }
 
 function render() {
+	var i;
 	cur_speed = 0;
-	for (var i = 0; i < anz_dices; ++i) {
+	for (i = 0; i < anz_dices; ++i) {
 		mesh[i].rotation.y += ( targetRotationX[i] - mesh[i].rotation.y ) * 0.05;
 		mesh[i].rotation.x += ( targetRotationY[i] - mesh[i].rotation.x ) * 0.05;
 		mesh[i].rotation.z += ( targetRotationZ[i] - mesh[i].rotation.z ) * 0.05;
@@ -209,43 +218,43 @@ function render() {
 		totwert = 0;
 		wert_count =  [0, 0, 0, 0, 0, 0];
 
-		for (var i = 0; i < anz_dices; ++i) {
+		for ( i = 0; i < anz_dices; ++i) {
 			rotX = ((Math.round((mesh[i].rotation.x % (Math.PI*2))/Math.PI*2))+4) % 4;
 			rotY = ((Math.round((mesh[i].rotation.y % (Math.PI*2))/Math.PI*2))+4) % 4;
 			rotZ = ((Math.round((mesh[i].rotation.z % (Math.PI*2))/Math.PI*2))+4) % 4;
 			wert[i] = 0;
-			if (rotX == 0 && rotY == 0 || 
+			if (rotX == 0 && rotY == 0 ||
 				rotX == 2 && rotY == 2) {
 				wert[i]=1;
-			} else if (	rotX == 3 && rotZ == 1 || 
-						rotX == 1 && rotZ == 3 || 
-						rotX == 0 && rotY == 1 && rotZ == 0 || 
-						rotX == 2 && rotY == 3 && rotZ == 0 || 
-						rotX == 2 && rotY == 1 && rotZ == 2 || 
+			} else if (	rotX == 3 && rotZ == 1 ||
+						rotX == 1 && rotZ == 3 ||
+						rotX == 0 && rotY == 1 && rotZ == 0 ||
+						rotX == 2 && rotY == 3 && rotZ == 0 ||
+						rotX == 2 && rotY == 1 && rotZ == 2 ||
 						rotX == 0 && rotY == 3 && rotZ == 2) {
 				wert[i]=2;
-			} else if (	rotX == 3 && rotZ == 0 || 
-						rotX == 1 && rotZ == 2 || 
-						rotX == 0 && rotY == 1 && rotZ == 3 || 
-						rotX == 0 && rotY == 3 && rotZ == 1 || 
-						rotX == 2 && rotY == 1 && rotZ == 1 || 
+			} else if (	rotX == 3 && rotZ == 0 ||
+						rotX == 1 && rotZ == 2 ||
+						rotX == 0 && rotY == 1 && rotZ == 3 ||
+						rotX == 0 && rotY == 3 && rotZ == 1 ||
+						rotX == 2 && rotY == 1 && rotZ == 1 ||
 						rotX == 2 && rotY == 3 && rotZ == 3) {
 				wert[i]=3;
-			} else if (	rotX == 1 && rotZ == 0 || 
-						rotX == 3 && rotZ == 2 || 
-						rotX == 0 && rotY == 3 && rotZ == 3 || 
-						rotX == 2 && rotY == 1 && rotZ == 3 || 
-						rotX == 0 && rotY == 1 && rotZ == 1 || 
+			} else if (	rotX == 1 && rotZ == 0 ||
+						rotX == 3 && rotZ == 2 ||
+						rotX == 0 && rotY == 3 && rotZ == 3 ||
+						rotX == 2 && rotY == 1 && rotZ == 3 ||
+						rotX == 0 && rotY == 1 && rotZ == 1 ||
 						rotX == 2 && rotY == 3 && rotZ == 1) {
 				wert[i]=4;
-			} else if (	rotX == 3 && rotZ == 3 || 
-						rotX == 1 && rotZ == 1 || 
-						rotX == 0 && rotY == 3 && rotZ == 0 || 
-						rotX == 2 && rotY == 3 && rotZ == 2 || 
-						rotX == 0 && rotY == 1 && rotZ == 2 || 
+			} else if (	rotX == 3 && rotZ == 3 ||
+						rotX == 1 && rotZ == 1 ||
+						rotX == 0 && rotY == 3 && rotZ == 0 ||
+						rotX == 2 && rotY == 3 && rotZ == 2 ||
+						rotX == 0 && rotY == 1 && rotZ == 2 ||
 						rotX == 2 && rotY == 1 && rotZ == 0) {
 				wert[i]=5;
-			} else if (	rotX == 0 && rotY == 2 || 
+			} else if (	rotX == 0 && rotY == 2 ||
 						rotX == 2 && rotY == 0) {
 				wert[i]=6;
 			} else {
@@ -262,23 +271,24 @@ function render() {
 				pop_lock_shown = true;
 			}
 			if (!in_lock){ cur_try ++; } else { in_lock = false;}
-			$("#lbtry").html(cur_try + " / 3");
-			$("#lbtry").show();
-			$("#lbtotwert").html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
+			$lbtry.html(cur_try + " / 3");
+			$lbtry.show();
+			$lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
 			if (cur_try > 3) { yahtzee_count(); }
 		} else {
-			$("#lbtotwert").html(totwert);
+			$lbtotwert.html(totwert);
 		}
-		$("#lbtotwert").show();
-	} 
+		$lbtotwert.show();
+	}
 	renderer.render( scene, camera );
 }
 
-function yahtzee_count () {
-	for (var i = 0; i < current_score.length; ++i) {
+function yahtzee_count (){
+	var i;
+	var sequence = 0;
+	for (i = 0; i < current_score.length; ++i) {
 		current_score[i]=0;
 	}
-	var sequence = 0;
 	for (i = 0; i < wert_count.length; ++i) {
 		current_score[i] = wert_count[i]*(i+1);
 		if (wert_count[i]>=3) {current_score[7] = 3*(i+1);}
@@ -295,15 +305,17 @@ function yahtzee_count () {
 		if (sequence>=5) {current_score[11] = 40;}
 	}
 	current_score[13] = totwert;
-	for (var i = 0; i < current_score.length; ++i) {
+	for (i = 0; i < current_score.length; ++i) {
 		if (player_score[cur_player-1][i] === null)
 		{
+			var $bt_p_ = $("#bt" + i + "p" + cur_player);
 			$("#lb" + i + "p" + cur_player).css('display', 'none');
-			$("#bt" + i + "p" + cur_player).css('display', 'block');
-			if ($("#bt" + i + "p" + cur_player + " .ui-btn-text").length) {
-				$("#bt" + i + "p" + cur_player + " .ui-btn-text").text(current_score[i]); 
+			$bt_p_.css('display', 'block');
+			var $bt_p_ui_btn_text = $("#bt" + i + "p" + cur_player + " .ui-btn-text");
+			if ($bt_p_ui_btn_text.length) {
+				$bt_p_ui_btn_text.text(current_score[i]);
 			} else {
-				$("#bt" + i + "p" + cur_player ).html(current_score[i]); 
+				$bt_p_.html(current_score[i]);
 			}
 		}
 	}
@@ -335,32 +347,36 @@ function yahtzee_setvalue ( id ) {
 	cur_player ++;
 	if (cur_player > anz_player) { cur_player = 1; }
 	cur_try = 1;
-	$("#lbtry").html(cur_try + " / 3");
-	$("#lbtotwert").html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
+	$lbtry.html(cur_try + " / 3");
+	$lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
 	unlock_dice();
 
 	$.mobile.changePage('#dice', {transition: 'pop', reverse: true});
 }
 
 function yahtzee_init () {
-	for (var i = 0; i < current_score.length; ++i) {
+	var i,j;
+	for (i = 0; i < current_score.length; ++i) {
 		current_score[i] = 0;
-		for (var j = 0; j < 5; ++j) {
+		for (j = 0; j < 5; ++j) {
 			player_score[j][i] = null;
 			$("#bt" + i + "p" + (j + 1)).css('display', 'none');
-			$("#lb" + i + "p" + (j + 1)).css('display', 'inline');
-			$("#lb" + i + "p" + (j + 1)).html("");
+			var $lb_p_ = $("#lb" + i + "p" + (j + 1));
+			$lb_p_.css('display', 'inline');
+			$lb_p_.html("");
 		}
 	}
-	for (var j = 0; j < 5; ++j) {
+	for (j = 0; j < 5; ++j) {
 		if (j < anz_player) {
 			//$("#imgp" + (j + 1)).css({ opacity: 1 });
+			$("#imgp" + (j + 1)).attr("style","width:100%;background-color: #CC002F;");
 			$("#lbsum1p" + (j + 1)).html(0);
 			$("#lbsum2p" + (j + 1)).html(0);
 			$("#lbsum3p" + (j + 1)).html(0);
 			$("#lbsum4p" + (j + 1)).html(0);
 		} else {
 			//$("#imgp" + (j + 1)).css({ opacity: 0.6 });
+			$("#imgp" + (j + 1)).attr("style","width:100%;background-color: #AAAAAA;");
 			$("#lbsum1p" + (j + 1)).html("");
 			$("#lbsum2p" + (j + 1)).html("");
 			$("#lbsum3p" + (j + 1)).html("");
@@ -373,15 +389,15 @@ function yahtzee_init () {
 	cur_try = 1;
 	unlock_dice();
 
-	$("#lbtotwert").html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
-	$("#lbtry").html(cur_try + " / 3");
-	$("#lbtotwert").show();
-	$("#lbtry").show();
+	$lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
+	$lbtry.html(cur_try + " / 3");
+	$lbtotwert.show();
+	$lbtry.show();
 }
 
 function onDocumentMouseDown( event ) {
-	$("#lbtotwert").hide();
-	$("#lbtry").hide();
+	$lbtotwert.hide();
+	$lbtry.hide();
 	event.preventDefault();
 	container.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	container.addEventListener( 'mouseup', onDocumentMouseUp, false );
@@ -449,8 +465,8 @@ function onDocumentTouchStart( event ) {
 	in_move = false;
 	if ( event.touches.length === 1 ) {
 		event.preventDefault();
-		$("#lbtotwert").hide();
-		$("#lbtry").hide();
+		$lbtotwert.hide();
+		$lbtry.hide();
 		mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
 		mouseYOnMouseDown = event.touches[ 0 ].pageY - windowHalfY;
 		timeOnMouseDown = new Date();
@@ -471,7 +487,6 @@ function onDocumentTouchMove( event ) {
 	in_move = true;
 	if ( event.touches.length === 1 ) {
 		event.preventDefault();
-		$("#lbtry").html("move");
 		mouseX = event.touches[ 0 ].pageX - windowHalfX;
 		mouseY = event.touches[ 0 ].pageY - windowHalfY;
 		for (var i = 0; i < anz_dices; ++i) {
@@ -499,11 +514,12 @@ function onDocumentTouchEnd( event ) {
 			targetRotationZ[i]=Math.round((targetRotationZ[i])/Math.PI*2)*Math.PI/2;
 		}
 	}
-	rolling = true;	
+	rolling = true;
 }
 
 function lock_dice () {"use strict";
-	for (var i = 0; i < anz_dices; ++i) {
+	var i;
+	for (i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
 			targetRotationX[i] = targetRotationXOnMouseDown[i];
 			targetRotationY[i] = targetRotationYOnMouseDown[i];
@@ -558,7 +574,7 @@ function lock_dice () {"use strict";
 			$('#imglock4').toggle();
 		}
 	}
-	for (var i = 0; i < anz_dices; ++i) {
+	for (i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) { break; }
 		if (i == anz_dices - 1) { yahtzee_count(); }
 	}
@@ -572,11 +588,11 @@ function content_formatting() {"use strict";
 
 	if (g_windowsheight > g_windowswidth) {
 		lock_height = g_windowsheight / 7;
-		$("#imglock3").attr("style","position:absolute; top:" + (windowHalfY - lock_height*2.4) + "px; left:" + (windowHalfX - lock_height*1.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock3').css('display'));
-		$("#imglock0").attr("style","position:absolute; top:" + (windowHalfY - lock_height*2.4) + "px; left:" + (windowHalfX + lock_height*0.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock0').css('display'));
-		$("#imglock2").attr("style","position:absolute; top:" + (windowHalfY - lock_height/2) + "px; left:" + (windowHalfX - lock_height/2) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock2').css('display'));
-		$("#imglock4").attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX - lock_height*1.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
-		$("#imglock1").attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX + lock_height*0.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
+		$imglock3.attr("style","position:absolute; top:" + (windowHalfY - lock_height*2.4) + "px; left:" + (windowHalfX - lock_height*1.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock3').css('display'));
+		$imglock0.attr("style","position:absolute; top:" + (windowHalfY - lock_height*2.4) + "px; left:" + (windowHalfX + lock_height*0.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock0').css('display'));
+		$imglock2.attr("style","position:absolute; top:" + (windowHalfY - lock_height/2) + "px; left:" + (windowHalfX - lock_height/2) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock2').css('display'));
+		$imglock4.attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX - lock_height*1.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
+		$imglock1.attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX + lock_height*0.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
 		$("#img_title").attr("style","width:100%;margin-top:-10px;");
 		$("#img_title2").attr("style","width:100%;margin-top:-40px;");
 		$("#img_title3h").show();
@@ -618,15 +634,15 @@ function content_formatting() {"use strict";
 					mesh[4].position.set( -0.45, -0.9, 0 );
 					camera.position.set( 0, 0, 5.6);
 					break;
-			} 
+			}
 		}
 	} else {
 		lock_height = g_windowsheight / 6;
-		$("#imglock3").attr("style","position:absolute; top:" + (windowHalfY - lock_height*1.7) + "px; left:" + (windowHalfX - lock_height*2.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock3').css('display'));
-		$("#imglock0").attr("style","position:absolute; top:" + (windowHalfY - lock_height*1.7) + "px; left:" + (windowHalfX + lock_height*1.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock0').css('display'));
-		$("#imglock2").attr("style","position:absolute; top:" + (windowHalfY - lock_height/2) + "px; left:" + (windowHalfX - lock_height/2) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock2').css('display'));
-		$("#imglock4").attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX - lock_height*2.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
-		$("#imglock1").attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX + lock_height*1.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
+		$imglock3.attr("style","position:absolute; top:" + (windowHalfY - lock_height*1.7) + "px; left:" + (windowHalfX - lock_height*2.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock3').css('display'));
+		$imglock0.attr("style","position:absolute; top:" + (windowHalfY - lock_height*1.7) + "px; left:" + (windowHalfX + lock_height*1.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock0').css('display'));
+		$imglock2.attr("style","position:absolute; top:" + (windowHalfY - lock_height/2) + "px; left:" + (windowHalfX - lock_height/2) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock2').css('display'));
+		$imglock4.attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX - lock_height*2.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
+		$imglock1.attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX + lock_height*1.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
 		$("#img_title").attr("style","width:calc(46% - 5px);margin-bottom:20px;");
 		$("#img_title2").attr("style","width:calc(34% - 5px);margin-top:0px;margin-bottom:20px;");
 		$("#img_title3h").hide();
@@ -668,24 +684,21 @@ function content_formatting() {"use strict";
 					mesh[4].position.set( -0.9, -0.45, 0 );
 					camera.position.set( 0, 0, 4);
 					break;
-			} 
+			}
 		}
 	}
 	$('#popupSwipe').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#popupLock').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#popupWebGL').css('max-width', (g_windowswidth - 10) + 'px');
 	$('#start').css('width', (g_windowswidth - 30) + 'px');
-	
+
 	for (var i = 1; i < 6; ++i) {
 		$("#radio"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-		$("#img_color"+i).css('max-width', '80px');
-		$("#img_color"+i).css('width', + (g_windowswidth-90)/5.5 +'px');
+		$("#img_color"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
 		$("#radioanz"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-		$("#img_anzahl"+i).css('max-width', '80px');
-		$("#img_anzahl"+i).css('width', + (g_windowswidth-90)/5.5 +'px');
+		$("#img_anzahl"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
 		$("#radioanzp"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-		$("#img_anzahlp"+i).css('max-width', '80px');
-		$("#img_anzahlp"+i).css('width', + (g_windowswidth-90)/5.5 +'px');
+		$("#img_anzahlp"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
 	}
 }
 
@@ -695,6 +708,7 @@ $(window).resize( function() {"use strict";
 });
 
 function display_dice(yahtzee){"use strict";
+	var $input_radio_color_checked = $('input:radio[name=color]:checked');
 	in_yahtzee = yahtzee;
 	in_dice=true;
 	anz_player = $('input:radio[name=anzahlp]:checked').val();
@@ -703,49 +717,51 @@ function display_dice(yahtzee){"use strict";
 		close_settings();
 		yahtzee_init();
 	} else {
-		$("#lbtotwert").hide();
-		$("#lbtry").hide();
+		$lbtotwert.hide();
+		$lbtry.hide();
 		unlock_dice();
 	}
 	myShakeEvent.start();
 	animate();
 	$.mobile.changePage('#dice', {transition: 'slide'});
-	mesh[0].material.color.setHex($('input:radio[name=color]:checked').val());
-	mesh[0].material.ambient.setHex($('input:radio[name=color]:checked').val());
+	mesh[0].material.color.setHex($input_radio_color_checked.val());
+	mesh[0].material.ambient.setHex($input_radio_color_checked.val());
 }
 
 function quit_dice(){"use strict";
 	myShakeEvent.stop();
 	in_dice=false;
-	$("#lbtotwert").hide();
-	$("#lbtry").hide();
+	$lbtotwert.hide();
+	$lbtry.hide();
 	unlock_dice();
 	$.mobile.changePage('#title', {transition: 'slide', reverse: true});
 }
 
 function unlock_dice() {
-	for (var i = 0; i < 5; ++i) {
+	var i;
+	for (i = 0; i < 5; ++i) {
 		locked[i] = false;
 		$('#imglock' + i).hide();
 	}
 }
 
 function close_settings() {"use strict";
-	if ($('input:radio[name=anzahl]:checked').val() > anz_dices) {
-		for (var i = anz_dices; i < $('input:radio[name=anzahl]:checked').val(); ++i) {
+	var $input_radio_anzahl_checked = $('input:radio[name=anzahl]:checked');
+	if ($input_radio_anzahl_checked.val() > anz_dices) {
+		for (i = anz_dices; i < $input_radio_anzahl_checked.val(); ++i) {
 			if (typeof mesh[i] == "undefined" || mesh[i] == null) {
 				clone_dice(i);
 			}
 			scene.add( mesh[i] );
 		}
 	}
-	if (anz_dices > $('input:radio[name=anzahl]:checked').val()) {
-		for (var i = $('input:radio[name=anzahl]:checked').val(); i < anz_dices; ++i) {
+	if (anz_dices > $input_radio_anzahl_checked.val()) {
+		for (i = $input_radio_anzahl_checked.val(); i < anz_dices; ++i) {
 			scene.remove(mesh[i]);
 		}
 	}
 
-	anz_dices = parseInt($('input:radio[name=anzahl]:checked').val());
+	anz_dices = parseInt($input_radio_anzahl_checked.val());
 	content_formatting();
 	$.mobile.changePage('#title', {transition: 'pop', reverse: true});
 }

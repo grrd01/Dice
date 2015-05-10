@@ -13,14 +13,13 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" >
 		<link rel="stylesheet" href="js/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="js/dice.css" />
-		<link rel="apple-touch-icon" type="image/x-icon" href="Images/apple-touch-icon-57x57.png" >
+		<link rel="apple-touch-icon" type="image/x-icon" href="images/apple-touch-icon-57x57.png" >
 		<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" >
 		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" >
 		<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png" >
 		<link rel="apple-touch-startup-image" href="images/apple-touch-startup-image-320x480.png" >
 		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" >
-		<link rel="resource" type="application/l10n" href="locales/locales.ini" />
-		<style>.ui-dialog .ui-header .ui-btn-icon-notext { display:none;}</style>
+		<link rel="prefetch" type="application/l10n" href="locales/locales.ini" />
 	</head>
 	<body>
 
@@ -42,26 +41,26 @@
 				</div>
 			</div>
 			<div id="popupWebGL" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
 				<p data-l10n-id="lbwebgl" style="margin-top:-1px;"><br>Your browser does not support WebGL!</p>
 			</div>
 		</div><!-- /page  -->
 
 		<div data-role="page" id="dice" data-theme="a" style="position:relative;margin-top:-4px;" onmousedown="$('#popupSwipe').popup('close');$('#popupLock').popup('close');">
 			<a href="#" onclick="quit_dice(); return false;" data-iconpos="notext" data-icon="delete" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;right:0;">Back</a>
-			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0px;pointer-events:none;"></div>
-			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0px;right:0;pointer-events:none;"></div>
-			<img id="imglock3" src="images/lock.png" style="position:absolute; top: 50px; left: 50px; pointer-events:none;"/>
-			<img id="imglock0" src="images/lock.png" style="position:absolute; top: 50px; left:180px; pointer-events:none;"/>
-			<img id="imglock2" src="images/lock.png" style="position:absolute; top:200px; left:100px; pointer-events:none;"/>
-			<img id="imglock4" src="images/lock.png" style="position:absolute; top:350px; left: 50px; pointer-events:none;"/>
-			<img id="imglock1" src="images/lock.png" style="position:absolute; top:350px; left:180px; pointer-events:none;"/>
+			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0;pointer-events:none;"></div>
+			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0;right:0;pointer-events:none;"></div>
+			<img id="imglock3" src="images/lock.png" style="position:absolute; top: 50px; left: 50px; pointer-events:none;" alt="lock">
+			<img id="imglock0" src="images/lock.png" style="position:absolute; top: 50px; left:180px; pointer-events:none;" alt="lock">
+			<img id="imglock2" src="images/lock.png" style="position:absolute; top:200px; left:100px; pointer-events:none;" alt="lock">
+			<img id="imglock4" src="images/lock.png" style="position:absolute; top:350px; left: 50px; pointer-events:none;" alt="lock">
+			<img id="imglock1" src="images/lock.png" style="position:absolute; top:350px; left:180px; pointer-events:none;" alt="lock">
 			<div id="popupSwipe" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
 				<p data-l10n-id="lbswipe" style="margin-top:-1px;"><br>Swipe or shake to roll the dice!</p>
 			</div>
 			<div id="popupLock" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
 				<p data-l10n-id="lblock" style="margin-top:-1px;"><br>Tap to lock a dice!</p>
 			</div>
 		</div><!-- /page -->
@@ -76,22 +75,25 @@
 			<div data-role="content" data-theme="d">
 				<table>
 					<tr>
-						<td colspan="2"  style="padding-top:10px;"><span data-l10n-id="lbdev">Developed by Gerard Tyedmers with <a href="http://jquerymobile.com/" target="_blank">jQuery mobile</a><span>, </span><a href="https://github.com/alexgibson/shake.js/" target="_blank">shake.js</a> <span data-l10n-id="lband"> and </span> <a href="http://threejs.org/" target="_blank">three.js</a><span>. </span><br>
+						<td colspan="2"  style="padding-top:10px;">
+							<span data-l10n-id="lbdev">Developed by Gerard Tyedmers with </span><a href="http://jquerymobile.com/" target="_blank">jQuery mobile</a>
+								<span>, </span><a href="https://github.com/alexgibson/shake.js/" target="_blank">shake.js</a>
+								<span data-l10n-id="lband"> and </span> <a href="http://threejs.org/" target="_blank">three.js</a><span>. </span><br>
 						<span data-l10n-id="lbmodel">3D-Model created with <a href="https://www.tinkercad.com/" target="_blank">tinkercad</a><span>. </span>
 						</span>
 						</td>
 					</tr>
 					<tr>
-						<td width="20%" style="text-align: center;padding-top:15px;"><a href="mailto:grrd@gmx.net"><img src="images/mail.png" alt="mail" style="width: 80%;"/></a></td>
-						<td width="80%" style="padding-left:10px;padding-top:10px;">E-mail: <a href="mailto:grrd@gmx.net">grrd@gmx.net </a></td>
+						<td style="width:20%;text-align: center;padding-top:15px;"><a href="mailto:grrd@gmx.net"><img src="images/mail.png" alt="mail" style="width: 80%;"/></a></td>
+						<td style="width:80%;padding-left:10px;padding-top:10px;">E-mail: <a href="mailto:grrd@gmx.net">grrd@gmx.net </a></td>
 					</tr>
 					<tr>
-						<td width="20%" style="text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank"><img src="images/puzzle.png" alt="puzzle" style="width: 80%;"/></a></td>
-						<td width="80%" style="padding-left:10px;"><span data-l10n-id="lbpuzzle">Try my other game: <a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank">grrd's Puzzle</a></span></td>
+						<td style="width:20%;text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank"><img src="images/puzzle.png" alt="puzzle" style="width: 80%;"/></a></td>
+						<td style="width:80%;padding-left:10px;"><span data-l10n-id="lbpuzzle">Try my other game: <a href="http://homepage.hispeed.ch/grrds_games/Puzzle" target="_blank">grrd's Puzzle</a></span></td>
 					</tr>
 					<tr>
-						<td width="20%" style="text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/4inaRow" target="_blank"><img src="images/4inarow.png" alt="puzzle" style="width: 80%;"/></a></td>
-						<td width="80%" style="padding-left:10px;"><span data-l10n-id="lband">and <a href="http://homepage.hispeed.ch/grrds_games/4inaRow/" target="_blank">grrd's 4 in a Row</a></span></td>
+						<td style="width:20%;text-align: center;"><a href="http://homepage.hispeed.ch/grrds_games/4inaRow" target="_blank"><img src="images/4inarow.png" alt="puzzle" style="width: 80%;"/></a></td>
+						<td style="width:20%;padding-left:10px;"><span data-l10n-id="lband">and <a href="http://homepage.hispeed.ch/grrds_games/4inaRow/" target="_blank">grrd's 4 in a Row</a></span></td>
 					</tr>
 				</table>
 				<a href="#title" data-l10n-id="btclose" data-role="button" data-theme="c" data-icon="delete">Close</a>
@@ -104,7 +106,7 @@
 				<img src="images/title2.png" class="header" alt="dice" style="width:28%;" data-inline="true"/>
 				<img src="images/dice.png" class="header" alt="dice" style="width:12%;" data-inline="true"/>
 			</div>
-			<div id="dice_content" data-role="content" data-theme="d">
+			<div data-role="content" data-theme="d">
 				<div data-l10n-id="lbcolor">Color</div>
 				<div style='display:block;width:100%;'>
 					<fieldset data-role="controlgroup" data-type="horizontal" style="width:100%;" >
@@ -150,17 +152,17 @@
 							<label id="radioanzp5" for="anzahlp5"><img id="img_anzahlp5" class="settings" src="images/dice_5.png" alt="5"/></label>
 					</fieldset>
 				</div>
-				<a id="btback" onclick="close_settings(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+				<a onclick="close_settings(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			</div><!-- /content -->
 		</div><!-- /page Settings -->
 
 		<div data-role="page" id="popupYahtzee" data-theme="a">
 			<div data-role="header" data-theme="a" style="text-align:center;">
-				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
-				<img src="images/dice.png" alt="dice" style="width:12%; margin-top:0px; margin-bottom:0px" data-inline="true"/>
+				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0; margin-bottom:0" data-inline="true"/>
+				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0; margin-bottom:0" data-inline="true"/>
+				<img src="images/dice.png" alt="dice" style="width:12%; margin-top:0; margin-bottom:0" data-inline="true"/>
 			</div>
-			<div id="dice_content" data-role="content" data-theme="d">
+			<div data-role="content" data-theme="d">
 				<table style="margin-left:-10px;margin-right:-10px;margin-top:-4px;border-collapse: collapse;">
 					<tr>
 						<td style="width:16%"></td>
@@ -511,12 +513,12 @@
 						<td class="score" id="lbsum4p5" style="font-weight: bold;"></td>
 					</tr>
 				</table>
-				<a id="btback" onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+				<a onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			</div><!-- /content -->
 			<div id="popupHelp" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;">
+				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
 				<p id="helptit" style="padding-top:7px; font-weight: bold;">Aces</p>
-				<p id="helptxt" style="padding-top:0px">Count and add only aces</p>
+				<p id="helptxt" style="padding-top:0">Count and add only aces</p>
 			</div>
 		</div><!-- /page Yahtzee -->
 

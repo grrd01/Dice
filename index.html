@@ -30,10 +30,10 @@
 				<img id="img_title3q" src="images/dice.png" alt="grrd's Dice" style="width:calc(20% - 2px);margin-bottom:20px;" />
 				<noscript> is a 3D Dice Roller app.</noscript>
 				<div data-role="controlgroup" data-type="horizontal" style="float:right;margin-top:-20px;">
-					<a href="#popupInfo" class="btsmall" data-role="button" data-rel="dialog" data-transition="pop"><img class="btsmall" src="images/info.png" alt="about"/></a>
-					<a href="#popupSettings" class="btsmall" data-role="button" data-rel="dialog" data-transition="pop"><img class="btsmall" src="images/settings.png" alt="settings"/></a>
+					<a href="#popupInfo" class="bt_small" data-role="button" data-rel="dialog" data-transition="pop"><img class="bt_small" src="images/info.png" alt="about"/></a>
+					<a href="#popupSettings" class="bt_small" data-role="button" data-rel="dialog" data-transition="pop"><img class="bt_small" src="images/settings.png" alt="settings"/></a>
 				</div>
-				<img id="img_title3h" src="images/dice.png" alt="grrd's Dice" style="display: block;margin-left: auto;margin-right: auto;margin-top:40px;margin-bottom:20px;width: 10em;clear:left" />
+				<img id="img_title3h" src="images/dice.png" alt="grrd's Dice" style="display: block;margin: 40px auto 20px auto;width: 10em;clear:left" />
 				<a   data-theme="b"></a>
 				<div id="btdiceyahtzee" data-role="controlgroup" data-type="horizontal" style="width:100%;position:absolute;bottom:10px;">
 					<a id="btdice" href="#" onclick="display_dice(false); return false;" data-role="button"><div id="btdice_pad" data-l10n-id="btdice"></div></a>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 			<div id="popupWebGL" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
+				<img src="images/dice.png" class="popup" alt="dice">
 				<p data-l10n-id="lbwebgl" style="margin-top:-1px;"><br>Your browser does not support WebGL!</p>
 			</div>
 		</div><!-- /page  -->
@@ -56,11 +56,11 @@
 			<img id="imglock4" src="images/lock.png" style="position:absolute; top:350px; left: 50px; pointer-events:none;" alt="lock">
 			<img id="imglock1" src="images/lock.png" style="position:absolute; top:350px; left:180px; pointer-events:none;" alt="lock">
 			<div id="popupSwipe" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
+				<img src="images/dice.png" class="popup" alt="dice">
 				<p data-l10n-id="lbswipe" style="margin-top:-1px;"><br>Swipe or shake to roll the dice!</p>
 			</div>
 			<div id="popupLock" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
+				<img src="images/dice.png" class="popup" alt="dice">
 				<p data-l10n-id="lblock" style="margin-top:-1px;"><br>Tap to lock a dice!</p>
 			</div>
 		</div><!-- /page -->
@@ -156,7 +156,7 @@
 			</div><!-- /content -->
 		</div><!-- /page Settings -->
 
-		<div data-role="page" id="popupYahtzee" data-theme="a">
+		<div data-role="page" id="popupYahtzee" data-theme="a" onmousedown="$('#popupHelp').popup('close');">
 			<div data-role="header" data-theme="a" style="text-align:center;">
 				<img src="images/title.png" alt="grrd's" style="width:38%;margin-top:0; margin-bottom:0" data-inline="true"/>
 				<img src="images/title2.png" alt="dice" style="width:28%; margin-top:0; margin-bottom:0" data-inline="true"/>
@@ -516,7 +516,7 @@
 				<a onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			</div><!-- /content -->
 			<div id="popupHelp" class="popup" data-role="popup" data-theme="a">
-				<img src="images/dice.png" style="width:60px; float:left;padding:10px;" alt="dice">
+				<img src="images/dice.png" class="popup" alt="dice">
 				<p id="helptit" style="padding-top:7px; font-weight: bold;">Aces</p>
 				<p id="helptxt" style="padding-top:0">Count and add only aces</p>
 			</div>

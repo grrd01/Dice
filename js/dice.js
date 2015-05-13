@@ -4,6 +4,8 @@
 * Licensed under the MPL License
 */
 
+"use strict";
+
 var container;
 var mesh = [];
 var camera, cameraTarget, scene, renderer, material;
@@ -38,6 +40,7 @@ var current_score = new Array(14);
 var player_score = new Array(5);
 for (var i = 0; i < player_score.length; ++i)
 {player_score[i] = new Array(14);}
+var total_score =  [0, 0, 0, 0, 0];
 
 var totwert;
 var upperwert;
@@ -306,8 +309,7 @@ function yahtzee_count (){
 	}
 	current_score[13] = totwert;
 	for (i = 0; i < current_score.length; ++i) {
-		if (player_score[cur_player-1][i] === null)
-		{
+		if (player_score[cur_player-1][i] === null) {
 			var $bt_p_ = $("#bt" + i + "p" + cur_player);
 			$("#lb" + i + "p" + cur_player).css('display', 'none');
 			$bt_p_.css('display', 'block');
@@ -323,6 +325,7 @@ function yahtzee_count (){
 }
 
 function yahtzee_setvalue ( id ) {
+	var empty = false;
 	player_score[cur_player-1][id] = current_score[id];
 	$("#lb" + id + "p" + cur_player).html(current_score[id]);
 
@@ -343,15 +346,29 @@ function yahtzee_setvalue ( id ) {
 	}
 	$("#lbsum3p" + cur_player).html(totwert - upperwert);
 	$("#lbsum4p" + cur_player).html(totwert);
+	total_score[cur_player - 1] = totwert;
 
-	cur_player ++;
-	if (cur_player > anz_player) { cur_player = 1; }
-	cur_try = 1;
-	$lbtry.html(cur_try + " / 3");
-	$lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
-	unlock_dice();
+	for (i = 0; i < current_score.length; ++i) {
+		if (player_score[cur_player - 1][i] === null && i != 6) {
+			empty = true;
+		}
+	}
 
-	$.mobile.changePage('#dice', {transition: 'pop', reverse: true});
+	if (!empty && cur_player == anz_player) {
+		i = total_score.indexOf(Math.max.apply(Math, total_score));
+		$("#helptit").html(navigator.mozL10n.get("lbplayer") + " " + (i + 1) + " " + navigator.mozL10n.get("lbwin"));
+		$("#helptxt").html(navigator.mozL10n.get("lbwith") + " " + total_score[i] + " " + navigator.mozL10n.get("lbpts"));
+		$("#popupHelp").popup("open");
+	} else {
+		cur_player ++;
+		if (cur_player > anz_player) { cur_player = 1; }
+		cur_try = 1;
+		$lbtry.html(cur_try + " / 3");
+		$lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
+		unlock_dice();
+
+		$.mobile.changePage('#dice', {transition: 'pop', reverse: true});
+	}
 }
 
 function yahtzee_init () {
@@ -383,6 +400,7 @@ function yahtzee_init () {
 			$("#lbsum4p" + (j + 1)).html("");
 		}
 		$("#lbbonusp" + (j + 1)).html("");
+		total_score[j] = 0;
 	}
 
 	cur_player = 1;
@@ -517,7 +535,7 @@ function onDocumentTouchEnd( event ) {
 	rolling = true;
 }
 
-function lock_dice () {"use strict";
+function lock_dice () {
 	var i;
 	for (i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
@@ -580,7 +598,7 @@ function lock_dice () {"use strict";
 	}
 }
 
-function content_formatting() {"use strict";
+function content_formatting() {
 	g_windowsheight = $(window).height();
 	g_windowswidth = $(window).width();
 	windowHalfX = window.innerWidth / 2;
@@ -702,12 +720,12 @@ function content_formatting() {"use strict";
 	}
 }
 
-$(window).resize( function() {"use strict";
+$(window).resize( function() {
 	content_formatting();
 	setTimeout(function() {content_formatting();},500);
 });
 
-function display_dice(yahtzee){"use strict";
+function display_dice(yahtzee){
 	var $input_radio_color_checked = $('input:radio[name=color]:checked');
 	in_yahtzee = yahtzee;
 	in_dice=true;
@@ -728,7 +746,7 @@ function display_dice(yahtzee){"use strict";
 	mesh[0].material.ambient.setHex($input_radio_color_checked.val());
 }
 
-function quit_dice(){"use strict";
+function quit_dice(){
 	myShakeEvent.stop();
 	in_dice=false;
 	$lbtotwert.hide();
@@ -745,7 +763,7 @@ function unlock_dice() {
 	}
 }
 
-function close_settings() {"use strict";
+function close_settings() {
 	var $input_radio_anzahl_checked = $('input:radio[name=anzahl]:checked');
 	if ($input_radio_anzahl_checked.val() > anz_dices) {
 		for (i = anz_dices; i < $input_radio_anzahl_checked.val(); ++i) {
@@ -766,7 +784,7 @@ function close_settings() {"use strict";
 	$.mobile.changePage('#title', {transition: 'pop', reverse: true});
 }
 
-function clone_dice(i) {"use strict";
+function clone_dice(i) {
 	mesh[i] = mesh[0].clone();
 	mesh[i].rotation.y = - Math.PI / 2;
 	mesh[i].scale.set( 0.01, 0.01, 0.01 );
@@ -778,7 +796,7 @@ function clone_dice(i) {"use strict";
 	mesh[i].rotation.z = targetRotationZ[i];
 }
 
-function show_help (i) {"use strict";
+function show_help (i) {
 	$("#helptit").html(navigator.mozL10n.get(i));
 	$("#helptxt").html(navigator.mozL10n.get(i+"txt"));
 	$("#popupHelp").popup("open");
@@ -786,7 +804,7 @@ function show_help (i) {"use strict";
 
 navigator.mozL10n.ready( function() {
 	// Example usage - http://homepage.hispeed.ch/grrds_games/Dice/?lang=en
-	url_param = url_query('lang');
+	var url_param = url_query('lang');
 	if ( url_param ) {
 		if (url_param !== navigator.mozL10n.language.code) {navigator.mozL10n.language.code = url_param;}
 	}

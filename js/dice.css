@@ -11,7 +11,8 @@ a.active { display: none; }
 div.passive { display: block; }
 img.header { margin-top:0; margin-bottom:0 }
 img.settings { margin-left:-20px;margin-right:-20px;margin-top:-4px; }
-a.btsmall { padding:-20px; height: 35px;width: 55px; }
-img.btsmall { margin-top:-5px;margin-left:-10px;height: 25px;width: 25px; }
+a.bt_small { padding:-20px; height: 35px;width: 55px; }
+img.bt_small { margin-top:-5px;margin-left:-10px;height: 25px;width: 25px; }
 div.popup { width:250px;height:80px;display:block;text-decoration:none;color:white }
-.ui-dialog .ui-header .ui-btn-icon-notext { display:none;}
+img.popup { width:60px; float:left;padding:10px; }
+.ui-dialog .ui-header .ui-btn-icon-notext { display:none; }

@@ -55,6 +55,7 @@ var cur_try = 1;
 var cur_speed;
 var pop_swipe_shown = false;
 var pop_lock_shown = false;
+var pop_help_shown = false;
 var lock_height;
 
 var windowHalfX = window.innerWidth / 2;
@@ -63,6 +64,7 @@ var windowHalfY = window.innerHeight / 2;
 var g_windowsheight;
 var g_windowswidth;
 
+var $lbanz = $("#lbanz");
 var $lbtry = $("#lbtry");
 var $lbtotwert = $("#lbtotwert");
 var $imglock0 = $("#imglock0");
@@ -96,6 +98,16 @@ $(document).on("pageshow","#dice",function(){
 	if (!pop_swipe_shown) {
 		$("#popupSwipe").popup("open");
 		pop_swipe_shown = true;
+	}
+
+});
+
+$(document).on("pageshow","#popupYahtzee",function(){
+	if (!pop_help_shown) {
+		$("#helptit").html(navigator.mozL10n.get("lbhelp"));
+		$("#helptxt").html("");
+		$("#popupHelp").popup("open");
+		pop_help_shown = true;
 	}
 
 });
@@ -612,12 +624,12 @@ function content_formatting() {
 		$imglock4.attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX - lock_height*1.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
 		$imglock1.attr("style","position:absolute; top:" + (windowHalfY + lock_height*1.3) + "px; left:" + (windowHalfX + lock_height*0.4) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
 		$("#img_title").attr("style","width:100%;margin-top:-10px;");
-		$("#img_title2").attr("style","width:100%;margin-top:-40px;");
+		$("#img_title2").attr("style","width:100%;margin-top:-20px;");
 		$("#img_title3h").show();
 		$("#img_title3q").hide();
-		$("#btdiceyahtzee").attr("style","width:100%;position:absolute;bottom:10px;");
-		$("#btdice").attr("style","width:" + (g_windowswidth/2-16) + "px;");
-		$("#btyahtzee").attr("style","width:" + (g_windowswidth/2-16) + "px;");
+		$("#btdiceyahtzee").css({"width":"100%","position":"absolute","bottom":"10px"});
+		$("#btdice").css({"width":(g_windowswidth/2-16) + "px","height":""});
+		$("#btyahtzee").css({"width":(g_windowswidth/2-16) + "px","height":""});
 		$("#btdice_pad").attr("style","");
 		$("#btyahtzee_pad").attr("style","");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
@@ -661,13 +673,13 @@ function content_formatting() {
 		$imglock2.attr("style","position:absolute; top:" + (windowHalfY - lock_height/2) + "px; left:" + (windowHalfX - lock_height/2) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock2').css('display'));
 		$imglock4.attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX - lock_height*2.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock4').css('display'));
 		$imglock1.attr("style","position:absolute; top:" + (windowHalfY + lock_height*0.6) + "px; left:" + (windowHalfX + lock_height*1.8) + "px; pointer-events:none; width:" + lock_height + "px; height:" + lock_height + "px; display:" + $('#imglock1').css('display'));
-		$("#img_title").attr("style","width:calc(46% - 5px);margin-bottom:20px;");
-		$("#img_title2").attr("style","width:calc(34% - 5px);margin-top:0px;margin-bottom:20px;");
+		$("#img_title").attr("style","width:calc(46% - 15px);margin-bottom:20px;");
+		$("#img_title2").attr("style","width:calc(31% - 10px);margin-top:0px;margin-bottom:20px;margin-left:20px;");
 		$("#img_title3h").hide();
 		$("#img_title3q").show();
-		$("#btdiceyahtzee").attr("style","width:100%;position:absolute;bottom:" + ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px;");
-		$("#btdice").attr("style","width:" + (g_windowswidth/2-16) + "px;height:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px;");
-		$("#btyahtzee").attr("style","width:" + (g_windowswidth/2-16) + "px;height:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px;");
+		$("#btdiceyahtzee").css({"width":"100%","position":"absolute","bottom": ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px"});
+		$("#btdice").css({"width":(g_windowswidth/2-16) + "px","height":Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
+		$("#btyahtzee").css({"width":(g_windowswidth/2-16) + "px","height": Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
 		$("#btdice_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
 		$("#btyahtzee_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
@@ -713,10 +725,7 @@ function content_formatting() {
 	for (var i = 1; i < 6; ++i) {
 		$("#radio"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
 		$("#img_color"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
-		$("#radioanz"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-		$("#img_anzahl"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
-		$("#radioanzp"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-		$("#img_anzahlp"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
+		$("#imganzahl"+i).css({'max-width': '9179px', 'width': + (g_windowswidth-70)/5.1 +'px','margin':'-5px -5px -5px -15px'});
 	}
 }
 
@@ -725,16 +734,30 @@ $(window).resize( function() {
 	setTimeout(function() {content_formatting();},500);
 });
 
-function display_dice(yahtzee){
-	var $input_radio_color_checked = $('input:radio[name=color]:checked');
+function set_number(yahtzee){
 	in_yahtzee = yahtzee;
-	in_dice=true;
-	anz_player = $('input:radio[name=anzahlp]:checked').val();
 	if (in_yahtzee) {
+		$lbanz.html(navigator.mozL10n.get("lbanzpl"));
+	} else {
+		$lbanz.html(navigator.mozL10n.get("lbanz"));
+	}
+	//$('#btdiceyahtzee').hide("slide", { direction: "right" }, 1000);
+	//$('#btanzahl').show("slide", { direction: "right" }, 1000);
+	$('#btdiceyahtzee').slideToggle();
+	setTimeout(function() {$('#btanzahl').slideToggle();},500);
+}
+
+function display_dice(anzahl){
+	var $input_radio_color_checked = $('input:radio[name=color]:checked');
+	in_dice=true;
+	if (in_yahtzee) {
+		anz_player = anzahl;
+		anzahl_dice(5);
 		$('input:radio[name=anzahl]').filter('[value=5]').prop('checked', true);
 		close_settings();
 		yahtzee_init();
 	} else {
+		anzahl_dice(anzahl);
 		$lbtotwert.hide();
 		$lbtry.hide();
 		unlock_dice();
@@ -746,11 +769,31 @@ function display_dice(yahtzee){
 	mesh[0].material.ambient.setHex($input_radio_color_checked.val());
 }
 
+function anzahl_dice (anzahl) {
+	if (anzahl > anz_dices) {
+		for (i = anz_dices; i < anzahl; ++i) {
+			if (typeof mesh[i] == "undefined" || mesh[i] == null) {
+				clone_dice(i);
+			}
+			scene.add( mesh[i] );
+		}
+	}
+	if (anz_dices > anzahl) {
+		for (i = anzahl; i < anz_dices; ++i) {
+			scene.remove(mesh[i]);
+		}
+	}
+	anz_dices = anzahl;
+	content_formatting();
+}
+
 function quit_dice(){
 	myShakeEvent.stop();
 	in_dice=false;
 	$lbtotwert.hide();
 	$lbtry.hide();
+	$('#btdiceyahtzee').show();
+	$('#btanzahl').hide();
 	unlock_dice();
 	$.mobile.changePage('#title', {transition: 'slide', reverse: true});
 }
@@ -764,22 +807,6 @@ function unlock_dice() {
 }
 
 function close_settings() {
-	var $input_radio_anzahl_checked = $('input:radio[name=anzahl]:checked');
-	if ($input_radio_anzahl_checked.val() > anz_dices) {
-		for (i = anz_dices; i < $input_radio_anzahl_checked.val(); ++i) {
-			if (typeof mesh[i] == "undefined" || mesh[i] == null) {
-				clone_dice(i);
-			}
-			scene.add( mesh[i] );
-		}
-	}
-	if (anz_dices > $input_radio_anzahl_checked.val()) {
-		for (i = $input_radio_anzahl_checked.val(); i < anz_dices; ++i) {
-			scene.remove(mesh[i]);
-		}
-	}
-
-	anz_dices = parseInt($input_radio_anzahl_checked.val());
 	content_formatting();
 	$.mobile.changePage('#title', {transition: 'pop', reverse: true});
 }

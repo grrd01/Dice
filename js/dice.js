@@ -75,6 +75,41 @@ var $imglock2 = $("#imglock2");
 var $imglock3 = $("#imglock3");
 var $imglock4 = $("#imglock4");
 var $bt_close_list = $("#bt_close_list");
+var $btdiceyahtzee = $("#btdiceyahtzee");
+var $btdice = $("#btdice");
+var $btyahtzee = $("#btyahtzee");
+var $popupSwipe = $("#popupSwipe");
+var $popupLock = $("#popupLock");
+var $popupWebGL = $("#popupWebGL");
+var $popupHelp = $("#popupHelp");
+var $helptit = $("#helptit");
+var $helptxt = $("#helptxt");
+
+$btdice.click(function(e) {set_number(false); e.preventDefault();});
+$btyahtzee.click(function(e) {set_number(true); e.preventDefault();});
+$bt_list.click(function(e) {$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'}); e.preventDefault();});
+$("#bt_quit").click(function(e) {quit_dice(); e.preventDefault();});
+$("#bt_closeSettings").click(function(e) {close_settings(); e.preventDefault();});
+$("#dice").mousedown(function(e) {$('#popupSwipe').popup('close');$('#popupLock').popup('close');});
+$("#popupYahtzee").mousedown(function(e) {$('#popupHelp').popup('close');});
+$bt_close_list.click(function(e) {close_list(); e.preventDefault();});
+$("[id^=btanzahl]").click(function(e) {display_dice(Number(e.target.id.slice(-1))); e.preventDefault();});
+$(".help").click(function(e) {show_help(e.target.id); e.preventDefault();});
+$("[id^=bt0p]").click(function(e) {yahtzee_setvalue(0); e.preventDefault();});
+$("[id^=bt1p]").click(function(e) {yahtzee_setvalue(1); e.preventDefault();});
+$("[id^=bt2p]").click(function(e) {yahtzee_setvalue(2); e.preventDefault();});
+$("[id^=bt3p]").click(function(e) {yahtzee_setvalue(3); e.preventDefault();});
+$("[id^=bt4p]").click(function(e) {yahtzee_setvalue(4); e.preventDefault();});
+$("[id^=bt5p]").click(function(e) {yahtzee_setvalue(5); e.preventDefault();});
+
+$("[id^=bt7p]").click(function(e) {yahtzee_setvalue(7); e.preventDefault();});
+$("[id^=bt8p]").click(function(e) {yahtzee_setvalue(8); e.preventDefault();});
+$("[id^=bt9p]").click(function(e) {yahtzee_setvalue(9); e.preventDefault();});
+$("[id^=bt10p]").click(function(e) {yahtzee_setvalue(10); e.preventDefault();});
+$("[id^=bt11p]").click(function(e) {yahtzee_setvalue(11); e.preventDefault();});
+$("[id^=bt12p]").click(function(e) {yahtzee_setvalue(12); e.preventDefault();});
+$("[id^=bt13p]").click(function(e) {yahtzee_setvalue(13); e.preventDefault();});
+
 
 var myShakeEvent = new Shake({
 	threshold: 8, // 15 - optional, shake strength threshold
@@ -83,8 +118,8 @@ var myShakeEvent = new Shake({
 
 window.addEventListener('shake', shakeEventDidOccur, false);
 function shakeEventDidOccur () {
-	$('#popupSwipe').popup('close');
-	$('#popupLock').popup('close');
+	$popupSwipe.popup('close');
+	$popupLock.popup('close');
 	$lbtotwert.hide();
 	$lbtry.hide();
 	for (var i = 0; i < anz_dices; ++i) {
@@ -99,7 +134,7 @@ function shakeEventDidOccur () {
 
 $(document).on("pageshow","#dice",function(){
 	if (!pop_swipe_shown) {
-		$("#popupSwipe").popup("open");
+		$popupSwipe.popup("open");
 		pop_swipe_shown = true;
 	}
 
@@ -107,16 +142,16 @@ $(document).on("pageshow","#dice",function(){
 
 $(document).on("pageshow","#popupYahtzee",function(){
 	if (!pop_help_shown) {
-		$("#helptit").html(navigator.mozL10n.get("lbhelp"));
-		$("#helptxt").html("");
-		$("#popupHelp").popup("open");
+		$helptit.html(navigator.mozL10n.get("lbhelp"));
+		$helptxt.html("");
+		$popupHelp.popup("open");
 		pop_help_shown = true;
 	}
 
 });
 
 if ( ! Detector.webgl ) {
-	setTimeout(function() {$("#popupWebGL").popup("open");},500);
+	setTimeout(function() {$popupWebGL.popup("open");},500);
 } else {
 	init();
 }
@@ -285,7 +320,7 @@ function render() {
 		}
 		if (in_yahtzee) {
 			if (!pop_lock_shown && cur_try ==1 && !in_lock) {
-				$("#popupLock").popup("open");
+				$popupLock.popup("open");
 				pop_lock_shown = true;
 			}
 			if (!in_lock){ cur_try ++; } else { in_lock = false;}
@@ -373,9 +408,9 @@ function yahtzee_setvalue ( id ) {
 
 	if (!empty && cur_player == anz_player) {
 		i = total_score.indexOf(Math.max.apply(Math, total_score));
-		$("#helptit").html(navigator.mozL10n.get("lbplayer") + " " + (i + 1) + " " + navigator.mozL10n.get("lbwin"));
-		$("#helptxt").html(navigator.mozL10n.get("lbwith") + " " + total_score[i] + " " + navigator.mozL10n.get("lbpts"));
-		$("#popupHelp").popup("open");
+		$helptit.html(navigator.mozL10n.get("lbplayer") + " " + (i + 1) + " " + navigator.mozL10n.get("lbwin"));
+		$helptxt.html(navigator.mozL10n.get("lbwith") + " " + total_score[i] + " " + navigator.mozL10n.get("lbpts"));
+		$popupHelp.popup("open");
 		game_over = true;
 	} else {
 		cur_player ++;
@@ -633,9 +668,9 @@ function content_formatting() {
 		$("#img_title2").attr("style","width:100%;margin-top:-20px;");
 		$("#img_title3h").show();
 		$("#img_title3q").hide();
-		$("#btdiceyahtzee").css({"width":"100%","position":"absolute","bottom":"10px"});
-		$("#btdice").css({"width":(g_windowswidth/2-16) + "px","height":""});
-		$("#btyahtzee").css({"width":(g_windowswidth/2-16) + "px","height":""});
+		$btdiceyahtzee.css({"width":"100%","position":"absolute","bottom":"10px"});
+		$btdice.css({"width":(g_windowswidth/2-16) + "px","height":""});
+		$btyahtzee.css({"width":(g_windowswidth/2-16) + "px","height":""});
 		$("#btdice_pad").attr("style","");
 		$("#btyahtzee_pad").attr("style","");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
@@ -683,9 +718,9 @@ function content_formatting() {
 		$("#img_title2").attr("style","width:calc(31% - 10px);margin-top:0px;margin-bottom:20px;margin-left:20px;");
 		$("#img_title3h").hide();
 		$("#img_title3q").show();
-		$("#btdiceyahtzee").css({"width":"100%","position":"absolute","bottom": ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px"});
-		$("#btdice").css({"width":(g_windowswidth/2-16) + "px","height":Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
-		$("#btyahtzee").css({"width":(g_windowswidth/2-16) + "px","height": Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
+		$btdiceyahtzee.css({"width":"100%","position":"absolute","bottom": ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px"});
+		$btdice.css({"width":(g_windowswidth/2-16) + "px","height":Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
+		$btyahtzee.css({"width":(g_windowswidth/2-16) + "px","height": Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
 		$("#btdice_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
 		$("#btyahtzee_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");
 		if (typeof mesh[0] !== "undefined" && mesh[0] !== null) {
@@ -723,9 +758,10 @@ function content_formatting() {
 			}
 		}
 	}
-	$('#popupSwipe').css('max-width', (g_windowswidth - 10) + 'px');
-	$('#popupLock').css('max-width', (g_windowswidth - 10) + 'px');
-	$('#popupWebGL').css('max-width', (g_windowswidth - 10) + 'px');
+	$popupSwipe.css('max-width', (g_windowswidth - 10) + 'px');
+	$popupLock.css('max-width', (g_windowswidth - 10) + 'px');
+	$popupWebGL.css('max-width', (g_windowswidth - 10) + 'px');
+	$popupHelp.css('max-width', (g_windowswidth - 40) + 'px');
 	$('#start').css('width', (g_windowswidth - 30) + 'px');
 
 	for (var i = 1; i < 6; ++i) {
@@ -748,9 +784,9 @@ function set_number(yahtzee){
 		$lbanz.html(navigator.mozL10n.get("lbanz"));
 	}
 	//$('#btdiceyahtzee').hide("slide", { direction: "right" }, 1000);
-	//$('#btanzahl').show("slide", { direction: "right" }, 1000);
+	//$('#grpanzahl').show("slide", { direction: "right" }, 1000);
 	$('#btdiceyahtzee').slideToggle();
-	setTimeout(function() {$('#btanzahl').slideToggle();},500);
+	setTimeout(function() {$('#grpanzahl').slideToggle();},500);
 }
 
 function display_dice(anzahl){
@@ -801,7 +837,7 @@ function quit_dice(){
 	$lbtotwert.hide();
 	$lbtry.hide();
 	$('#btdiceyahtzee').show();
-	$('#btanzahl').hide();
+	$('#grpanzahl').hide();
 	unlock_dice();
 	$.mobile.changePage('#title', {transition: 'slide', reverse: true});
 }
@@ -841,9 +877,9 @@ function clone_dice(i) {
 }
 
 function show_help (i) {
-	$("#helptit").html(navigator.mozL10n.get(i));
-	$("#helptxt").html(navigator.mozL10n.get(i+"txt"));
-	$("#popupHelp").popup("open");
+	$helptit.html(navigator.mozL10n.get(i));
+	$helptxt.html(navigator.mozL10n.get(i+"txt"));
+	$popupHelp.popup("open");
 }
 
 navigator.mozL10n.ready( function() {

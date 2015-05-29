@@ -56,6 +56,7 @@
 
 		<div data-role="page" id="dice" data-theme="a" style="position:relative;margin-top:-4px;" onmousedown="$('#popupSwipe').popup('close');$('#popupLock').popup('close');">
 			<a href="#" onclick="quit_dice(); return false;" data-iconpos="notext" data-icon="delete" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;right:0;">Back</a>
+			<a href="#" onclick="$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'}); return false;" id="bt_list" data-iconpos="notext" data-icon="bars" data-direction="reverse" data-role="button" data-theme="a" style="margin: 20px;overflow: hidden;position:absolute;left:0;">List</a>
 			<div id="lbtotwert" style="margin: 20px;position:absolute;bottom:0;pointer-events:none;"></div>
 			<div id="lbtry" style="margin: 20px;position:absolute;bottom:0;right:0;pointer-events:none;"></div>
 			<img id="imglock3" src="images/lock.png" style="position:absolute; top: 50px; left: 50px; pointer-events:none;" alt="lock">
@@ -491,7 +492,7 @@
 						<td class="score" id="lbsum4p5" style="font-weight: bold;"></td>
 					</tr>
 				</table>
-				<a onclick="quit_dice(); return false;" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+				<a onclick="close_list(); return false;" id="bt_close_list" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			</div><!-- /content -->
 			<div id="popupHelp" class="popup" data-role="popup" data-theme="a">
 				<img src="images/dice.png" class="popup" alt="dice">

@@ -56,6 +56,7 @@ var cur_speed;
 var pop_swipe_shown = false;
 var pop_lock_shown = false;
 var pop_help_shown = false;
+var game_over = false;
 var lock_height;
 
 var windowHalfX = window.innerWidth / 2;
@@ -66,12 +67,14 @@ var g_windowswidth;
 
 var $lbanz = $("#lbanz");
 var $lbtry = $("#lbtry");
+var $bt_list = $("#bt_list");
 var $lbtotwert = $("#lbtotwert");
 var $imglock0 = $("#imglock0");
 var $imglock1 = $("#imglock1");
 var $imglock2 = $("#imglock2");
 var $imglock3 = $("#imglock3");
 var $imglock4 = $("#imglock4");
+var $bt_close_list = $("#bt_close_list");
 
 var myShakeEvent = new Shake({
 	threshold: 8, // 15 - optional, shake strength threshold
@@ -333,6 +336,7 @@ function yahtzee_count (){
 			}
 		}
 	}
+	$bt_close_list.hide();
 	$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'});
 }
 
@@ -359,6 +363,7 @@ function yahtzee_setvalue ( id ) {
 	$("#lbsum3p" + cur_player).html(totwert - upperwert);
 	$("#lbsum4p" + cur_player).html(totwert);
 	total_score[cur_player - 1] = totwert;
+	$bt_close_list.show();
 
 	for (i = 0; i < current_score.length; ++i) {
 		if (player_score[cur_player - 1][i] === null && i != 6) {
@@ -371,6 +376,7 @@ function yahtzee_setvalue ( id ) {
 		$("#helptit").html(navigator.mozL10n.get("lbplayer") + " " + (i + 1) + " " + navigator.mozL10n.get("lbwin"));
 		$("#helptxt").html(navigator.mozL10n.get("lbwith") + " " + total_score[i] + " " + navigator.mozL10n.get("lbpts"));
 		$("#popupHelp").popup("open");
+		game_over = true;
 	} else {
 		cur_player ++;
 		if (cur_player > anz_player) { cur_player = 1; }
@@ -756,10 +762,12 @@ function display_dice(anzahl){
 		$('input:radio[name=anzahl]').filter('[value=5]').prop('checked', true);
 		close_settings();
 		yahtzee_init();
+		$bt_list.show();
 	} else {
 		anzahl_dice(anzahl);
 		$lbtotwert.hide();
 		$lbtry.hide();
+		$bt_list.hide();
 		unlock_dice();
 	}
 	myShakeEvent.start();
@@ -809,6 +817,15 @@ function unlock_dice() {
 function close_settings() {
 	content_formatting();
 	$.mobile.changePage('#title', {transition: 'pop', reverse: true});
+}
+
+function close_list() {
+	if (game_over) {
+		game_over = false;
+		quit_dice();
+	} else {
+		$.mobile.changePage('#dice', {transition: 'pop', reverse: true});
+	}
 }
 
 function clone_dice(i) {

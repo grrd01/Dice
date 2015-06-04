@@ -74,7 +74,7 @@ var $imglock1 = $("#imglock1");
 var $imglock2 = $("#imglock2");
 var $imglock3 = $("#imglock3");
 var $imglock4 = $("#imglock4");
-var $bt_close_list = $("#bt_close_list");
+var $div_close_list = $("#div_close_list");
 var $btdiceyahtzee = $("#btdiceyahtzee");
 var $btdice = $("#btdice");
 var $btyahtzee = $("#btyahtzee");
@@ -90,9 +90,9 @@ $btyahtzee.click(function(e) {set_number(true); e.preventDefault();});
 $bt_list.click(function(e) {$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'}); e.preventDefault();});
 $("#bt_quit").click(function(e) {quit_dice(); e.preventDefault();});
 $("#bt_closeSettings").click(function(e) {close_settings(); e.preventDefault();});
-$("#dice").mousedown(function(e) {$('#popupSwipe').popup('close');$('#popupLock').popup('close');});
-$("#popupYahtzee").mousedown(function(e) {$('#popupHelp').popup('close');});
-$bt_close_list.click(function(e) {close_list(); e.preventDefault();});
+$("#dice").mousedown(function() {$('#popupSwipe').popup('close');$('#popupLock').popup('close');});
+$("#popupYahtzee").mousedown(function() {$('#popupHelp').popup('close');});
+$("#bt_close_list").click(function(e) {close_list(); e.preventDefault();});
 $("[id^=btanzahl]").click(function(e) {display_dice(Number(e.target.id.slice(-1))); e.preventDefault();});
 $(".help").click(function(e) {show_help(e.target.id); e.preventDefault();});
 $("[id^=bt0p]").click(function(e) {yahtzee_setvalue(0); e.preventDefault();});
@@ -251,8 +251,10 @@ function onWindowResize() {
 }
 
 function animate() {
-	if(in_dice){requestAnimationFrame( animate );}
-	render();
+	if(in_dice){
+		requestAnimationFrame( animate );
+		render();
+	}
 }
 
 function render() {
@@ -371,7 +373,7 @@ function yahtzee_count (){
 			}
 		}
 	}
-	$bt_close_list.hide();
+	$div_close_list.hide();
 	$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'});
 }
 
@@ -398,7 +400,7 @@ function yahtzee_setvalue ( id ) {
 	$("#lbsum3p" + cur_player).html(totwert - upperwert);
 	$("#lbsum4p" + cur_player).html(totwert);
 	total_score[cur_player - 1] = totwert;
-	$bt_close_list.show();
+	$div_close_list.show();
 
 	for (i = 0; i < current_score.length; ++i) {
 		if (player_score[cur_player - 1][i] === null && i != 6) {
@@ -491,7 +493,7 @@ function onDocumentMouseDown( event ) {
 function onDocumentMouseMove( event ) {
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
-
+	if (in_yahtzee && rolling) {return;}
 	for (var i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
 			targetRotationX[i] = targetRotationXOnMouseDown[i] +  (( mouseX - mouseXOnMouseDown ) * 0.08)*randX[i];
@@ -512,14 +514,20 @@ function onDocumentMouseOut( event ) {
 function MouseOut_MouseUp( event ) {
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
-	if (Math.abs(mouseX - mouseXOnMouseDown) < 5 && Math.abs(mouseY - mouseYOnMouseDown) < 5 && new Date() - timeOnMouseDown < 300 && in_yahtzee)
+	if (Math.abs(mouseX - mouseXOnMouseDown) < 5 && Math.abs(mouseY - mouseYOnMouseDown) < 5 && in_yahtzee)
 	{
-		lock_dice();
+		if (new Date() - timeOnMouseDown < 300) {
+			lock_dice();
+		} else {
+			in_lock = true;
+		}
 	}
 
 	container.removeEventListener( 'mousemove', onDocumentMouseMove, false );
 	container.removeEventListener( 'mouseup', onDocumentMouseUp, false );
 	container.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+
+	if (in_yahtzee && rolling) {return;}
 
 	for (var i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
@@ -560,6 +568,7 @@ function onDocumentTouchMove( event ) {
 		event.preventDefault();
 		mouseX = event.touches[ 0 ].pageX - windowHalfX;
 		mouseY = event.touches[ 0 ].pageY - windowHalfY;
+		if (in_yahtzee && rolling) {return;}
 		for (var i = 0; i < anz_dices; ++i) {
 			if (!locked[i]) {
 				targetRotationX[i] = targetRotationXOnMouseDown[i] +  (( mouseX - mouseXOnMouseDown ) * 0.02)*randX[i];
@@ -572,12 +581,17 @@ function onDocumentTouchMove( event ) {
 
 function onDocumentTouchEnd( event ) {
 	event.preventDefault();
-	if (in_move == false && new Date() - timeOnMouseDown < 500 && in_yahtzee)
+	if (in_move == false && in_yahtzee)
 	{
-		mouseX = mouseXOnMouseDown;
-		mouseY = mouseYOnMouseDown;
-		lock_dice();
+		if (new Date() - timeOnMouseDown < 500) {
+			mouseX = mouseXOnMouseDown;
+			mouseY = mouseYOnMouseDown;
+			lock_dice();
+		} else {
+			in_lock = true;
+		}
 	}
+	if (in_yahtzee && rolling) {return;}
 	for (var i = 0; i < anz_dices; ++i) {
 		if (!locked[i]) {
 			targetRotationX[i]=Math.round((targetRotationX[i])/Math.PI*2)*Math.PI/2;
@@ -668,7 +682,7 @@ function content_formatting() {
 		$("#img_title2").attr("style","width:100%;margin-top:-20px;");
 		$("#img_title3h").show();
 		$("#img_title3q").hide();
-		$btdiceyahtzee.css({"width":"100%","position":"absolute","bottom":"10px"});
+		$btdiceyahtzee.css({"width":"100%","position":"absolute","bottom":"0","margin-bottom":"16px"});
 		$btdice.css({"width":(g_windowswidth/2-16) + "px","height":""});
 		$btyahtzee.css({"width":(g_windowswidth/2-16) + "px","height":""});
 		$("#btdice_pad").attr("style","");
@@ -718,7 +732,7 @@ function content_formatting() {
 		$("#img_title2").attr("style","width:calc(31% - 10px);margin-top:0px;margin-bottom:20px;margin-left:20px;");
 		$("#img_title3h").hide();
 		$("#img_title3q").show();
-		$btdiceyahtzee.css({"width":"100%","position":"absolute","bottom": ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px"});
+		$btdiceyahtzee.css({"width":"100%","position":"absolute","margin-bottom": ((g_windowsheight - g_windowswidth * 0.2 - 100)/3.5) + "px","bottom":"0"});
 		$btdice.css({"width":(g_windowswidth/2-16) + "px","height":Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
 		$btyahtzee.css({"width":(g_windowswidth/2-16) + "px","height": Math.max(((g_windowsheight - g_windowswidth * 0.2 - 100)/2),40) + "px"});
 		$("#btdice_pad").attr("style","padding-top:" + Math.max(((g_windowsheight - g_windowswidth * 0.2 - 200)/4),0) + "px;");

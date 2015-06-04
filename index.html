@@ -28,7 +28,7 @@
 				<img id="img_title" src="images/title.png" alt="grrd's" />
 				<img id="img_title2" src="images/title2.png" alt="Dice" />
 				<img id="img_title3q" class="tit3q" src="images/dice.png" alt="grrd's Dice"/>
-				<noscript> is a 3D Dice Roller app.</noscript>
+				<noscript> grrd’s Dice is a 3D Dice Roller app and a Yahtzee game for one to five players.</noscript>
 				<div class="settings" data-role="controlgroup" data-type="horizontal">
 					<a href="#popupInfo" class="bt_small" data-role="button" data-rel="dialog" data-transition="pop"><img class="bt_small" src="images/info.png" alt="about"/></a>
 					<a href="#popupSettings" class="bt_small" data-role="button" data-rel="dialog" data-transition="pop"><img class="bt_small" src="images/settings.png" alt="settings"/></a>
@@ -492,7 +492,9 @@
 						<td class="score bold" id="lbsum4p5"></td>
 					</tr>
 				</table>
-				<a id="bt_close_list" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+				<div id="div_close_list">
+					<a id="bt_close_list" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+				</div>
 			</div><!-- /content -->
 			<div id="popupHelp" class="popup" data-role="popup" data-theme="a">
 				<img src="images/dice.png" class="popup" alt="dice">
@@ -505,7 +507,7 @@
 		<script src="js/build/three.min.js"></script>
 		<script src="js/loaders/STLLoader.js"></script>
 		<script src="js/Detector.js"></script>
-		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/l10n.js"></script>
 		<script src="js/shake.js"></script>

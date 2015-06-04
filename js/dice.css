@@ -10,11 +10,11 @@ td.bold { font-weight: bold; }
 table.score { margin: -4px -10px 0; border-collapse: collapse; }
 div.score { text-align: right; float: right; }
 div.center { text-align:center; }
-div.bottom { width:100%; position:absolute; bottom:10px; }
+div.bottom { width:100%; position:absolute; margin-bottom:16px; bottom:0; }
 .dnone { display: none; }
 .dblock { display: block; }
 img.tit3q { width:calc(20% - 2px); margin-bottom:20px; margin-left:2.5%; }
-img.tit3h { display: block; margin: 40px auto 20px auto; width: 10em; clear:left; }
+img.tit3h { display: block; margin: 40px auto 20px auto; width: 55%; clear:left; }
 img.header { margin-top:0; margin-bottom:0; }
 img.settings { margin-left:-20px; margin-right:-20px; margin-top:-4px; }
 div.settings { float:right; margin-top:-20px; }

@@ -118,6 +118,7 @@ var myShakeEvent = new Shake({
 
 window.addEventListener('shake', shakeEventDidOccur, false);
 function shakeEventDidOccur () {
+	if (in_yahtzee && rolling) {return;}
 	$popupSwipe.popup('close');
 	$popupLock.popup('close');
 	$lbtotwert.hide();

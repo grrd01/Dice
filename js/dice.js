@@ -6,6 +6,7 @@
 
 "use strict";
 
+(function() {
 var container;
 var mesh = [];
 var camera, cameraTarget, scene, renderer, material;
@@ -916,3 +917,5 @@ function url_query( query ) {
 		return false;
 	}
 }
+}());
+

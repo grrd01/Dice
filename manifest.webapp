@@ -1,0 +1,36 @@
+{
+  "name": "grrd's Dice",
+  "description": "grrd’s Dice is a 3D Dice Roller app and a Yahtzee game for one to five players. grrd's Dice is free, no ads, no in-app purchases.",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/images/icon_16.png",
+    "32": "/images/icon_32.png",
+    "48": "/images/icon_48.png",
+    "60": "/images/icon_60.png",
+    "64": "/images/icon_64.png",
+    "90": "/images/icon_90.png",
+    "120": "/images/icon_120.png",
+    "128": "/images/icon_128.png",
+    "256": "/images/icon_256.png"
+  },
+  "version": "2.1",
+  "developer": {
+    "name": "grrd's Games",
+    "url": "http://homepage.hispeed.ch/grrds_games/"
+  },
+  "default_locale": "en",
+  "fullscreen": "true",
+ 
+  "locales": {
+    "de": {
+      "description": "grrd’s Dice ist eine 3D Würfel-App und ein Yahtzee (Kniffel, Yatzy) Spiel für 1 bis 5 Spieler. grrd's Dice ist gratis, keine Werbung, keine In-App Käufe."
+    },
+    "en": {
+      "description": "grrd’s Dice is a 3D Dice Roller app and a Yahtzee game for one to five players. grrd's Dice is free, no ads, no in-app purchases."
+    },
+    "fr": {
+      "description": "grrd’s Dice est une application 3D pour jouer aux dés et un jeu Yahtzee (Yatzee, Yatzy) pour 1 à 5 joueurs. grrd's Dice est gratuit, ni publicité, ni achats in-app."
+    }
+  }
+ 
+}

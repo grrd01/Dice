@@ -1,0 +1,26 @@
+{
+  "name": "grrd's Dice",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "short_name": "Dice",
+  "icons": {
+    "256": "images/icon_256.png",
+    "128": "images/icon_128.png",
+    "64": "images/icon_64.png",
+    "60": "images/icon_60.png",
+    "48": "images/icon_48.png",
+    "32": "images/icon_32.png",
+    "16": "images/icon_16.png"
+  },
+  "app": {
+    "urls": [
+      "http://homepage.hispeed.ch/grrds_games/Dice/"
+    ],
+    "launch": {
+      "web_url": "http://homepage.hispeed.ch/grrds_games/Dice/"
+    }
+  },
+  "author": "Gerard Tyedmers"
+}

@@ -42,9 +42,13 @@ p.helptxt { padding-top:0; }
 .w80 { width:80%; }
 .w80l { width:80%; padding-left:10px; }
 .w100 { width:100%; }
-.red { background-color: #CC002F; }
-.blue { background-color: #6666FF; }
-.yellow { background-color: #FFA319; }
-.green { background-color: #33D633; }
-.white { background-color: #BBBBBB; }
+.red { fill: #CC002F; }
+.blue { fill: #6666FF; }
+.yellow { fill: #FFA319; }
+.green { fill: #33D633; }
+.white { fill: #BBBBBB; }
+.svgwhite { fill:none; stroke:#ffffff; stroke-width:12; }
+.svggrey { fill:none;stroke:#333333;stroke-width:12; }
+.svggreyfilled { stroke:#333333; stroke-width:12; }
 .ui-dialog .ui-header .ui-btn-icon-notext { display:none; }
+.ui-controlgroup-horizontal .ui-radio .ui-btn-inner { padding: 5px;}

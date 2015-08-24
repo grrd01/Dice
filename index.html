@@ -41,61 +41,11 @@
                 </div>
                 <div id="grpanzahl" data-role="controlgroup" data-type="horizontal" class="bottom dnone">
                     <div id="lbanz">Anzahl Spieler/Würfel:</div>
-                    <a id="btanzahl1" href="#" data-role="button" class="w20-7">
-                        <div id="imganzahl1" class="w100">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#ffffff" >
-                                <rect class="svgwhite" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#ffffff" stroke-width="12" fill="none"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                            </svg>
-                        </div>
-                    </a>
-                    <a id="btanzahl2" href="#" data-role="button" class="w20-7">
-                        <div id="imganzahl2" class="w100">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#ffffff" >
-                                <rect class="svgwhite" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#ffffff" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </div>
-                    </a>
-                    <a id="btanzahl3" href="#" data-role="button" class="w20-7">
-                        <div id="imganzahl3" class="w100">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#ffffff" >
-                                <rect class="svgwhite" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#ffffff" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </div>
-                    </a>
-                    <a id="btanzahl4" href="#" data-role="button" class="w20-7">
-                        <div id="imganzahl4" class="w100">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#ffffff" >
-                                <rect class="svgwhite" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#ffffff" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </div>
-                    </a>
-                    <a id="btanzahl5" href="#" data-role="button" class="w20-7">
-                        <div id="imganzahl5" class="w100">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#ffffff" >
-                                <rect class="svgwhite" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#ffffff" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </div>
-                    </a>
+                    <a id="btanzahl1" href="#" data-role="button" class="w20-7"><img id="imganzahl1" class="w100" src="images/dice_1w.png" alt="1"/></a>
+                    <a id="btanzahl2" href="#" data-role="button" class="w20-7"><img id="imganzahl2" class="w100" src="images/dice_2w.png" alt="1"/></a>
+                    <a id="btanzahl3" href="#" data-role="button" class="w20-7"><img id="imganzahl3" class="w100" src="images/dice_3w.png" alt="1"/></a>
+                    <a id="btanzahl4" href="#" data-role="button" class="w20-7"><img id="imganzahl4" class="w100" src="images/dice_4w.png" alt="1"/></a>
+                    <a id="btanzahl5" href="#" data-role="button" class="w20-7"><img id="imganzahl5" class="w100" src="images/dice_5w.png" alt="1"/></a>
                 </div>
             </div>
             <div id="popupWebGL" class="popup" data-role="popup" data-theme="a">
@@ -170,45 +120,15 @@
                 <div class="dblock w100">
                     <fieldset data-role="controlgroup" data-type="horizontal" class="w100">
                         <input type="radio" name="color" id="color1" value="0xCC002F" checked="checked"/>
-                            <label id="radio1" for="color1">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                    <rect class="svggreyfilled red" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                    <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                    <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                                </svg>
-                            </label>
+                            <label id="radio1" for="color1"><img id="img_color1" class="settings red" src="images/dice_chance.png" alt="red"/></label>
                         <input type="radio" name="color" id="color2" value="0x6666FF" />
-                            <label id="radio2" for="color2">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                    <rect class="svggreyfilled blue" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                    <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                    <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                                </svg>
-                            </label>
+                            <label id="radio2" for="color2"><img id="img_color2" class="settings blue" src="images/dice_chance.png" alt="blue"/></label>
                         <input type="radio" name="color" id="color3" value="0xFFA319" />
-                            <label id="radio3" for="color3">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                    <rect class="svggreyfilled yellow" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                    <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                    <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                                </svg>
-                            </label>
+                            <label id="radio3" for="color3"><img id="img_color3" class="settings yellow" src="images/dice_chance.png" alt="yellow"/></label>
                         <input type="radio" name="color" id="color4" value="0x33D633" />
-                            <label id="radio4" for="color4">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                    <rect class="svggreyfilled green" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                    <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                    <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                                </svg>
-                            </label>
+                            <label id="radio4" for="color4"><img id="img_color4" class="settings green" src="images/dice_chance.png" alt="green"/></label>
                         <input type="radio" name="color" id="color5" value="0xBBBBBB" />
-                            <label id="radio5" for="color5">
-                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                    <rect class="svggreyfilled white" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                    <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                    <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                                </svg>
-                            </label>
+                            <label id="radio5" for="color5"><img id="img_color5" class="settings white" src="images/dice_chance.png" alt="white"/></label>
                     </fieldset>
                 </div>
                 <a id="bt_closeSettings" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
@@ -225,61 +145,15 @@
                 <table class="score">
                     <tr>
                         <td class="w16"></td>
-                        <td class="w16">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" width="170px" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect id="imgp1" class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                            </svg>
-                        </td>
-                        <td class="w16">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect id="imgp2" class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
-                        <td class="w16">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect id="imgp3" class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
-                        <td class="w16">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect id="imgp4" class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
-                        <td class="w16">
-                            <svg class="w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect id="imgp5" class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td class="w16"><img id="imgp1" src="images/dice_1.png" class="w100" alt="Player 1"/></td>
+                        <td class="w16"><img id="imgp2" src="images/dice_2.png" class="w100" alt="Player 2"/></td>
+                        <td class="w16"><img id="imgp3" src="images/dice_3.png" class="w100" alt="Player 3"/></td>
+                        <td class="w16"><img id="imgp4" src="images/dice_4.png" class="w100" alt="Player 4"/></td>
+                        <td class="w16"><img id="imgp5" src="images/dice_5.png" class="w100" alt="Player 5"/></td>
                     </tr>
 
                     <tr>
-                        <td class="lineup">
-                            <svg id="lb1" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td class="lineup"><img id="lb1" src="images/dice_1.png" class="help w100" alt="1"/></td>
                         <td class="lineup">
                             <a class="dnone" id="bt0p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb0p1"></div>
@@ -302,14 +176,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb2" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td><img id="lb2" src="images/dice_2.png" class="help w100" alt="2"/></td>
                         <td>
                             <a class="dnone" id="bt1p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb1p1"></div>
@@ -332,15 +199,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb3" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td><img id="lb3" src="images/dice_3.png" class="help w100" alt="3"/></td>
                         <td>
                             <a class="dnone" id="bt2p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb2p1"></div>
@@ -363,16 +222,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb4" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td><img id="lb4" src="images/dice_4.png" class="help w100" alt="4"/></td>
                         <td>
                             <a class="dnone" id="bt3p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb3p1"></div>
@@ -395,17 +245,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb5" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="55" cy="55" r="15"></circle>
-                                <circle cx="105" cy="55" r="15"></circle>
-                                <circle cx="80" cy="80" r="15"></circle>
-                                <circle cx="55" cy="105" r="15"></circle>
-                                <circle cx="105" cy="105" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td><img id="lb5" src="images/dice_5.png" class="help w100" alt="5"/></td>
                         <td>
                             <a class="dnone" id="bt4p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb4p1"></div>
@@ -428,18 +268,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb6" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <circle cx="60" cy="49" r="15"></circle>
-                                <circle cx="100" cy="49" r="15"></circle>
-                                <circle cx="60" cy="80" r="15"></circle>
-                                <circle cx="100" cy="80" r="15"></circle>
-                                <circle cx="60" cy="111" r="15"></circle>
-                                <circle cx="100" cy="111" r="15"></circle>
-                            </svg>
-                        </td>
+                        <td><img id="lb6" src="images/dice_6.png" class="help w100" alt="6"/></td>
                         <td>
                             <a class="dnone" id="bt5p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb5p1"></div>
@@ -462,16 +291,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="lineup">
-                            <svg id="lbsum1" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="50" y="43" width="60" height="14"></rect>
-                                <line x1="55" y1="52" x2="85" y2="85" style="stroke:#333333;stroke-width:14"></line>
-                                <line x1="84" y1="76" x2="55" y2="108" style="stroke:#333333;stroke-width:14"></line>
-                                <rect x="50" y="103" width="60" height="14"></rect>
-                            </svg>
-                        </td>
+                        <td class="lineup"><img id="lbsum1" src="images/dice_sum.png" class="help w100" alt="Upper Total"/></td>
                         <td class="score lineup" id="lbsum1p1"></td>
                         <td class="score lineup" id="lbsum1p2"></td>
                         <td class="score lineup" id="lbsum1p3"></td>
@@ -479,14 +299,7 @@
                         <td class="score lineup" id="lbsum1p5"></td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbbonus" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="73" y="50" width="14" height="60"></rect>
-                                <rect x="50" y="73" width="60" height="14"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbbonus" src="images/dice_plus.png" class="help w100" alt="Bonus"/></td>
                         <td class="score" id="lbbonusp1"></td>
                         <td class="score" id="lbbonusp2"></td>
                         <td class="score" id="lbbonusp3"></td>
@@ -494,16 +307,7 @@
                         <td class="score" id="lbbonusp5"></td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbsum2" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="50" y="43" width="60" height="14"></rect>
-                                <line x1="55" y1="52" x2="85" y2="85" style="stroke:#333333;stroke-width:14"></line>
-                                <line x1="84" y1="76" x2="55" y2="108" style="stroke:#333333;stroke-width:14"></line>
-                                <rect x="50" y="103" width="60" height="14"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbsum2" src="images/dice_sum.png" class="help w100" alt="Upper Total"/></td>
                         <td class="score" id="lbsum2p1"></td>
                         <td class="score" id="lbsum2p2"></td>
                         <td class="score" id="lbsum2p3"></td>
@@ -511,15 +315,7 @@
                         <td class="score" id="lbsum2p5"></td>
                     </tr>
                     <tr>
-                        <td class="lineup">
-                            <svg id="lb3kind" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="55" y="50" width="14" height="60"></rect>
-                                <rect x="73" y="50" width="14" height="60"></rect>
-                                <rect x="91" y="50" width="14" height="60"></rect>
-                            </svg>
-                        </td>
+                        <td class="lineup"><img id="lb3kind" src="images/dice_3kind.png" class="help w100" alt="3 of a kind"/></td>
                         <td class="lineup">
                             <a class="dnone" id="bt7p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb7p1"></div>
@@ -542,16 +338,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lb4kind" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="46" y="50" width="14" height="60"></rect>
-                                <rect x="64" y="50" width="14" height="60"></rect>
-                                <rect x="82" y="50" width="14" height="60"></rect>
-                                <rect x="100" y="50" width="14" height="60"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lb4kind" src="images/dice_4kind.png" class="help w100" alt="4 of a kind"/></td>
                         <td>
                             <a class="dnone" id="bt8p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb8p1"></div>
@@ -574,17 +361,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbfullhouse" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="37" y="86" width="14" height="24"></rect>
-                                <rect x="55" y="86" width="14" height="24"></rect>
-                                <rect x="73" y="50" width="14" height="60"></rect>
-                                <rect x="91" y="50" width="14" height="60"></rect>
-                                <rect x="109" y="50" width="14" height="60"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbfullhouse" src="images/dice_fullh.png" class="help w100" alt="Full House"/></td>
                         <td>
                             <a class="dnone" id="bt9p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb9p1"></div>
@@ -607,16 +384,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbsmallstr" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="37" y="98" width="14" height="12"></rect>
-                                <rect x="55" y="86" width="14" height="24"></rect>
-                                <rect x="73" y="74" width="14" height="36"></rect>
-                                <rect x="91" y="62" width="14" height="48"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbsmallstr" src="images/dice_smstr.png" class="help w100" alt="Small Straight"/></td>
                         <td>
                             <a class="dnone" id="bt10p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb10p1"></div>
@@ -639,17 +407,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbbigstr" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="37" y="98" width="14" height="12"></rect>
-                                <rect x="55" y="86" width="14" height="24"></rect>
-                                <rect x="73" y="74" width="14" height="36"></rect>
-                                <rect x="91" y="62" width="14" height="48"></rect>
-                                <rect x="109" y="50" width="14" height="60"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbbigstr" src="images/dice_lgstr.png" class="help w100" alt="Large Straight"/></td>
                         <td>
                             <a class="dnone" id="bt11p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb11p1"></div>
@@ -672,17 +430,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbyahtzee" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="37" y="50" width="14" height="60"></rect>
-                                <rect x="55" y="50" width="14" height="60"></rect>
-                                <rect x="73" y="50" width="14" height="60"></rect>
-                                <rect x="91" y="50" width="14" height="60"></rect>
-                                <rect x="109" y="50" width="14" height="60"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbyahtzee" src="images/dice_yahtzee.png" class="help w100" alt="Yahtzee"/></td>
                         <td>
                             <a class="dnone" id="bt12p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb12p1"></div>
@@ -705,13 +453,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbchance" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <text x="48" y="120" font-family="Arial" font-size="110" font-weight="900">?</text>
-                            </svg>
-                        </td>
+                        <td><img id="lbchance" src="images/dice_chance.png" class="help w100" alt="Chance"/></td>
                         <td>
                             <a class="dnone" id="bt13p1" data-direction="reverse" data-role="button" data-theme="b" data-mini="true"></a>
                             <div class="dblock score" id="lb13p1"></div>
@@ -734,16 +476,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="lineup">
-                            <svg id="lbsum3" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="50" y="43" width="60" height="14"></rect>
-                                <line x1="55" y1="52" x2="85" y2="85" style="stroke:#333333;stroke-width:14"></line>
-                                <line x1="84" y1="76" x2="55" y2="108" style="stroke:#333333;stroke-width:14"></line>
-                                <rect x="50" y="103" width="60" height="14"></rect>
-                            </svg>
-                        </td>
+                        <td class="lineup"><img id="lbsum3" src="images/dice_sum.png" class="help w100" alt="Lower Total"/></td>
                         <td class="score lineup" id="lbsum3p1"></td>
                         <td class="score lineup" id="lbsum3p2"></td>
                         <td class="score lineup" id="lbsum3p3"></td>
@@ -751,16 +484,7 @@
                         <td class="score lineup" id="lbsum3p5"></td>
                     </tr>
                     <tr>
-                        <td>
-                            <svg id="lbsum4" class="help w100" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 170 170" stroke="none" fill="#333333" >
-                                <rect class="svggrey" x="5" y="5" rx="20" ry="20" width="150" height="150"></rect>
-                                <circle cx="80" cy="80" r="60" stroke="#333333" stroke-width="12" fill="none"></circle>
-                                <rect x="50" y="43" width="60" height="14"></rect>
-                                <line x1="55" y1="52" x2="85" y2="85" style="stroke:#333333;stroke-width:14"></line>
-                                <line x1="84" y1="76" x2="55" y2="108" style="stroke:#333333;stroke-width:14"></line>
-                                <rect x="50" y="103" width="60" height="14"></rect>
-                            </svg>
-                        </td>
+                        <td><img id="lbsum4" src="images/dice_sum.png" class="help w100" alt="Grand Total"/></td>
                         <td class="score bold" id="lbsum4p1"></td>
                         <td class="score bold" id="lbsum4p2"></td>
                         <td class="score bold" id="lbsum4p3"></td>
@@ -771,12 +495,12 @@
                 <div id="div_close_list">
                     <a id="bt_close_list" data-l10n-id="btback" data-direction="reverse" data-role="button" data-theme="b">Back</a>
                 </div>
+                <div id="popupHelp" class="popup" data-role="popup" data-theme="a">
+                    <img src="images/dice.png" class="popup" alt="dice">
+                    <p id="helptit" class="helptit">Aces</p>
+                    <p id="helptxt" class="helptxt">Count and add only aces</p>
+                </div>
             </div><!-- /content -->
-            <div id="popupHelp" class="popup" data-role="popup" data-theme="a">
-                <img src="images/dice.png" class="popup" alt="dice">
-                <p id="helptit" class="helptit">Aces</p>
-                <p id="helptxt" class="helptxt">Count and add only aces</p>
-            </div>
         </div><!-- /page Yahtzee -->
 
 

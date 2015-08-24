@@ -96,6 +96,7 @@
     $("#bt_close_list").click(function(e) {close_list(); e.preventDefault();});
     $("[id^=btanzahl]").click(function(e) {display_dice(Number($(this).attr('id').slice(-1))); e.preventDefault();});
     $(".help").click(function(e) {show_help($(this).attr('id')); e.preventDefault();});
+
     $("[id^=bt0p]").click(function(e) {yahtzee_setvalue(0); e.preventDefault();});
     $("[id^=bt1p]").click(function(e) {yahtzee_setvalue(1); e.preventDefault();});
     $("[id^=bt2p]").click(function(e) {yahtzee_setvalue(2); e.preventDefault();});
@@ -110,6 +111,7 @@
     $("[id^=bt11p]").click(function(e) {yahtzee_setvalue(11); e.preventDefault();});
     $("[id^=bt12p]").click(function(e) {yahtzee_setvalue(12); e.preventDefault();});
     $("[id^=bt13p]").click(function(e) {yahtzee_setvalue(13); e.preventDefault();});
+
 
     var myShakeEvent = new Shake({
         threshold: 8, // 15 - optional, shake strength threshold
@@ -138,17 +140,17 @@
             $popupSwipe.popup("open");
             pop_swipe_shown = true;
         }
-
     });
 
     $(document).on("pageshow","#popupYahtzee",function(){
+        myShakeEvent.stop();
+        in_dice=false;
         if (!pop_help_shown) {
             $helptit.html(navigator.mozL10n.get("lbhelp"));
             $helptxt.html("");
             $popupHelp.popup("open");
             pop_help_shown = true;
         }
-
     });
 
     if ( ! Detector.webgl ) {
@@ -422,8 +424,7 @@
             $lbtry.html(cur_try + " / 3");
             $lbtotwert.html(navigator.mozL10n.get("lbplayer") + " " + cur_player);
             unlock_dice();
-
-            $.mobile.changePage('#dice', {transition: 'pop', reverse: true});
+            close_list();
         }
     }
 
@@ -442,14 +443,14 @@
         for (j = 0; j < 5; ++j) {
             if (j < anz_player) {
                 //$("#imgp" + (j + 1)).css({ opacity: 1 });
-                $("#imgp" + (j + 1)).css("fill", "#CC002F");
+                $("#imgp" + (j + 1)).attr("style","width:100%;background-color: #CC002F;");
                 $("#lbsum1p" + (j + 1)).html(0);
                 $("#lbsum2p" + (j + 1)).html(0);
                 $("#lbsum3p" + (j + 1)).html(0);
                 $("#lbsum4p" + (j + 1)).html(0);
             } else {
                 //$("#imgp" + (j + 1)).css({ opacity: 0.6 });
-                $("#imgp" + (j + 1)).css("fill", "#AAAAAA");
+                $("#imgp" + (j + 1)).attr("style","width:100%;background-color: #AAAAAA;");
                 $("#lbsum1p" + (j + 1)).html("");
                 $("#lbsum2p" + (j + 1)).html("");
                 $("#lbsum3p" + (j + 1)).html("");
@@ -515,20 +516,20 @@
     function MouseOut_MouseUp( event ) {
         mouseX = event.clientX - windowHalfX;
         mouseY = event.clientY - windowHalfY;
-        if (Math.abs(mouseX - mouseXOnMouseDown) < 5 && Math.abs(mouseY - mouseYOnMouseDown) < 5 && in_yahtzee)
-        {
-            if (new Date() - timeOnMouseDown < 300) {
-                lock_dice();
-            } else {
-                in_lock = true;
-            }
-        }
 
         container.removeEventListener( 'mousemove', onDocumentMouseMove, false );
         container.removeEventListener( 'mouseup', onDocumentMouseUp, false );
         container.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 
         if (in_yahtzee && rolling) {return;}
+
+        if (Math.abs(mouseX - mouseXOnMouseDown) < 5 && Math.abs(mouseY - mouseYOnMouseDown) < 5 && in_yahtzee)
+        {
+            in_lock = true;
+            if (new Date() - timeOnMouseDown < 300) {
+                lock_dice();
+            }
+        }
 
         for (var i = 0; i < anz_dices; ++i) {
             if (!locked[i]) {
@@ -582,17 +583,16 @@
 
     function onDocumentTouchEnd( event ) {
         event.preventDefault();
+        if (in_yahtzee && rolling) {return;}
         if (in_move == false && in_yahtzee)
         {
+            in_lock = true;
             if (new Date() - timeOnMouseDown < 500) {
                 mouseX = mouseXOnMouseDown;
                 mouseY = mouseYOnMouseDown;
                 lock_dice();
-            } else {
-                in_lock = true;
             }
         }
-        if (in_yahtzee && rolling) {return;}
         for (var i = 0; i < anz_dices; ++i) {
             if (!locked[i]) {
                 targetRotationX[i]=Math.round((targetRotationX[i])/Math.PI*2)*Math.PI/2;
@@ -614,7 +614,6 @@
         }
         if (cur_try == 1){ return; }
         if (rolling){ return; }
-        in_lock = true;
         if (g_windowsheight > g_windowswidth) {
             if (mouseX < 0 && mouseY > g_windowsheight/15) {
                 locked[4] = !locked[4];
@@ -781,7 +780,8 @@
 
         for (var i = 1; i < 6; ++i) {
             $("#radio"+i).attr("style","width:" + (g_windowswidth-50)/5.3 + "px;max-width:92px;"+"height:" + (g_windowswidth-50)/5.3 + "px;max-height:92px;");
-            $("#imganzahl"+i).css({'width': + (g_windowswidth-70)/5.1 +'px','margin':'-5px -5px -5px -15px'});
+            $("#img_color"+i).css({'max-width': '80px', 'width': + (g_windowswidth-90)/5.5 +'px'});
+            $("#imganzahl"+i).css({'max-width': '9179px', 'width': + (g_windowswidth-70)/5.1 +'px','margin':'-5px -5px -5px -15px'});
         }
     }
 
@@ -868,6 +868,9 @@
     }
 
     function close_list() {
+        myShakeEvent.start();
+        in_dice=true;
+        animate();
         if (game_over) {
             game_over = false;
             quit_dice();

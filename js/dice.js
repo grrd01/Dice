@@ -78,6 +78,7 @@
     var $div_close_list = $("#div_close_list");
     var $btdiceyahtzee = $("#btdiceyahtzee");
     var $btdice = $("#btdice");
+    var $dice = $("#dice");
     var $btyahtzee = $("#btyahtzee");
     var $popupSwipe = $("#popupSwipe");
     var $popupLock = $("#popupLock");
@@ -91,7 +92,6 @@
     $bt_list.click(function(e) {$.mobile.changePage('#popupYahtzee', {transition: 'pop' , role: 'dialog'}); e.preventDefault();});
     $("#bt_quit").click(function(e) {quit_dice(); e.preventDefault();});
     $("#bt_closeSettings").click(function(e) {close_settings(); e.preventDefault();});
-    $("#dice").mousedown(function() {$('#popupSwipe').popup('close');$('#popupLock').popup('close');});
     $("#popupYahtzee").mousedown(function() {$('#popupHelp').popup('close');});
     $("#bt_close_list").click(function(e) {close_list(); e.preventDefault();});
     $("[id^=btanzahl]").click(function(e) {display_dice(Number($(this).attr('id').slice(-1))); e.preventDefault();});
@@ -138,6 +138,8 @@
     $(document).on("pageshow","#dice",function(){
         if (!pop_swipe_shown) {
             $popupSwipe.popup("open");
+            $dice.mousedown(function(e) {$(this).off('mousedown');$('#popupSwipe').popup('close');onDocumentMouseDown(e)});
+            $dice.mouseup(function(e) {$(this).off('mouseup');onDocumentMouseUp(e)});
             pop_swipe_shown = true;
         }
     });
@@ -326,6 +328,8 @@
             if (in_yahtzee) {
                 if (!pop_lock_shown && cur_try ==1 && !in_lock) {
                     $popupLock.popup("open");
+                    $dice.mousedown(function(e) {$(this).off('mousedown');$popupLock.popup('close');onDocumentMouseDown(e)});
+                    $dice.mouseup(function(e) {$(this).off('mouseup');onDocumentMouseUp(e)});
                     pop_lock_shown = true;
                 }
                 if (!in_lock){ cur_try ++; } else { in_lock = false;}
@@ -852,6 +856,12 @@
         $('#grpanzahl').hide();
         unlock_dice();
         $.mobile.changePage('#title', {transition: 'slidefade', reverse: true}); // slide broken in chrome43
+        for (i = 0; i < anz_dices; ++i) {
+            mesh[i].rotation.y = targetRotationX[i];
+            mesh[i].rotation.x = targetRotationY[i];
+            mesh[i].rotation.z = targetRotationZ[i];
+        }
+        rolling = false;
     }
 
     function unlock_dice() {

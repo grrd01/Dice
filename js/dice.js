@@ -339,6 +339,17 @@
                 if (cur_try > 3) { yahtzee_count(); }
             } else {
                 $lbtotwert.html(totwert);
+                var url_param = url_query('debug');
+                if ( url_param ) {
+                    var mystring ="";
+                    for ( i = 0; i < anz_dices; ++i) {
+                        rotX = ((Math.round((mesh[i].rotation.x % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        rotY = ((Math.round((mesh[i].rotation.y % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        rotZ = ((Math.round((mesh[i].rotation.z % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        mystring = mystring + "" +rotX + " - " + rotY + " - " +rotZ + " : " + wert[i] + "<br>"
+                    }
+                    $lbtotwert.html(mystring);
+                }
             }
             $lbtotwert.show();
         }
@@ -824,9 +835,10 @@
         }
         myShakeEvent.start();
         animate();
-        $.mobile.changePage('#dice', {transition: 'slidefade'}); // slide broken in chrome43
+        $.mobile.changePage('#dice', {transition: 'slide'});
         mesh[0].material.color.setHex($input_radio_color_checked.val());
         mesh[0].material.ambient.setHex($input_radio_color_checked.val());
+        mesh[0].material.ambient.ambient
     }
 
     function anzahl_dice (anzahl) {
@@ -855,7 +867,7 @@
         $('#btdiceyahtzee').show();
         $('#grpanzahl').hide();
         unlock_dice();
-        $.mobile.changePage('#title', {transition: 'slidefade', reverse: true}); // slide broken in chrome43
+        $.mobile.changePage('#title', {transition: 'slide', reverse: true});
         for (i = 0; i < anz_dices; ++i) {
             mesh[i].rotation.y = targetRotationX[i];
             mesh[i].rotation.x = targetRotationY[i];

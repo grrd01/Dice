@@ -263,7 +263,7 @@
     }
 
     function render() {
-        var i;
+        var i, j;
         cur_speed = 0;
         for (i = 0; i < anz_dices; ++i) {
             mesh[i].rotation.y += ( targetRotationX[i] - mesh[i].rotation.y ) * 0.05;
@@ -278,56 +278,59 @@
             totwert = 0;
             wert_count =  [0, 0, 0, 0, 0, 0];
 
-            for ( i = 0; i < anz_dices; ++i) {
-                rotX = ((Math.round((targetRotationY[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
-                rotY = ((Math.round((targetRotationX[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
-                rotZ = ((Math.round((targetRotationZ[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
-                wert[i] = 0;
-                if (rotX == 0 && rotY == 0 ||
-                    rotX == 2 && rotY == 2) {
-                    wert[i]=1;
-                } else if (
-                    rotX == 3              && rotZ == 1 ||
-                    rotX == 1              && rotZ == 3 ||
-                    rotX == 0 && rotY == 1 && rotZ == 0 ||
-                    rotX == 2 && rotY == 3 && rotZ == 0 ||
-                    rotX == 2 && rotY == 1 && rotZ == 2 ||
-                    rotX == 0 && rotY == 3 && rotZ == 2) {
-                    wert[i]=2;
-                } else if (
-                    rotX == 3              && rotZ == 0 ||
-                    rotX == 1              && rotZ == 2 ||
-                    rotX == 0 && rotY == 1 && rotZ == 3 ||
-                    rotX == 0 && rotY == 3 && rotZ == 1 ||
-                    rotX == 2 && rotY == 1 && rotZ == 1 ||
-                    rotX == 2 && rotY == 3 && rotZ == 3) {
-                    wert[i]=3;
-                } else if (
-                    rotX == 1              && rotZ == 0 ||
-                    rotX == 3              && rotZ == 2 ||
-                    rotX == 0 && rotY == 3 && rotZ == 3 ||
-                    rotX == 2 && rotY == 1 && rotZ == 3 ||
-                    rotX == 0 && rotY == 1 && rotZ == 1 ||
-                    rotX == 2 && rotY == 3 && rotZ == 1) {
-                    wert[i]=4;
-                } else if (
-                    rotX == 3              && rotZ == 3 ||
-                    rotX == 1              && rotZ == 1 ||
-                    rotX == 0 && rotY == 3 && rotZ == 0 ||
-                    rotX == 2 && rotY == 3 && rotZ == 2 ||
-                    rotX == 0 && rotY == 1 && rotZ == 2 ||
-                    rotX == 2 && rotY == 1 && rotZ == 0) {
-                    wert[i]=5;
-                } else if (
-                    rotX == 0 && rotY == 2 ||
-                    rotX == 2 && rotY == 0) {
-                    wert[i]=6;
+            for ( j = 0; j < 2; j++) {
+                for ( i = 0; i < anz_dices; ++i) {
+                    rotX = ((Math.round((targetRotationY[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
+                    rotY = ((Math.round((targetRotationX[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
+                    rotZ = ((Math.round((targetRotationZ[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
+                    wert[i] = 0;
+                    if (rotX == 0 && rotY == 0 ||
+                        rotX == 2 && rotY == 2) {
+                        wert[i]=1;
+                    } else if (
+                        rotX == 3              && rotZ == 1 ||
+                        rotX == 1              && rotZ == 3 ||
+                        rotX == 0 && rotY == 1 && rotZ == 0 ||
+                        rotX == 2 && rotY == 3 && rotZ == 0 ||
+                        rotX == 2 && rotY == 1 && rotZ == 2 ||
+                        rotX == 0 && rotY == 3 && rotZ == 2) {
+                        wert[i]=2;
+                    } else if (
+                        rotX == 3              && rotZ == 0 ||
+                        rotX == 1              && rotZ == 2 ||
+                        rotX == 0 && rotY == 1 && rotZ == 3 ||
+                        rotX == 0 && rotY == 3 && rotZ == 1 ||
+                        rotX == 2 && rotY == 1 && rotZ == 1 ||
+                        rotX == 2 && rotY == 3 && rotZ == 3) {
+                        wert[i]=3;
+                    } else if (
+                        rotX == 1              && rotZ == 0 ||
+                        rotX == 3              && rotZ == 2 ||
+                        rotX == 0 && rotY == 3 && rotZ == 3 ||
+                        rotX == 2 && rotY == 1 && rotZ == 3 ||
+                        rotX == 0 && rotY == 1 && rotZ == 1 ||
+                        rotX == 2 && rotY == 3 && rotZ == 1) {
+                        wert[i]=4;
+                    } else if (
+                        rotX == 3              && rotZ == 3 ||
+                        rotX == 1              && rotZ == 1 ||
+                        rotX == 0 && rotY == 3 && rotZ == 0 ||
+                        rotX == 2 && rotY == 3 && rotZ == 2 ||
+                        rotX == 0 && rotY == 1 && rotZ == 2 ||
+                        rotX == 2 && rotY == 1 && rotZ == 0) {
+                        wert[i]=5;
+                    } else if (
+                        rotX == 0 && rotY == 2 ||
+                        rotX == 2 && rotY == 0) {
+                        wert[i]=6;
+                    }
+                    //wert=wert + "\n" + "x: " + rotX + "  y: " + rotY + "  Z: " + rotZ;
+                    //alert(wert);
+                    totwert += wert[i];
+                    wert_count[wert[i]-1] = wert_count[wert[i]-1] + 1;
                 }
-                //wert=wert + "\n" + "x: " + rotX + "  y: " + rotY + "  Z: " + rotZ;
-                //alert(wert);
-                totwert += wert[i];
-                wert_count[wert[i]-1] = wert_count[wert[i]-1] + 1;
             }
+
             if (in_yahtzee) {
                 if (!pop_lock_shown && cur_try ==1 && !in_lock) {
                     $popupLock.popup("open");
@@ -346,9 +349,9 @@
                 if ( url_param ) {
                     var mystring ="";
                     for ( i = 0; i < anz_dices; ++i) {
-                        rotX = ((Math.round((mesh[i].rotation.x % (Math.PI*2))/Math.PI*2))+4) % 4;
-                        rotY = ((Math.round((mesh[i].rotation.y % (Math.PI*2))/Math.PI*2))+4) % 4;
-                        rotZ = ((Math.round((mesh[i].rotation.z % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        rotX = ((Math.round((targetRotationY[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        rotY = ((Math.round((targetRotationX[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
+                        rotZ = ((Math.round((targetRotationZ[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
                         mystring = mystring + "" +rotX + " - " + rotY + " - " +rotZ + " : " + wert[i] + "<br>"
                     }
                     $lbtotwert.html(mystring);

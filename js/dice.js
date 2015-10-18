@@ -275,10 +275,9 @@
         if (cur_speed < 0.02 && rolling)
         {
             rolling = false;
-            totwert = 0;
-            wert_count =  [0, 0, 0, 0, 0, 0];
-
             for ( j = 0; j < 2; j++) {
+                totwert = 0;
+                wert_count =  [0, 0, 0, 0, 0, 0];
                 for ( i = 0; i < anz_dices; ++i) {
                     rotX = ((Math.round((targetRotationY[i] % (Math.PI*2))/Math.PI*2))+4) % 4;
                     rotY = ((Math.round((targetRotationX[i] % (Math.PI*2))/Math.PI*2))+4) % 4;

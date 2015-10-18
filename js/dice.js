@@ -142,6 +142,8 @@
             $dice.mouseup(function(e) {$(this).off('mouseup');onDocumentMouseUp(e)});
             pop_swipe_shown = true;
         }
+        content_formatting();
+        setTimeout(function() {content_formatting();},500);
     });
 
     $(document).on("pageshow","#popupYahtzee",function(){
@@ -593,9 +595,9 @@
             if (in_yahtzee && rolling) {return;}
             for (var i = 0; i < anz_dices; ++i) {
                 if (!locked[i]) {
-                    targetRotationX[i] = targetRotationXOnMouseDown[i] +  (( mouseX - mouseXOnMouseDown ) * 0.02)*randX[i];
-                    targetRotationY[i] = targetRotationYOnMouseDown[i] +  (( mouseY - mouseYOnMouseDown ) * 0.02)*randY[i];
-                    targetRotationZ[i] = targetRotationZOnMouseDown[i] + ((( mouseX - mouseXOnMouseDown ) * 0.02)*randZ[i] + (( mouseY - mouseYOnMouseDown ) * 0.02)*randZ[i])/2;
+                    targetRotationX[i] = targetRotationXOnMouseDown[i] +  (( mouseX - mouseXOnMouseDown ) * 0.06)*randX[i];
+                    targetRotationY[i] = targetRotationYOnMouseDown[i] +  (( mouseY - mouseYOnMouseDown ) * 0.06)*randY[i];
+                    targetRotationZ[i] = targetRotationZOnMouseDown[i] + ((( mouseX - mouseXOnMouseDown ) * 0.06)*randZ[i] + (( mouseY - mouseYOnMouseDown ) * 0.02)*randZ[i])/2;
                 }
             }
         }

@@ -11,24 +11,24 @@ table.score { margin: -4px -10px 0; border-collapse: collapse; }
 div.score { text-align: right; float: right; }
 div.center { text-align:center; }
 div.bottom { width:100%; position:absolute; margin-bottom:16px; bottom:0; }
-.dnone { display: none; }
-.dblock { display: block; }
+.d_none { display: none; }
+.d_block { display: block; }
 img.tit3q { width:calc(20% - 2px); margin-bottom:20px; margin-left:2.5%; }
 img.tit3h { display: block; margin: 40px auto 20px auto; width: 55%; clear:left; }
 img.header { margin-top:0; margin-bottom:0; }
 img.settings { margin-left:-20px; margin-right:-20px; margin-top:-4px; }
 div.settings { float:right; margin-top:-20px; }
 .abs { position:absolute; pointer-events:none; }
-.abstop { margin: 20px; overflow: hidden; position:absolute; }
-.txtbottom { margin: 20px; bottom:0; }
-a.bt_small { padding:-20px; height: 35px; width: 55px; }
+.abs_top { margin: 20px; overflow: hidden; position:absolute; }
+.txt_bottom { margin: 20px; bottom:0; }
+a.bt_small { padding:0; height: 35px; width: 55px; }
 img.bt_small { margin-top:-5px; margin-left:-10px; height: 25px; width:25px; }
 div.dice { position:relative; margin-top:-4px; }
 div.popup { width:250px; height:80px; display:block; text-decoration:none; color:white; }
 img.popup { width:60px; float:left; padding:10px; }
 p.popup { margin-top:-1px; }
-p.helptit { padding-top:7px; font-weight: bold; }
-p.helptxt { padding-top:0; }
+p.help_tit { padding-top:7px; font-weight: bold; }
+p.help_txt { padding-top:0; }
 .r0 { right:0; }
 .l0 { left:0; }
 .pt15 { padding-top:15px; }

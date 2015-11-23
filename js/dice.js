@@ -681,7 +681,7 @@
             curSpeed = Math.max(curSpeed, (Math.abs(mesh[i].rotation.y - targetRotationX[i]) + Math.abs(mesh[i].rotation.x - targetRotationY[i]) + Math.abs(mesh[i].rotation.z - targetRotationZ[i])));
         }
 
-        if (curSpeed < 0.02 && rolling) {
+        if (curSpeed < 0.01 && rolling) {
             rolling = false;
             for (j = 0; j < 2; j += 1) {
                 totVal = 0;

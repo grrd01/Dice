@@ -7,10 +7,12 @@
 /*jslint browser:true, for:true, devel: true, this: true */ /*global  $, window, THREE, Shake, Detector*/
 
 (function () {
-    'use strict';
+    "use strict";
     var container;
     var mesh = [];
-    var camera, scene, renderer, material;
+    var camera;
+    var scene;
+    var renderer;
 
     var targetRotationX = [0, 0, 0, 0, 0];
     var targetRotationXOnMouseDown = [0, 0, 0, 0, 0];
@@ -103,11 +105,11 @@
     }
 
     $bt_list.click(function (e) {
-        $.mobile.changePage('#popup_yahtzee', {transition: 'pop', role: 'dialog'});
+        $.mobile.changePage("#popup_yahtzee", {transition: "pop", role: "dialog"});
         e.preventDefault();
     });
     $("#popup_yahtzee").mousedown(function () {
-        $popupHelp.popup('close');
+        $popupHelp.popup("close");
     });
 
     var myShakeEvent = new Shake({
@@ -120,8 +122,8 @@
         if (inYahtzee && rolling) {
             return;
         }
-        $popupSwipe.popup('close');
-        $popupLock.popup('close');
+        $popupSwipe.popup("close");
+        $popupLock.popup("close");
         $lbTotVal.hide();
         $lbTry.hide();
         for (i = 0; i < anzDices; i += 1) {
@@ -134,7 +136,7 @@
         rolling = true;
     }
 
-    window.addEventListener('shake', shakeEventDidOccur, false);
+    window.addEventListener("shake", shakeEventDidOccur, false);
 
     function contentFormatting() {
         var i;
@@ -145,11 +147,11 @@
 
         if (gWindowsHeight > gWindowsWidth) {
             lockHeight = gWindowsHeight / 7;
-            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock3').css('display'));
-            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock0').css('display'));
-            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock2').css('display'));
-            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock4').css('display'));
-            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock1').css('display'));
+            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock3").css("display"));
+            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock0").css("display"));
+            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock2").css("display"));
+            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock4").css("display"));
+            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock1").css("display"));
             $("#img_title").attr("style", "width:100%;margin-top:-10px;");
             $("#img_title2").attr("style", "width:100%;margin-top:-20px;");
             $("#img_title3h").show();
@@ -195,11 +197,11 @@
             }
         } else {
             lockHeight = gWindowsHeight / 6;
-            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock3').css('display'));
-            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock0').css('display'));
-            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock2').css('display'));
-            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock4').css('display'));
-            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $('#img_lock1').css('display'));
+            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock3").css("display"));
+            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock0").css("display"));
+            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock2").css("display"));
+            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock4").css("display"));
+            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock1").css("display"));
             $("#img_title").attr("style", "width:calc(46% - 15px);margin-bottom:20px;");
             $("#img_title2").attr("style", "width:calc(31% - 10px);margin-top:0px;margin-bottom:20px;margin-left:20px;");
             $("#img_title3h").hide();
@@ -244,16 +246,16 @@
                 }
             }
         }
-        $popupSwipe.css('max-width', (gWindowsWidth - 10) + 'px');
-        $popupLock.css('max-width', (gWindowsWidth - 10) + 'px');
-        $popupWebGL.css('max-width', (gWindowsWidth - 10) + 'px');
-        $popupHelp.css('max-width', (gWindowsWidth - 40) + 'px');
-        $('#start').css('width', (gWindowsWidth - 30) + 'px');
+        $popupSwipe.css("max-width", (gWindowsWidth - 10) + "px");
+        $popupLock.css("max-width", (gWindowsWidth - 10) + "px");
+        $popupWebGL.css("max-width", (gWindowsWidth - 10) + "px");
+        $popupHelp.css("max-width", (gWindowsWidth - 40) + "px");
+        $("#start").css("width", (gWindowsWidth - 30) + "px");
 
         for (i = 1; i < 6; i += 1) {
             $("#radio" + i).attr("style", "width:" + (gWindowsWidth - 50) / 5.3 + "px; max-width: 92px;" + "height:" + (gWindowsWidth - 50) / 5.3 + "px; max-height: 92px;");
-            $("#img_color" + i).css({'max-width': '80px', width: (gWindowsWidth - 90) / 5.5 + 'px'});
-            $("#img_anz" + i).css({'max-width': '9179px', width: (gWindowsWidth - 70) / 5.1 + 'px', margin: '-5px -5px -5px -15px'});
+            $("#img_color" + i).css({"max-width": "80px", width: (gWindowsWidth - 90) / 5.5 + "px"});
+            $("#img_anz" + i).css({"max-width": "9179px", width: (gWindowsWidth - 70) / 5.1 + "px", margin: "-5px -5px -5px -15px"});
         }
     }
 
@@ -274,8 +276,10 @@
     }
 
     function yahtzeeCount() {
-        var i, j;
-        var $bt_p_, $bt_p_ui_btn_text;
+        var i;
+        var j;
+        var $bt_p_;
+        var $bt_p_ui_btn_text;
         var sequence = 0;
         for (i = 0; i < currentScore.length; i += 1) {
             currentScore[i] = 0;
@@ -317,8 +321,8 @@
         for (i = 0; i < currentScore.length; i += 1) {
             if (playerScore[curPlayer - 1][i] === null) {
                 $bt_p_ = $("#bt_" + i + "p" + curPlayer);
-                $("#lb_" + i + "p" + curPlayer).css('display', 'none');
-                $bt_p_.css('display', 'block');
+                $("#lb_" + i + "p" + curPlayer).css("display", "none");
+                $bt_p_.css("display", "block");
                 $bt_p_ui_btn_text = $("#bt_" + i + "p" + curPlayer + " .ui-btn-text");
                 if ($bt_p_ui_btn_text.length) {
                     $bt_p_ui_btn_text.text(currentScore[i]);
@@ -328,7 +332,7 @@
             }
         }
         $div_close_list.hide();
-        $.mobile.changePage('#popup_yahtzee', {transition: 'pop', role: 'dialog'});
+        $.mobile.changePage("#popup_yahtzee", {transition: "pop", role: "dialog"});
     }
 
     function lockDice() {
@@ -349,46 +353,46 @@
         if (gWindowsHeight > gWindowsWidth) {
             if (mouseX < 0 && mouseY > gWindowsHeight / 15) {
                 locked[4] = !locked[4];
-                $('#img_lock4').toggle();
+                $("#img_lock4").toggle();
                 //mesh[4].material.color.setHex(0x00BB33);
             }
             if (mouseX > 0 && mouseY > gWindowsHeight / 15) {
                 locked[1] = !locked[1];
-                $('#img_lock1').toggle();
+                $("#img_lock1").toggle();
             }
             if (mouseX > gWindowsHeight / (-15) && mouseX < gWindowsHeight / 15 && mouseY > gWindowsHeight / (-15) && mouseY < gWindowsHeight / 15) {
                 locked[2] = !locked[2];
-                $('#img_lock2').toggle();
+                $("#img_lock2").toggle();
             }
             if (mouseX < 0 && mouseY < gWindowsHeight / (-15)) {
                 locked[3] = !locked[3];
-                $('#img_lock3').toggle();
+                $("#img_lock3").toggle();
             }
             if (mouseX > 0 && mouseY < gWindowsHeight / (-15)) {
                 locked[0] = !locked[0];
-                $('#img_lock0').toggle();
+                $("#img_lock0").toggle();
             }
 
         } else {
             if (mouseY < 0 && mouseX > gWindowsHeight / 15) {
                 locked[0] = !locked[0];
-                $('#img_lock0').toggle();
+                $("#img_lock0").toggle();
             }
             if (mouseY > 0 && mouseX > gWindowsHeight / 15) {
                 locked[1] = !locked[1];
-                $('#img_lock1').toggle();
+                $("#img_lock1").toggle();
             }
             if (mouseY > gWindowsHeight / (-15) && mouseY < gWindowsHeight / 15 && mouseX > gWindowsHeight / (-15) && mouseX < gWindowsHeight / 15) {
                 locked[2] = !locked[2];
-                $('#img_lock2').toggle();
+                $("#img_lock2").toggle();
             }
             if (mouseY < 0 && mouseX < gWindowsHeight / (-15)) {
                 locked[3] = !locked[3];
-                $('#img_lock3').toggle();
+                $("#img_lock3").toggle();
             }
             if (mouseY > 0 && mouseX < gWindowsHeight / (-15)) {
                 locked[4] = !locked[4];
-                $('#img_lock4').toggle();
+                $("#img_lock4").toggle();
             }
         }
         for (i = 0; i < anzDices; i += 1) {
@@ -405,7 +409,7 @@
         var i;
         for (i = 0; i < 5; i += 1) {
             locked[i] = false;
-            $('#img_lock' + i).hide();
+            $("#img_lock" + i).hide();
         }
     }
 
@@ -414,9 +418,9 @@
         mouseX = event.clientX - windowHalfX;
         mouseY = event.clientY - windowHalfY;
 
-        container.removeEventListener('mousemove', onDocumentMouseMove, false);
-        container.removeEventListener('mouseup', onDocumentMouseUp, false);
-        container.removeEventListener('mouseout', onDocumentMouseOut, false);
+        container.removeEventListener("mousemove", onDocumentMouseMove, false);
+        container.removeEventListener("mouseup", onDocumentMouseUp, false);
+        container.removeEventListener("mouseout", onDocumentMouseOut, false);
 
         if (inYahtzee && rolling) {
             return;
@@ -452,9 +456,9 @@
         $lbTotVal.hide();
         $lbTry.hide();
         event.preventDefault();
-        container.addEventListener('mousemove', onDocumentMouseMove, false);
-        container.addEventListener('mouseup', onDocumentMouseUp, false);
-        container.addEventListener('mouseout', onDocumentMouseOut, false);
+        container.addEventListener("mousemove", onDocumentMouseMove, false);
+        container.addEventListener("mouseup", onDocumentMouseUp, false);
+        container.addEventListener("mouseout", onDocumentMouseOut, false);
         mouseXOnMouseDown = event.clientX - windowHalfX;
         mouseYOnMouseDown = event.clientY - windowHalfY;
         timeOnMouseDown = new Date();
@@ -542,12 +546,12 @@
         if (!popSwipeShown) {
             $popupSwipe.popup("open");
             $dice.mousedown(function (e) {
-                $(this).off('mousedown');
-                $popupSwipe.popup('close');
+                $(this).off("mousedown");
+                $popupSwipe.popup("close");
                 onDocumentMouseDown(e);
             });
             $dice.mouseup(function (e) {
-                $(this).off('mouseup');
+                $(this).off("mouseup");
                 onDocumentMouseUp(e);
             });
             popSwipeShown = true;
@@ -567,20 +571,18 @@
         directionalLight.castShadow = true;
 
         var d = 1;
-        directionalLight.shadowCameraLeft = -d;
-        directionalLight.shadowCameraRight = d;
-        directionalLight.shadowCameraTop = d;
-        directionalLight.shadowCameraBottom = -d;
+        directionalLight.shadow.camera.left = -d;
+        directionalLight.shadow.camera.right = d;
+        directionalLight.shadow.camera.top = d;
+        directionalLight.shadow.camera.bottom = -d;
 
-        directionalLight.shadowCameraNear = 1;
-        directionalLight.shadowCameraFar = 4;
+        directionalLight.shadow.camera.near = 1;
+        directionalLight.shadow.camera.far = 4;
 
-        directionalLight.shadowMapWidth = 1024;
-        directionalLight.shadowMapHeight = 1024;
+        directionalLight.shadow.mapSize.width = 1024;
+        directionalLight.shadow.mapSize.height = 1024;
 
-        directionalLight.shadowBias = -0.005;
-        directionalLight.shadowDarkness = 0.15;
-
+        directionalLight.shadow.bias = -0.005;
     }
 
     function onWindowResize() {
@@ -593,7 +595,7 @@
     function init() {
         $lbTotVal.hide();
         $lbTry.hide();
-        container = document.createElement('div');
+        container = document.createElement("div");
         document.getElementById("dice").appendChild(container);
 
         camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
@@ -601,33 +603,32 @@
 
         scene = new THREE.Scene();
 
-        var loader = new THREE.STLLoader();
-        loader.load('./models/dice.stl', function (geometry) {
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + "% downloaded");
+            }
+        };
 
-            material = new THREE.MeshPhongMaterial({ambient: 0xFF0066, color: 0xFF0066, specular: 0x111111, shininess: 200});
+        var onError = function (xhr) {};
 
-            geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -30));
-
-            mesh[0] = new THREE.Mesh(geometry, material);
-
-            mesh[0].position.set(0, 0, 0);
-            mesh[0].rotation.y = -Math.PI / 2;
-            targetRotationX[0] = -Math.PI / 2;
-
-            mesh[0].scale.set(0.01, 0.01, 0.01);
-
-            scene.add(mesh[0]);
-
-            rotX = ((Math.round((mesh[0].rotation.x % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-            rotY = ((Math.round((mesh[0].rotation.y % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-            rotZ = ((Math.round((mesh[0].rotation.z % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath("./models/");
+        mtlLoader.load("dice.mtl", function (materials) {
+            materials.preload();
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath("./models/");
+            objLoader.load("dice.obj", function (object) {
+                scene.add(object);
+                mesh[0] = object;
+            }, onProgress, onError);
         });
 
         // Lights
         scene.add(new THREE.AmbientLight(0x777777));
-        addShadowedLight(0.5, 1, -1, 0xffffff, 1);
-        addShadowedLight(-1, 1, 1, 0xffffff, 1.35);
+        addShadowedLight(0.5, 1, -1, 0xffffff, 0.7);
+        addShadowedLight(-1, 1, 1, 0xffffff, 1);
 
         // renderer
         renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
@@ -639,12 +640,12 @@
 
         container.appendChild(renderer.domElement);
 
-        container.addEventListener('mousedown', onDocumentMouseDown, false);
-        container.addEventListener('touchstart', onDocumentTouchStart, false);
-        container.addEventListener('touchmove', onDocumentTouchMove, false);
-        container.addEventListener('touchend', onDocumentTouchEnd, false);
+        container.addEventListener("mousedown", onDocumentMouseDown, false);
+        container.addEventListener("touchstart", onDocumentTouchStart, false);
+        container.addEventListener("touchmove", onDocumentTouchMove, false);
+        container.addEventListener("touchend", onDocumentTouchEnd, false);
 
-        window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener("resize", onWindowResize, false);
     }
 
     $(document).on("pageshow", "#popup_yahtzee", function () {
@@ -672,7 +673,8 @@
     }, 500);
 
     function render() {
-        var i, j;
+        var i;
+        var j;
         curSpeed = 0;
         for (i = 0; i < anzDices; i += 1) {
             mesh[i].rotation.y += (targetRotationX[i] - mesh[i].rotation.y) * 0.05;
@@ -749,12 +751,12 @@
                 if (!popLockShown && curTry === 1 && !inLock) {
                     $popupLock.popup("open");
                     $dice.mousedown(function (e) {
-                        $(this).off('mousedown');
-                        $popupLock.popup('close');
+                        $(this).off("mousedown");
+                        $popupLock.popup("close");
                         onDocumentMouseDown(e);
                     });
                     $dice.mouseup(function (e) {
-                        $(this).off('mouseup');
+                        $(this).off("mouseup");
                         onDocumentMouseUp(e);
                     });
                     popLockShown = true;
@@ -772,7 +774,7 @@
                 }
             } else {
                 $lbTotVal.html(totVal);
-                var urlParam = urlQuery('debug');
+                var urlParam = urlQuery("debug");
                 if (urlParam) {
                     var myString = "";
                     for (i = 0; i < anzDices; i += 1) {
@@ -803,9 +805,9 @@
         $lbTotVal.hide();
         $lbTry.hide();
         $btDiceYahtzee.show();
-        $('#grp_anz').hide();
+        $("#grp_anz").hide();
         unlockDice();
-        $.mobile.changePage('#title', {transition: 'slide', reverse: true});
+        $.mobile.changePage("#title", {transition: "slide", reverse: true});
         for (i = 0; i < anzDices; i += 1) {
             mesh[i].rotation.y = targetRotationX[i];
             mesh[i].rotation.x = targetRotationY[i];
@@ -827,7 +829,7 @@
             gameOver = false;
             quit_dice();
         } else {
-            $.mobile.changePage('#dice', {transition: 'pop', reverse: true});
+            $.mobile.changePage("#dice", {transition: "pop", reverse: true});
         }
     }
 
@@ -844,8 +846,8 @@
 
         totVal = 0;
         for (i = 0; i < currentScore.length; i += 1) {
-            $("#bt_" + i + "p" + curPlayer).css('display', 'none');
-            $("#lb_" + i + "p" + curPlayer).css('display', 'inline');
+            $("#bt_" + i + "p" + curPlayer).css("display", "none");
+            $("#lb_" + i + "p" + curPlayer).css("display", "inline");
             totVal += playerScore[curPlayer - 1][i];
             if (i === 5) {
                 $("#lb_sum1p" + curPlayer).html(totVal);
@@ -942,15 +944,16 @@
     });
 
     function yahtzee_init() {
-        var i, j;
+        var i;
+        var j;
         var $lb_p_;
         for (i = 0; i < 14; i += 1) {
             currentScore[i] = 0;
             for (j = 0; j < 5; j += 1) {
                 playerScore[j][i] = null;
-                $("#bt_" + i + "p" + (j + 1)).css('display', 'none');
+                $("#bt_" + i + "p" + (j + 1)).css("display", "none");
                 $lb_p_ = $("#lb_" + i + "p" + (j + 1));
-                $lb_p_.css('display', 'inline');
+                $lb_p_.css("display", "inline");
                 $lb_p_.html("");
             }
         }
@@ -1000,7 +1003,7 @@
         }
         $btDiceYahtzee.slideToggle();
         setTimeout(function () {
-            $('#grp_anz').slideToggle();
+            $("#grp_anz").slideToggle();
         }, 500);
     }
 
@@ -1016,7 +1019,6 @@
     function cloneDice(i) {
         mesh[i] = mesh[0].clone();
         mesh[i].rotation.y = -Math.PI / 2;
-        mesh[i].scale.set(0.01, 0.01, 0.01);
         targetRotationX[i] = Math.round((targetRotationX[i] + 30 * Math.random() - 15) / Math.PI * 2) * Math.PI / 2;
         targetRotationY[i] = Math.round((targetRotationY[i] + 30 * Math.random() - 15) / Math.PI * 2) * Math.PI / 2;
         targetRotationZ[i] = Math.round((targetRotationZ[i] + 30 * Math.random() - 15) / Math.PI * 2) * Math.PI / 2;
@@ -1046,7 +1048,7 @@
 
     function closeSettings() {
         contentFormatting();
-        $.mobile.changePage('#title', {transition: 'pop', reverse: true});
+        $.mobile.changePage("#title", {transition: "pop", reverse: true});
     }
 
     $("#bt_closeSettings").click(function (e) {
@@ -1055,12 +1057,19 @@
     });
 
     function displayDice(anz) {
-        var $input_radio_color_checked = $('input:radio[name=color]:checked');
+        var color = [
+            [[0.850000, 0.000000, 0.110000], [1.000000, 1.000000, 1.000000]],
+            [[0.100000, 0.251960, 0.600000], [1.000000, 1.000000, 1.000000]],
+            [[1.000000, 0.600000, 0.000000], [1.000000, 1.000000, 1.000000]],
+            [[0.021000, 0.360000, 0.300000], [1.000000, 1.000000, 1.000000]],
+            [[0.650000, 0.650000, 0.650000], [0.060000, 0.060000, 0.060000]]
+        ];
+        var $input_radio_color_checked = $("input:radio[name=color]:checked");
         inDice = true;
         if (inYahtzee) {
             anzPlayer = anz;
             numberOfDice(5);
-            $('input:radio[name=anzahl]').filter('[value=5]').prop('checked', true);
+            $("input:radio[name=anzahl]").filter("[value=5]").prop("checked", true);
             closeSettings();
             yahtzee_init();
             $bt_list.show();
@@ -1073,13 +1082,21 @@
         }
         myShakeEvent.start();
         animate();
-        $.mobile.changePage('#dice', {transition: 'slide'});
-        mesh[0].material.color.setHex($input_radio_color_checked.val());
-        mesh[0].material.ambient.setHex($input_radio_color_checked.val());
+        $.mobile.changePage("#dice", {transition: "slide"});
+        mesh[0].children[0].material[0].color.setRGB(
+            color[parseInt($input_radio_color_checked.val())][0][0],
+            color[parseInt($input_radio_color_checked.val())][0][1],
+            color[parseInt($input_radio_color_checked.val())][0][2]
+        );
+        mesh[0].children[0].material[1].color.setRGB(
+            color[parseInt($input_radio_color_checked.val())][1][0],
+            color[parseInt($input_radio_color_checked.val())][1][1],
+            color[parseInt($input_radio_color_checked.val())][1][2]
+        );
     }
 
     $("[id^=bt_anz]").click(function (e) {
-        displayDice(Number($(this).attr('id').slice(-1)));
+        displayDice(Number($(this).attr("id").slice(-1)));
         e.preventDefault();
     });
 
@@ -1090,13 +1107,13 @@
     }
 
     $(".help").click(function (e) {
-        showHelp($(this).attr('id'));
+        showHelp($(this).attr("id"));
         e.preventDefault();
     });
 
     navigator.mozL10n.ready(function () {
         // Example usage - http://homepage.hispeed.ch/grrds_games/Dice/?lang=en
-        var urlParam = urlQuery('lang');
+        var urlParam = urlQuery("lang");
         if (urlParam) {
             if (urlParam !== navigator.mozL10n.language.code) {
                 navigator.mozL10n.language.code = urlParam;

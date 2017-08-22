@@ -140,6 +140,7 @@
 
     function contentFormatting() {
         var i;
+        var w16;
         gWindowsHeight = $(window).height();
         gWindowsWidth = $(window).width();
         windowHalfX = window.innerWidth / 2;
@@ -255,8 +256,15 @@
         for (i = 1; i < 6; i += 1) {
             $("#radio" + i).attr("style", "width:" + (gWindowsWidth - 50) / 5.3 + "px; max-width: 92px;" + "height:" + (gWindowsWidth - 50) / 5.3 + "px; max-height: 92px;");
             $("#img_color" + i).css({"max-width": "80px", width: (gWindowsWidth - 90) / 5.5 + "px"});
-            $("#img_anz" + i).css({"max-width": "9179px", width: (gWindowsWidth - 70) / 5.1 + "px", margin: "-5px -5px -5px -15px"});
+            $("#img_anz" + i).width((gWindowsWidth - 10) / 5 + "px");
         }
+        w16 = $(".w16");
+        w16.width(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
+        w16.height(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
+        setTimeout(function () {
+            w16.width(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
+            w16.height(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
+        }, 500);
     }
 
     function onDocumentMouseMove(event) {
@@ -657,6 +665,7 @@
             $popupHelp.popup("open");
             popHelpShown = true;
         }
+        contentFormatting();
     });
 
     if (!Detector.webgl) {
@@ -959,14 +968,12 @@
         }
         for (j = 0; j < 5; j += 1) {
             if (j < anzPlayer) {
-                //$("#img_p" + (j + 1)).css({ opacity: 1 });
                 $("#img_p" + (j + 1)).attr("style", "width:100%; background-color: #CC002F;");
                 $("#lb_sum1p" + (j + 1)).html(0);
                 $("#lb_sum2p" + (j + 1)).html(0);
                 $("#lb_sum3p" + (j + 1)).html(0);
                 $("#lb_sum4p" + (j + 1)).html(0);
             } else {
-                //$("#img_p" + (j + 1)).css({ opacity: 0.6 });
                 $("#img_p" + (j + 1)).attr("style", "width:100%; background-color: #AAAAAA;");
                 $("#lb_sum1p" + (j + 1)).html("");
                 $("#lb_sum2p" + (j + 1)).html("");
@@ -1058,10 +1065,10 @@
 
     function displayDice(anz) {
         var color = [
-            [[0.850000, 0.000000, 0.110000], [1.000000, 1.000000, 1.000000]],
-            [[0.100000, 0.251960, 0.600000], [1.000000, 1.000000, 1.000000]],
-            [[1.000000, 0.600000, 0.000000], [1.000000, 1.000000, 1.000000]],
-            [[0.021000, 0.360000, 0.300000], [1.000000, 1.000000, 1.000000]],
+            [[0.750000, 0.000000, 0.070000], [1.000000, 1.000000, 1.000000]],
+            [[0.090000, 0.200000, 0.550000], [1.000000, 1.000000, 1.000000]],
+            [[0.850000, 0.450000, 0.000000], [1.000000, 1.000000, 1.000000]],
+            [[0.019000, 0.324000, 0.270000], [1.000000, 1.000000, 1.000000]],
             [[0.650000, 0.650000, 0.650000], [0.060000, 0.060000, 0.060000]]
         ];
         var $input_radio_color_checked = $("input:radio[name=color]:checked");

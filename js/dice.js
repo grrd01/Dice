@@ -92,6 +92,16 @@
     var $helpTit = $("#help_tit");
     var $helpTxt = $("#help_txt");
 
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("js/sw.js").then(function (registration) {
+                console.log("ServiceWorker registration successful with scope: ", registration.scope);
+            }, function (err) {
+                console.log("ServiceWorker registration failed: ", err);
+            });
+        });
+    }
+
     function urlQuery(query) {
         query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var expr = "[\\?&]" + query + "=([^&#]*)";

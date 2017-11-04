@@ -1,4 +1,4 @@
-var CACHE_NAME = 'grrds-dice-cache-v1.0';
+var CACHE_NAME = 'grrds-dice-cache-v1';
 var urlsToCache = [
     '../index.html',
     '../images/4inarow.svg',
@@ -36,7 +36,7 @@ var urlsToCache = [
     'jquery-1.9.1.min.js',
     'l10n.js',
     'shake.js',
-    'sw.js',
+    //'sw.js',
     'build/three.min.js',
     'images/ajax-loader.gif',
     'images/ajax-loader.png',
@@ -44,8 +44,8 @@ var urlsToCache = [
     'images/icons-18-white.png',
     'images/icons-36-black.png',
     'images/icons-36-white.png',
-    '../loaders/MTLLoader.js',
-    '../loaders/OBJLoader.js',
+    'loaders/MTLLoader.js',
+    'loaders/OBJLoader.js',
     '../models/dice.mtl',
     '../models/dice.obj',
     '../locales/de/dice.properties',

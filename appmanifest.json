@@ -50,6 +50,12 @@
       "type": "image/png",
       "sizes": "256x256"
     }
+  ,
+    {
+      "src": "images/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
   ],
   "background_color": "#434343",
   "theme_color": "#434343",

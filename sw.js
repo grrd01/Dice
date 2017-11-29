@@ -1,4 +1,7 @@
-var CACHE_NAME = 'grrds-dice-cache-v1';
+var CACHE_NAME = 'grrds-dice-cache';
+var CACHE_VERSION = 'v1.1';
+var CACHE = CACHE_NAME + '-' + CACHE_VERSION;
+
 var urlsToCache = [
     'index.html',
     'images/4inarow.svg',
@@ -58,7 +61,7 @@ var urlsToCache = [
 self.addEventListener('install', function(event) {
     // Perform install steps
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open(CACHE)
             .then(function(cache) {
                 console.log('Opened cache');
                 return cache.addAll(urlsToCache);
@@ -94,7 +97,7 @@ self.addEventListener('fetch', function(event) {
                         // to clone it so we have two streams.
                         var responseToCache = response.clone();
 
-                        caches.open(CACHE_NAME)
+                        caches.open(CACHE)
                             .then(function(cache) {
                                 cache.put(event.request, responseToCache);
                             });
@@ -103,5 +106,18 @@ self.addEventListener('fetch', function(event) {
                     }
                 );
             })
+    );
+});
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(cacheNames.map(function(cacheName) {
+                if (cacheName.indexOf(CACHE_NAME) === 0 && cacheName.indexOf(CACHE_VERSION) === -1){
+                    console.log(cacheName + ' deleted');
+                    return caches.delete(cacheName);
+                }
+            }));
+        })
     );
 });

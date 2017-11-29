@@ -670,7 +670,7 @@
         myShakeEvent.stop();
         inDice = false;
         if (!popHelpShown) {
-            $helpTit.html(navigator.mozL10n.get("lb_help"));
+            $helpTit.html(document.webL10n.get("lb_help"));
             $helpTxt.html("");
             $popupHelp.popup("open");
             popHelpShown = true;
@@ -787,7 +787,7 @@
                 }
                 $lbTry.html(curTry + " / 3");
                 $lbTry.show();
-                $lbTotVal.html(navigator.mozL10n.get("lb_player") + " " + curPlayer);
+                $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
                 if (curTry > 3) {
                     yahtzeeCount();
                 }
@@ -891,8 +891,8 @@
 
         if (!empty && curPlayer === anzPlayer) {
             i = totalScore.indexOf(Math.max.apply(Math, totalScore));
-            $helpTit.html(navigator.mozL10n.get("lb_player") + " " + (i + 1) + " " + navigator.mozL10n.get("lb_win"));
-            $helpTxt.html(navigator.mozL10n.get("lb_with") + " " + totalScore[i] + " " + navigator.mozL10n.get("lb_pts"));
+            $helpTit.html(document.webL10n.get("lb_player") + " " + (i + 1) + " " + document.webL10n.get("lb_win"));
+            $helpTxt.html(document.webL10n.get("lb_with") + " " + totalScore[i] + " " + document.webL10n.get("lb_pts"));
             $popupHelp.popup("open");
             gameOver = true;
         } else {
@@ -902,7 +902,7 @@
             }
             curTry = 1;
             $lbTry.html(curTry + " / 3");
-            $lbTotVal.html(navigator.mozL10n.get("lb_player") + " " + curPlayer);
+            $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
             unlockDice();
             close_list();
         }
@@ -998,7 +998,7 @@
         curTry = 1;
         unlockDice();
 
-        $lbTotVal.html(navigator.mozL10n.get("lb_player") + " " + curPlayer);
+        $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
         $lbTry.html(curTry + " / 3");
         $lbTotVal.show();
         $lbTry.show();
@@ -1014,9 +1014,9 @@
     function set_number(yahtzee) {
         inYahtzee = yahtzee;
         if (inYahtzee) {
-            $lbAnz.html(navigator.mozL10n.get("lb_anz_pl"));
+            $lbAnz.html(document.webL10n.get("lb_anz_pl"));
         } else {
-            $lbAnz.html(navigator.mozL10n.get("lb_anz"));
+            $lbAnz.html(document.webL10n.get("lb_anz"));
         }
         $btDiceYahtzee.slideToggle();
         setTimeout(function () {
@@ -1118,8 +1118,8 @@
     });
 
     function showHelp(i) {
-        $helpTit.html(navigator.mozL10n.get(i));
-        $helpTxt.html(navigator.mozL10n.get(i + "_txt"));
+        $helpTit.html(document.webL10n.get(i));
+        $helpTxt.html(document.webL10n.get(i + "_txt"));
         $popupHelp.popup("open");
     }
 
@@ -1128,12 +1128,12 @@
         e.preventDefault();
     });
 
-    navigator.mozL10n.ready(function () {
-        // Example usage - http://homepage.hispeed.ch/grrds_games/Dice/?lang=en
+    document.webL10n.ready(function () {
+        // Example usage - https://grrd01.github.io/Dice/?lang=en
         var urlParam = urlQuery("lang");
         if (urlParam) {
-            if (urlParam !== navigator.mozL10n.language.code) {
-                navigator.mozL10n.language.code = urlParam;
+            if (urlParam !== document.webL10n.getLanguage()) {
+                document.webL10n.setLanguage(urlParam);
             }
         }
     });

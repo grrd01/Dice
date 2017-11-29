@@ -1,6 +1,6 @@
 {
   "name": "grrd's Dice",
-  "version": "3.0",
+  "version": "3.1",
   "manifest_version": 2,
   "description": "__MSG_appDesc__",
   "default_locale": "en",
@@ -16,10 +16,10 @@
   },
   "app": {
     "urls": [
-      "http://homepage.hispeed.ch/grrds_games/Dice/"
+      "https://grrd01.github.io/Dice/"
     ],
     "launch": {
-      "web_url": "http://homepage.hispeed.ch/grrds_games/Dice/"
+      "web_url": "https://grrd01.github.io/Dice/"
     }
   },
   "author": "Gerard Tyedmers"

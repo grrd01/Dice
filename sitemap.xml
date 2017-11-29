@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://grrd01.github.io/Dice/</loc>
+        <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://grrd01.github.io/Dice/?lang=en"
+        />
+        <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://grrd01.github.io/Dice/?lang=de"
+        />
+        <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://grrd01.github.io/Dice/?lang=fr"
+        />
+        <xhtml:link
+                rel="alternate"
+                hreflang="nl"
+                href="https://grrd01.github.io/Dice/?lang=nl"
+        />
+        <xhtml:link
+                rel="alternate"
+                hreflang="rm"
+                href="https://grrd01.github.io/Dice/?lang=rm"
+        />
+    </url>
+
+</urlset>

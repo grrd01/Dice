@@ -1,10 +1,11 @@
 var CACHE_NAME = 'grrds-dice-cache';
-var CACHE_VERSION = 'v1.1';
+var CACHE_VERSION = 'v1.2';
 var CACHE = CACHE_NAME + '-' + CACHE_VERSION;
 
 var urlsToCache = [
     'index.html',
     'images/4inarow.svg',
+    'images/dice.png',
     'images/dice_1.svg',
     'images/dice_1w.svg',
     'images/dice_2.svg',
@@ -31,6 +32,7 @@ var urlsToCache = [
     'images/settings.png',
     'images/title.png',
     'images/title2.png',
+    'images/info.png',
     'js/Detector.js',
     'js/dice.css',
     'js/dice.js',

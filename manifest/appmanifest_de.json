@@ -1,0 +1,64 @@
+{
+  "name": "grrd's Dice",
+  "short_name": "Dice",
+  "version": "3.0",
+  "description": "grrd’s Dice ist eine 3D Würfel-App und ein Yahtzee (Kniffel, Yatzy) Spiel für 1 bis 5 Spieler.",
+  "default_locale": "de",
+  "icons": [
+    {
+      "src": "images/icon_16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "images/icon_32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "images/icon_48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/icon_60.png",
+      "type": "image/png",
+      "sizes": "60x60"
+    },
+    {
+      "src": "images/icon_64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "images/icon_96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/icon_128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "images/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "images/icon_256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ,
+    {
+      "src": "images/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "background_color": "#434343",
+  "theme_color": "#434343",
+  "display": "standalone",
+  "author": "Gerard Tyedmers"
+}

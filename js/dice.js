@@ -8,6 +8,7 @@
 
 (function () {
     "use strict";
+    var langReady = false;
     var container;
     var mesh = [];
     var camera;
@@ -793,17 +794,6 @@
                 }
             } else {
                 $lbTotVal.html(totVal);
-                var urlParam = urlQuery("debug");
-                if (urlParam) {
-                    var myString = "";
-                    for (i = 0; i < anzDices; i += 1) {
-                        rotX = ((Math.round((targetRotationY[i] % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-                        rotY = ((Math.round((targetRotationX[i] % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-                        rotZ = ((Math.round((targetRotationZ[i] % (Math.PI * 2)) / Math.PI * 2)) + 4) % 4;
-                        myString = myString + "" + rotX + " - " + rotY + " - " + rotZ + " : " + diceVal[i] + "<br>";
-                    }
-                    $lbTotVal.html(myString);
-                }
             }
             $lbTotVal.show();
         }
@@ -1131,10 +1121,18 @@
     document.webL10n.ready(function () {
         // Example usage - https://grrd01.github.io/Dice/?lang=en
         var urlParam = urlQuery("lang");
-        if (urlParam) {
-            if (urlParam !== document.webL10n.getLanguage()) {
-                document.webL10n.setLanguage(urlParam);
-            }
+        langReady = true;
+        if (urlParam && urlParam !== document.webL10n.getLanguage()) {
+            document.webL10n.setLanguage(urlParam);
+            langReady = false;
         }
+    });
+    document.addEventListener('localized', function () {
+        if (langReady) {
+            $("html").attr("lang", document.webL10n.getLanguage().substr(0, 2));
+            $('meta[name=description]').attr("content", document.webL10n.get("lb_desc"));
+            $('link[rel=manifest]').attr("href", "manifest/appmanifest_" + document.webL10n.getLanguage().substr(0, 2) +".json");
+        }
+        langReady = true;
     });
 }());

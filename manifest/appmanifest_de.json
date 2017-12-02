@@ -60,5 +60,6 @@
   "background_color": "#434343",
   "theme_color": "#434343",
   "display": "standalone",
+  "start_url": "../index.html",
   "author": "Gerard Tyedmers"
 }

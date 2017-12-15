@@ -1127,11 +1127,11 @@
             langReady = false;
         }
     });
-    document.addEventListener('localized', function () {
+    document.addEventListener("localized", function () {
         if (langReady) {
             $("html").attr("lang", document.webL10n.getLanguage().substr(0, 2));
-            $('meta[name=description]').attr("content", document.webL10n.get("lb_desc"));
-            $('link[rel=manifest]').attr("href", "manifest/appmanifest_" + document.webL10n.getLanguage().substr(0, 2) +".json");
+            $("meta[name=description]").attr("content", document.webL10n.get("lb_desc"));
+            $("link[rel=manifest]").attr("href", "manifest/appmanifest_" + document.webL10n.getLanguage().substr(0, 2) + ".json");
         }
         langReady = true;
     });

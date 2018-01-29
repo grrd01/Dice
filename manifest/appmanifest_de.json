@@ -57,6 +57,34 @@
       "sizes": "512x512"
     }
   ],
+  "screenshots": [
+    {
+      "src": "../images/screenshots/Dice1_de.png",
+      "type": "image/png",
+      "sizes": "1280x800"
+    },
+    {
+      "src": "../images/screenshots/Dice2_de.png",
+      "type": "image/png",
+      "sizes": "1280x800"
+    },
+    {
+      "src": "../images/screenshots/Dice3.png",
+      "type": "image/png",
+      "sizes": "1280x800"
+    },
+    {
+      "src": "../images/screenshots/Dice4.png",
+      "type": "image/png",
+      "sizes": "1280x800"
+    },
+    {
+      "src": "../images/screenshots/Dice5.png",
+      "type": "image/png",
+      "sizes": "1280x800"
+    }
+  ],
+  "categories": ["games", "dice games", "casual games", "family games", "spiele", "würfelspiele", "gelegenheitsspiele", "familienspiele"],
   "background_color": "#434343",
   "theme_color": "#434343",
   "display": "standalone",

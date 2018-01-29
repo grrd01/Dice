@@ -1132,6 +1132,7 @@
             $("html").attr("lang", document.webL10n.getLanguage().substr(0, 2));
             $("meta[name=description]").attr("content", document.webL10n.get("lb_desc"));
             $("link[rel=manifest]").attr("href", "manifest/appmanifest_" + document.webL10n.getLanguage().substr(0, 2) + ".json");
+            $("link[rel=canonical]").attr("href", "https://grrd01.github.io/Dice/?lang=" + document.webL10n.getLanguage().substr(0, 2));
         }
         langReady = true;
     });

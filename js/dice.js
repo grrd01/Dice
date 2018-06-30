@@ -563,7 +563,7 @@
 
     $(document).on("pageshow", "#dice", function () {
         if (!popSwipeShown) {
-            $popupSwipe.popup("open");
+            $popupSwipe.popup("open", {transition: "pop"});
             $dice.mousedown(function (e) {
                 $(this).off("mousedown");
                 $popupSwipe.popup("close");
@@ -673,7 +673,7 @@
         if (!popHelpShown) {
             $helpTit.html(document.webL10n.get("lb_help"));
             $helpTxt.html("");
-            $popupHelp.popup("open");
+            $popupHelp.popup("open", {transition: "pop"});
             popHelpShown = true;
         }
         contentFormatting();
@@ -681,7 +681,7 @@
 
     if (!Detector.webgl) {
         setTimeout(function () {
-            $popupWebGL.popup("open");
+            $popupWebGL.popup("open", {transition: "pop"});
         }, 500);
     } else {
         init();
@@ -769,7 +769,7 @@
 
             if (inYahtzee) {
                 if (!popLockShown && curTry === 1 && !inLock) {
-                    $popupLock.popup("open");
+                    $popupLock.popup("open", {transition: "pop"});
                     $dice.mousedown(function (e) {
                         $(this).off("mousedown");
                         $popupLock.popup("close");
@@ -883,7 +883,7 @@
             i = totalScore.indexOf(Math.max.apply(Math, totalScore));
             $helpTit.html(document.webL10n.get("lb_player") + " " + (i + 1) + " " + document.webL10n.get("lb_win"));
             $helpTxt.html(document.webL10n.get("lb_with") + " " + totalScore[i] + " " + document.webL10n.get("lb_pts"));
-            $popupHelp.popup("open");
+            $popupHelp.popup("open", {transition: "pop"});
             gameOver = true;
         } else {
             curPlayer += 1;
@@ -1110,7 +1110,7 @@
     function showHelp(i) {
         $helpTit.html(document.webL10n.get(i));
         $helpTxt.html(document.webL10n.get(i + "_txt"));
-        $popupHelp.popup("open");
+        $popupHelp.popup("open", {transition: "pop"});
     }
 
     $(".help").click(function (e) {

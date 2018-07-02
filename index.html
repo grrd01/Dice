@@ -148,7 +148,16 @@
                             <label id="radio5" for="color5"><img id="img_color5" class="settings white w16" src="images/dice_chance.svg" alt="white"/></label>
                     </fieldset>
                 </div>
-                <a id="bt_closeSettings" data-l10n-id="bt_back" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+
+                <div data-role="fieldcontain">
+                    <label for="b_instr" data-l10n-id="lb_instr">Display instructions</label>
+                    <select name="b_instr" id="b_instr" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </div>
+
+                <a id="bt_closeSettings" data-l10n-id="bt_back" data-icon="arrow-l" data-direction="reverse" data-role="button" data-theme="c">Back</a>
             </div><!-- /content -->
         </div><!-- /page Settings -->
 
@@ -510,7 +519,7 @@
                     </tr>
                 </table>
                 <div id="div_close_list">
-                    <a id="bt_close_list" data-l10n-id="bt_back" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+                    <a id="bt_close_list" data-l10n-id="bt_back" data-icon="arrow-l" data-direction="reverse" data-role="button" data-theme="b">Back</a>
                 </div>
                 <div id="popup_help" class="popup" data-role="popup" data-history="false" data-theme="a">
                     <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -526,9 +535,9 @@
         <script src="js/loaders/MTLLoader.js"></script>
         <script src="js/loaders/OBJLoader.js"></script>
         <script src="js/Detector.js"></script>
-        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
-        <script type="text/javascript" src="js/l10n.js"></script>
+        <script src="js/jquery-1.12.3.min.js"></script>
+        <script src="js/jquery.mobile-1.3.2.min.js"></script>
+        <script src="js/l10n.js"></script>
         <script src="js/shake.js"></script>
         <script src="js/dice.js"></script>
     </body>

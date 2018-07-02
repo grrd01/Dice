@@ -4,7 +4,8 @@
  * Licensed under the MPL License
  */
 
-/*jslint browser:true, for:true, devel: true, this: true */ /*global  $, window, THREE, Shake, Detector*/
+/*jslint browser:true, for:true, this: true, devel: true, long: true */
+/*global  $, window, THREE, Shake, Detector*/
 
 (function () {
     "use strict";
@@ -92,6 +93,19 @@
     var $popupHelp = $("#popup_help");
     var $helpTit = $("#help_tit");
     var $helpTxt = $("#help_txt");
+    var $b_instr = $("#b_instr");
+    var g_instr = true;
+
+    var localStorageOK = (function () {
+        var mod = "modernizr";
+        try {
+            localStorage.setItem(mod, mod);
+            localStorage.removeItem(mod);
+            return true;
+        } catch (ignore) {
+            return false;
+        }
+    }());
 
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
@@ -562,7 +576,7 @@
     }
 
     $(document).on("pageshow", "#dice", function () {
-        if (!popSwipeShown) {
+        if (!popSwipeShown && g_instr) {
             $popupSwipe.popup("open", {transition: "pop"});
             $dice.mousedown(function (e) {
                 $(this).off("mousedown");
@@ -612,6 +626,18 @@
     }
 
     function init() {
+        if (!localStorageOK) {
+            $b_instr.val("on");
+        } else {
+            //localStorage.clear();
+            if (localStorage.getItem("s_instr") === null) {
+                $b_instr.val("on");
+            } else {
+                $b_instr.val(localStorage.getItem("s_instr"));
+            }
+        }
+        g_instr = $b_instr.val() === "on";
+
         $lbTotVal.hide();
         $lbTry.hide();
         container = document.createElement("div");
@@ -671,8 +697,8 @@
         myShakeEvent.stop();
         inDice = false;
         if (!popHelpShown) {
-            $helpTit.html(document.webL10n.get("lb_help"));
-            $helpTxt.html("");
+            $helpTxt.html(document.webL10n.get("lb_help"));
+            $helpTit.html("");
             $popupHelp.popup("open", {transition: "pop"});
             popHelpShown = true;
         }
@@ -768,7 +794,7 @@
             }
 
             if (inYahtzee) {
-                if (!popLockShown && curTry === 1 && !inLock) {
+                if (!popLockShown && curTry === 1 && !inLock && g_instr) {
                     $popupLock.popup("open", {transition: "pop"});
                     $dice.mousedown(function (e) {
                         $(this).off("mousedown");
@@ -1054,6 +1080,10 @@
     }
 
     function closeSettings() {
+        g_instr = $b_instr.val() === "on";
+        if (localStorageOK) {
+            localStorage.setItem("s_instr", $b_instr.val());
+        }
         contentFormatting();
         $.mobile.changePage("#title", {transition: "pop", reverse: true});
     }

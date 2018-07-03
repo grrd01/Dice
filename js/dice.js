@@ -630,6 +630,11 @@
             $b_instr.val("on");
         } else {
             //localStorage.clear();
+            if (localStorage.getItem("s_color") === null) {
+                $("input:radio[name=color]").filter("[value = 0]").prop("checked", true);
+            } else {
+                $("input:radio[name=color]").filter("[value = " + localStorage.getItem("s_color") + "]").prop("checked", true);
+            }
             if (localStorage.getItem("s_instr") === null) {
                 $b_instr.val("on");
             } else {
@@ -1082,6 +1087,7 @@
     function closeSettings() {
         g_instr = $b_instr.val() === "on";
         if (localStorageOK) {
+            localStorage.setItem("s_color", $("input:radio[name=color]:checked").val());
             localStorage.setItem("s_instr", $b_instr.val());
         }
         contentFormatting();
@@ -1101,7 +1107,7 @@
             [[0.017000, 0.292000, 0.243000], [1.000000, 1.000000, 1.000000]],
             [[0.650000, 0.650000, 0.650000], [0.060000, 0.060000, 0.060000]]
         ];
-        var $input_radio_color_checked = $("input:radio[name=color]:checked");
+        var r_color = $("input:radio[name=color]:checked").val();
         inDice = true;
         if (inYahtzee) {
             anzPlayer = anz;
@@ -1121,14 +1127,14 @@
         animate();
         $.mobile.changePage("#dice", {transition: "slide"});
         mesh[0].children[0].material[0].color.setRGB(
-            color[parseInt($input_radio_color_checked.val())][0][0],
-            color[parseInt($input_radio_color_checked.val())][0][1],
-            color[parseInt($input_radio_color_checked.val())][0][2]
+            color[parseInt(r_color)][0][0],
+            color[parseInt(r_color)][0][1],
+            color[parseInt(r_color)][0][2]
         );
         mesh[0].children[0].material[1].color.setRGB(
-            color[parseInt($input_radio_color_checked.val())][1][0],
-            color[parseInt($input_radio_color_checked.val())][1][1],
-            color[parseInt($input_radio_color_checked.val())][1][2]
+            color[parseInt(r_color)][1][0],
+            color[parseInt(r_color)][1][1],
+            color[parseInt(r_color)][1][2]
         );
     }
 

@@ -701,7 +701,7 @@
     $(document).on("pageshow", "#popup_yahtzee", function () {
         myShakeEvent.stop();
         inDice = false;
-        if (!popHelpShown) {
+        if (!popHelpShown  && g_instr) {
             $helpTxt.html(document.webL10n.get("lb_help"));
             $helpTit.html("");
             $popupHelp.popup("open", {transition: "pop"});

@@ -229,7 +229,7 @@
             $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock4").css("display"));
             $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock1").css("display"));
             $("#img_title").attr("style", "width:calc(46% - 15px);margin-bottom:20px;");
-            $("#img_title2").attr("style", "width:calc(31% - 10px);margin-top:0px;margin-bottom:20px;margin-left:20px;");
+            $("#img_title2").attr("style", "width:calc(31% - 10px);margin-top:0px;margin-bottom:23px;margin-left:20px;");
             $("#img_title3h").hide();
             $("#img_title3q").show();
             $btDiceYahtzee.css({width: "100%", position: "absolute", "margin-bottom": ((gWindowsHeight - gWindowsWidth * 0.2 - 100) / 3.5) + "px", bottom: "0"});

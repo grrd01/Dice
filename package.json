@@ -1,0 +1,21 @@
+{
+  "name": "grrds-Dice",
+  "version": "0.1.0",
+  "description": "grrd's Tic Tac Toe is a HTML5 Game that works offline",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/grrd01/Dice.git"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "load-grunt-tasks": "^4.0.0",
+    "grunt-svgmin": "^5.0.0",
+    "grunt-contrib-imagemin": "^3.1.0",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-htmlmin": "^3.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-replace": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0"
+  }
+}

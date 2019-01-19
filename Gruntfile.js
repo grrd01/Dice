@@ -106,9 +106,11 @@ module.exports = function(grunt) {
                     {'../../2_Build/Dice/images/dice_sm_str.svg': 'images/dice_sm_str.svg'},
                     {'../../2_Build/Dice/images/dice_sum.svg': 'images/dice_sum.svg'},
                     {'../../2_Build/Dice/images/dice_yahtzee.svg': 'images/dice_yahtzee.svg'},
+                    {'../../2_Build/Dice/images/info.svg': 'images/info.svg'},
                     {'../../2_Build/Dice/images/lock.svg': 'images/lock.svg'},
                     {'../../2_Build/Dice/images/mail.svg': 'images/mail.svg'},
                     {'../../2_Build/Dice/images/puzzle.svg': 'images/puzzle.svg'},
+                    {'../../2_Build/Dice/images/settings.svg': 'images/settings.svg'},
                     {'../../2_Build/Dice/images/tictactoe.svg': 'images/tictactoe.svg'}
                 ]
             }

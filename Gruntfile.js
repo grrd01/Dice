@@ -3,12 +3,14 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        uglify: {
+        terser: {
             one: {
                 options: {
-                    banner: "/*\n* grrd's Dice\n* Copyright (c) 2015 Gerard Tyedmers, grrd@gmx.net\n* Licensed under the MPL License\n*/\n",
+                    compress: true,
                     mangle: true,
-                    compress: true
+                    output: {
+                        comments: 'some'
+                    }
                 },
                 files: {
                     '../../2_Build/Dice/js/dice.js': ['js/dice.js']
@@ -16,25 +18,19 @@ module.exports = function(grunt) {
             },
             two: {
                 options: {
-                    banner: "/*\n* grrd's Dice\n* Copyright (c) 2015 Gerard Tyedmers, grrd@gmx.net\n* Licensed under the MPL License\n*/\n",
+                    compress: true,
                     mangle: true,
-                    compress: true
+                    output: {
+                        comments: 'some'
+                    }
                 },
                 files: {
                     '../../2_Build/Dice/sw.js': ['sw.js']
                 }
-            },
+            }
+        },
+        uglify: {
             three: {
-                options: {
-                    banner: "/*\n* Copyright (c) 2011-2013 Fabien Cazenave, Mozilla.\n*/\n",
-                    mangle: true,
-                    compress: true
-                },
-                files: {
-                    '../../2_Build/Dice/js/l10n.js': ['js/l10n.js']
-                }
-            },
-            four: {
                 options: {
                     banner: "/*\n* Loads a Wavefront .mtl file specifying materials\n* @author angelxuanchang\n*/\n",
                     mangle: true,
@@ -85,33 +81,31 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [
-                    {'../../2_Build/Dice/images/4inarow.svg': 'images/4inarow.svg'},
-                    {'../../2_Build/Dice/images/dice_1.svg': 'images/dice_1.svg'},
-                    {'../../2_Build/Dice/images/dice_1w.svg': 'images/dice_1w.svg'},
-                    {'../../2_Build/Dice/images/dice_2.svg': 'images/dice_2.svg'},
-                    {'../../2_Build/Dice/images/dice_2w.svg': 'images/dice_2w.svg'},
-                    {'../../2_Build/Dice/images/dice_3.svg': 'images/dice_3.svg'},
-                    {'../../2_Build/Dice/images/dice_3kind.svg': 'images/dice_3kind.svg'},
-                    {'../../2_Build/Dice/images/dice_3w.svg': 'images/dice_3w.svg'},
-                    {'../../2_Build/Dice/images/dice_4.svg': 'images/dice_4.svg'},
-                    {'../../2_Build/Dice/images/dice_4kind.svg': 'images/dice_4kind.svg'},
-                    {'../../2_Build/Dice/images/dice_4w.svg': 'images/dice_4w.svg'},
-                    {'../../2_Build/Dice/images/dice_5.svg': 'images/dice_5.svg'},
-                    {'../../2_Build/Dice/images/dice_5w.svg': 'images/dice_5w.svg'},
-                    {'../../2_Build/Dice/images/dice_6.svg': 'images/dice_6.svg'},
-                    {'../../2_Build/Dice/images/dice_chance.svg': 'images/dice_chance.svg'},
-                    {'../../2_Build/Dice/images/dice_full_h.svg': 'images/dice_full_h.svg'},
-                    {'../../2_Build/Dice/images/dice_lg_str.svg': 'images/dice_lg_str.svg'},
-                    {'../../2_Build/Dice/images/dice_plus.svg': 'images/dice_plus.svg'},
-                    {'../../2_Build/Dice/images/dice_sm_str.svg': 'images/dice_sm_str.svg'},
-                    {'../../2_Build/Dice/images/dice_sum.svg': 'images/dice_sum.svg'},
-                    {'../../2_Build/Dice/images/dice_yahtzee.svg': 'images/dice_yahtzee.svg'},
-                    {'../../2_Build/Dice/images/info.svg': 'images/info.svg'},
-                    {'../../2_Build/Dice/images/lock.svg': 'images/lock.svg'},
-                    {'../../2_Build/Dice/images/mail.svg': 'images/mail.svg'},
-                    {'../../2_Build/Dice/images/puzzle.svg': 'images/puzzle.svg'},
-                    {'../../2_Build/Dice/images/settings.svg': 'images/settings.svg'},
-                    {'../../2_Build/Dice/images/tictactoe.svg': 'images/tictactoe.svg'}
+                    {'../../2_Build/Dice/i/4inarow.svg': 'i/4inarow.svg'},
+                    {'../../2_Build/Dice/i/dice_1.svg': 'i/dice_1.svg'},
+                    {'../../2_Build/Dice/i/dice_2.svg': 'i/dice_2.svg'},
+                    {'../../2_Build/Dice/i/dice_3.svg': 'i/dice_3.svg'},
+                    {'../../2_Build/Dice/i/dice_3kind.svg': 'i/dice_3kind.svg'},
+                    {'../../2_Build/Dice/i/dice_4.svg': 'i/dice_4.svg'},
+                    {'../../2_Build/Dice/i/dice_4kind.svg': 'i/dice_4kind.svg'},
+                    {'../../2_Build/Dice/i/dice_5.svg': 'i/dice_5.svg'},
+                    {'../../2_Build/Dice/i/dice_6.svg': 'i/dice_6.svg'},
+                    {'../../2_Build/Dice/i/dice_chance.svg': 'i/dice_chance.svg'},
+                    {'../../2_Build/Dice/i/dice_full_h.svg': 'i/dice_full_h.svg'},
+                    {'../../2_Build/Dice/i/dice_lg_str.svg': 'i/dice_lg_str.svg'},
+                    {'../../2_Build/Dice/i/dice_plus.svg': 'i/dice_plus.svg'},
+                    {'../../2_Build/Dice/i/dice_sm_str.svg': 'i/dice_sm_str.svg'},
+                    {'../../2_Build/Dice/i/dice_sum.svg': 'i/dice_sum.svg'},
+                    {'../../2_Build/Dice/i/dice_yahtzee.svg': 'i/dice_yahtzee.svg'},
+                    {'../../2_Build/Dice/i/info.svg': 'i/info.svg'},
+                    {'../../2_Build/Dice/i/list.svg': 'i/list.svg'},
+                    {'../../2_Build/Dice/i/lock.svg': 'i/lock.svg'},
+                    {'../../2_Build/Dice/i/mail.svg': 'i/mail.svg'},
+                    {'../../2_Build/Dice/i/ok.svg': 'i/ok.svg'},
+                    {'../../2_Build/Dice/i/puzzle.svg': 'i/puzzle.svg'},
+                    {'../../2_Build/Dice/i/settings.svg': 'i/settings.svg'},
+                    {'../../2_Build/Dice/i/tictactoe.svg': 'i/tictactoe.svg'},
+                    {'../../2_Build/Dice/i/x.svg': 'i/x.svg'}
                 ]
             }
         },
@@ -122,20 +116,9 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'images',
+                    cwd: 'i',
                     src: ['*.{png,jpg,gif}'],
-                    dest: '../../2_Build/Dice/images/'
-                }]
-            },
-            dist2: {
-                options: {
-                    optimizationLevel: 5
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'js/images',
-                    src: ['*.{png,jpg,gif}'],
-                    dest: '../../2_Build/Dice/js/images/'
+                    dest: '../../2_Build/Dice/i/'
                 }]
             }
         },
@@ -185,8 +168,7 @@ module.exports = function(grunt) {
                     {expand: true, src: ['locales/**'], dest: '../../2_Build/Dice/'},
                     {expand: true, flatten: true, src: ['manifest/*'], dest: '../../2_Build/Dice/manifest/'},
                     {expand: true, flatten: true, src: ['models/*'], dest: '../../2_Build/Dice/models/'},
-                    {expand: true, flatten: true, src: ['images/*.ico'], dest: '../../2_Build/Dice/images/'},
-                    {expand: true, flatten: true, src: ['js/jquery*.*'], dest: '../../2_Build/Dice/js/'},
+                    {expand: true, flatten: true, src: ['i/*.ico'], dest: '../../2_Build/Dice/i/'},
                     {expand: true, flatten: true, src: ['js/build/*'], dest: '../../2_Build/Dice/js/build/'},
                     {expand: true, flatten: true, src: ['**.txt'], dest: '../../2_Build/Dice/'},
                     {expand: true, flatten: true, src: ['**.md'], dest: '../../2_Build/Dice/'}
@@ -203,6 +185,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', [
+        'terser',
         'uglify',
         'svgmin',
         'imagemin',

@@ -474,6 +474,7 @@
         e.classList.add("popup-show");
         if (e === $popupYahtzee) {
             myShakeEvent.stop();
+            inDice = false;
             if (!popHelpShown && $("b_instr").checked) {
                 setTimeout(function () {
                     $helptit.innerHTML = "";

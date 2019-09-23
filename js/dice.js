@@ -1363,7 +1363,7 @@
             if (i === 6) {
                 i = 7;
             }
-            for (j = 1; j < 5; j += 1) {
+            for (j = 1; j <= 5; j += 1) {
                 $("bt_" + i + "p" + j).addEventListener("click", function () {
                     yahtzeeSetValue();
                 });

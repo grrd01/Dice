@@ -472,13 +472,16 @@
         e.classList.remove("popup-init");
         e.classList.remove("popup-hide");
         e.classList.add("popup-show");
-        if (e === $popupYahtzee && !popHelpShown && $("b_instr").checked) {
-            setTimeout(function () {
-                $helptit.innerHTML = "";
-                $help.innerHTML = lLoc[nLang].lb_help;
-                fShowPopup($popupHelp);
-                popHelpShown = true;
-            }, 700);
+        if (e === $popupYahtzee) {
+            myShakeEvent.stop();
+            if (!popHelpShown && $("b_instr").checked) {
+                setTimeout(function () {
+                    $helptit.innerHTML = "";
+                    $help.innerHTML = lLoc[nLang].lb_help;
+                    fShowPopup($popupHelp);
+                    popHelpShown = true;
+                }, 700);
+            }
         }
     }
     function fHidePopup(e) {

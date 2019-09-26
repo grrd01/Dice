@@ -1,15 +1,372 @@
-/*
+/**
  * grrd's Dice
  * Copyright (c) 2015 Gerard Tyedmers, grrd@gmx.net
- * Licensed under the MPL License
+ * @license MPL-2.0
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-/*jslint browser:true, for:true, this: true, devel: true, long: true */
-/*global  $, window, THREE, Shake, Detector*/
+/*jslint browser:true, long: true, devel: true, for: true */
+/*global  THREE, Shake, Detector*/
 
 (function () {
     "use strict";
-    var langReady = false;
+
+    // Localization
+    var nLang = 0;
+    var lLoc = [{
+        lb_desc: "grrd’s Dice is a 3D Dice Roller app and a Yahtzee game for one to five players.",
+        lb_swipe: "Swipe or shake to roll the dice!",
+        lb_lock: "Tap to lock a dice!",
+        lb_web_gl: "Your browser does not support WebGL!",
+        lb_help: "Tap on an icon to get help!",
+        lb_color: "Color:",
+        lb_instr: "Display instructions:",
+        lb_anz: "Number of dice:",
+        lb_anz_pl: "Number of players:",
+        bt_dice: "Dice!",
+        bt_yahtzee: "Yahtzee!",
+        bt_start: "Start",
+        bt_back: " Back",
+        bt_close: " Close",
+        lb_dev: " Developed by Gérard Tyedmers with",
+        lb_and: " and",
+        lb_or: " or",
+        lb_model: " 3D-Model created with",
+        lb_puzzle: " Don't miss ",
+        lb_yes: " Yes",
+        lb_no: " No",
+        lb_again: " Play again?",
+        lb_game: " game played.",
+        lb_games: " games played.",
+        lb_player: " Player",
+        lb_win: " wins!",
+        lb_with: " with",
+        lb_pts: " points",
+        lb_name: " Your name:",
+        lb_img: " Your image:",
+        lb_played: " Games played:",
+        lb_won: " Games won:",
+        lb_sound: " Play sounds",
+        lb_1: " Aces",
+        lb_1_txt: " Sum of all aces",
+        lb_2: " Twos",
+        lb_2_txt: " Sum of all twos",
+        lb_3: " Threes",
+        lb_3_txt: " Sum of all threes",
+        lb_4: " Fours",
+        lb_4_txt: " Sum of all fours",
+        lb_5: " Fives",
+        lb_5_txt: " Sum of all fives",
+        lb_6: " Sixes",
+        lb_6_txt: " Sum of all sixes",
+        lb_sum1: " Total",
+        lb_sum1_txt: " Total upper section",
+        lb_bonus: " Bonus 35 pts",
+        lb_bonus_txt: " if total > 62",
+        lb_sum2: " Total",
+        lb_sum2_txt: " Total with bonus",
+        lb_3kind: " 3 of a kind",
+        lb_3kind_txt: " Sum of 3 identical dice",
+        lb_4kind: " 4 of a kind",
+        lb_4kind_txt: " Sum of 4 identical dice",
+        lb_full_house: " Full House 25 pts",
+        lb_full_house_txt: " 2 and 3 dice of a kind",
+        lb_small_str: " Small Straight 30 pts",
+        lb_small_str_txt: " Sequence of 4 dice",
+        lb_big_str: " Large Straight 40 pts",
+        lb_big_str_txt: " Sequence of 5 dice",
+        lb_yahtzee: " Yahtzee 50 pts",
+        lb_yahtzee_txt: " 5 of a kind",
+        lb_chance: " Chance",
+        lb_chance_txt: " Total of all 5 dice",
+        lb_sum3: " Total",
+        lb_sum3_txt: " Total lower section",
+        lb_sum4: " Grand Total",
+        lb_sum4_txt: " Upper + lower section"
+    }, {
+        lb_desc: "grrd’s Dice ist eine 3D Würfel-App und ein Yahtzee (Kniffel, Yatzy) Spiel für 1 bis 5 Spieler.",
+        lb_swipe: "Streiche oder schüttle zum Würfeln!",
+        lb_lock: "Tippe, um einen Würfel zu sperren!",
+        lb_web_gl: "Dein Browser unter- stützt WebGL nicht!",
+        lb_help: "Tippe auf ein Icon für Hilfe!",
+        lb_color: "Farbe:",
+        lb_instr: "Anleitung einblenden:",
+        lb_anz: "Anzahl Würfel:",
+        lb_anz_pl: "Anzahl Spieler:",
+        bt_dice: "Würfel!",
+        bt_yahtzee: "Yahtzee!",
+        bt_start: "Start",
+        bt_back: " Zurück",
+        bt_close: " Schliessen",
+        lb_dev: " Entwickelt von Gérard Tyedmers mit",
+        lb_and: " und",
+        lb_or: " oder",
+        lb_model: " 3D-Modell erstellt mit",
+        lb_puzzle: " Probier auch",
+        lb_yes: " Ja",
+        lb_no: " Nein",
+        lb_again: " Nochmals spielen?",
+        lb_game: " Spiel gespielt.",
+        lb_games: " Spiele gespielt.",
+        lb_player: " Spieler",
+        lb_win: " gewinnt!",
+        lb_with: " mit",
+        lb_pts: " Punkten",
+        lb_name: " Dein Name:",
+        lb_img: " Dein Bild",
+        lb_played: " Spiele gespielt:",
+        lb_won: " Spiele gewonnen:",
+        lb_sound: " Töne abspielen",
+        lb_1: " Einer",
+        lb_1_txt: " Summe aller Einer",
+        lb_2: " Zweier",
+        lb_2_txt: " Summe aller Zweier",
+        lb_3: " Dreier",
+        lb_3_txt: " Summe aller Dreier",
+        lb_4: " Vierer",
+        lb_4_txt: " Summe aller Vierer",
+        lb_5: " Fünfer",
+        lb_5_txt: " Summe aller Fünfer",
+        lb_6: " Sechser",
+        lb_6_txt: " Summe aller Sechser",
+        lb_sum1: " Summe",
+        lb_sum1_txt: " Summe obere Hälfte",
+        lb_bonus: " Bonus 35 Pt.",
+        lb_bonus_txt: " wenn Summe > 62 Pt.",
+        lb_sum2: " Summe",
+        lb_sum2_txt: " Summe mit Bonus",
+        lb_3kind: " Dreierpasch",
+        lb_3kind_txt: " Drei gleiche Würfel",
+        lb_4kind: " Viererpasch",
+        lb_4kind_txt: " Vier gleiche Würfel",
+        lb_full_house: " Full House 25 Pt.",
+        lb_full_house_txt: " 2 und 3 gleiche Würfel",
+        lb_small_str: " Kleine Strasse 30 Pt.",
+        lb_small_str_txt: " Reihenfolge mit 4 Würfeln",
+        lb_big_str: " Grosse Strasse 40 Pt",
+        lb_big_str_txt: " Reihenfolge mit 5 Würfeln",
+        lb_yahtzee: " Yahtzee 50 Pt.",
+        lb_yahtzee_txt: " Fünf gleiche Würfel",
+        lb_chance: " Chance",
+        lb_chance_txt: " Summe aller 5 Würfel",
+        lb_sum3: " Summe",
+        lb_sum3_txt: " Summe untere Hälfte",
+        lb_sum4: " Summe Total",
+        lb_sum4_txt: " obere + untere Hälfte"
+    }, {
+        lb_desc: "grrd’s Dice est une application 3D pour jouer aux dés et un jeu Yahtzee (Yatzee, Yatzy) pour 1 à 5 joueurs.",
+        lb_swipe: "Glissez ou secouez pour lancer les dés!",
+        lb_lock: "Tapez pour verrouiller un dé!",
+        lb_web_gl: "Votre navigateur ne supporte pas WebGL.",
+        lb_help: "Tapez sur une icône pour obtenir de l'aide!",
+        lb_color: "Couleur:",
+        lb_instr: "Afficher les instructions:",
+        lb_anz: "Nombre de dés:",
+        lb_anz_pl: "Nombre de joueurs:",
+        bt_dice: "Dés!",
+        bt_yahtzee: "Yahtzee!",
+        bt_start: "Démarrer",
+        bt_back: " Retour",
+        bt_close: " Fermer",
+        lb_dev: " Développé par Gérard Tyedmers avec",
+        lb_and: " et",
+        lb_or: " ou",
+        lb_model: " Modèle 3D créé avec",
+        lb_puzzle: " Ne manquez pas",
+        lb_yes: " Oui",
+        lb_no: " Non",
+        lb_again: " Jouer à nouveau?",
+        lb_game: " jeu joué.",
+        lb_games: " jeux joués.",
+        lb_player: " Joueur",
+        lb_win: " gagne!",
+        lb_with: " avec",
+        lb_pts: " points",
+        lb_name: " Votre nom:",
+        lb_img: " Votre image:",
+        lb_played: " Jeux joués:",
+        lb_won: " Jeux gagnés:",
+        lb_sound: " Jouer les sons",
+        lb_1: " As",
+        lb_1_txt: " Somme des 1 obtenus",
+        lb_2: " Deux",
+        lb_2_txt: " Somme des 2 obtenus",
+        lb_3: " Trois",
+        lb_3_txt: " Somme des 3 obtenus",
+        lb_4: " Quatre",
+        lb_4_txt: " Somme des 4 obtenus",
+        lb_5: " Cinq",
+        lb_5_txt: " Somme des 5 obtenus",
+        lb_6: " Six",
+        lb_6_txt: " Somme des 6 obtenus",
+        lb_sum1: " Total",
+        lb_sum1_txt: " Total 1ère section",
+        lb_bonus: " Prime 35 pts",
+        lb_bonus_txt: " Si total > 62",
+        lb_sum2: " Total",
+        lb_sum2_txt: " 1ère section + prime",
+        lb_3kind: " Brelan",
+        lb_3kind_txt: " 3 dés identiques",
+        lb_4kind: " Carré",
+        lb_4kind_txt: " 4 dés identiques",
+        lb_full_house: " Full 25 pts",
+        lb_full_house_txt: " 2 + 3 dés identiques",
+        lb_small_str: " Petite suite 30 pts",
+        lb_small_str_txt: " Suite de 4 dés",
+        lb_big_str: " Grande suite 40 pts",
+        lb_big_str_txt: " Suite  de 5 dés",
+        lb_yahtzee: " Yahtzee 50 pts",
+        lb_yahtzee_txt: " 5 dés identiques",
+        lb_chance: " Chance",
+        lb_chance_txt: " Somme des dés",
+        lb_sum3: " Total",
+        lb_sum3_txt: " Total 2ème section",
+        lb_sum4: " Total global",
+        lb_sum4_txt: " 1ère + 2ème section"
+    }, {
+        lb_desc: "grrd's Dice is een 3D dobbelstenen app en een Yahtzee spel voor 1-5 spelers.",
+        lb_swipe: "Veeg of schud om te dobbelen!",
+        lb_lock: "Tik om de dobbelsteen te blokkeren!",
+        lb_web_gl: "Uw browser ondersteunt geen WebGL!",
+        lb_help: "Tik op een pictogram voor hulp!",
+        lb_color: "Kleur:",
+        lb_instr: "Instructies weergeven:",
+        lb_anz: "Aantal dobbelstenen:",
+        lb_anz_pl: "Aantal spelers:",
+        bt_dice: "Dobbelstenen!",
+        bt_yahtzee: "Yahtzee!",
+        bt_start: "Begin",
+        bt_back: " Terug",
+        bt_close: " Sluiten",
+        lb_dev: " Ontwikkeld door Gérard Tyedmers met",
+        lb_and: " en",
+        lb_or: " of",
+        lb_model: " 3D-model gemaakt met",
+        lb_puzzle: " Mis niet",
+        lb_yes: " Ja",
+        lb_no: " Nee",
+        lb_again: " Speel opnieuw?",
+        lb_game: " wedstrijd gespeeld.",
+        lb_games: " wedstrijden gespeeld.",
+        lb_player: " Speler",
+        lb_win: " wint!",
+        lb_with: " met",
+        lb_pts: " punten",
+        lb_name: " Jouw naam:",
+        lb_img: " Uw afbeelding:",
+        lb_played: " Gespeelde spellen:",
+        lb_won: " Spellen gewonnen:",
+        lb_sound: " Speel geluiden",
+        lb_1: " Enen",
+        lb_1_txt: " Som van alle enen",
+        lb_2: " Tweeën",
+        lb_2_txt: " Som van alle tweeën",
+        lb_3: " Drieën",
+        lb_3_txt: " Som van alle drieën",
+        lb_4: " Vieren",
+        lb_4_txt: " Som van alle vieren",
+        lb_5: " Vijven",
+        lb_5_txt: " Som van alle vijven",
+        lb_6: " Zessen",
+        lb_6_txt: " Som van alle zessen",
+        lb_sum1: " Totaal",
+        lb_sum1_txt: " van de bovenste helft",
+        lb_bonus: " Bonus 35 ptn",
+        lb_bonus_txt: " als de totale > 62",
+        lb_sum2: " Totaal",
+        lb_sum2_txt: " Bovenste helft + bonus",
+        lb_3kind: " 3 dezelfde",
+        lb_3kind_txt: " Som van 3 dezelfde",
+        lb_4kind: " 4 dezelfde",
+        lb_4kind_txt: " Som van 4 dezelfde",
+        lb_full_house: " Full House 25 ptn",
+        lb_full_house_txt: " 2 en 3 dezelfde",
+        lb_small_str: " Kleine Straat 30 ptn",
+        lb_small_str_txt: " 4 opeenvolgende nummers",
+        lb_big_str: " Grote Straat 40 ptn",
+        lb_big_str_txt: " 5 opeenvolgende nummers",
+        lb_yahtzee: " Yahtzee 50 ptn",
+        lb_yahtzee_txt: " 5 dezelfde",
+        lb_chance: " Chance",
+        lb_chance_txt: " Vrije keus",
+        lb_sum3: " Totaal",
+        lb_sum3_txt: " van de onderste helft",
+        lb_sum4: " Totaal generaal",
+        lb_sum4_txt: " bovenste + onderste helft"
+    }, {
+        lb_desc: "grrd's Dice è ina app 3D per far ir dats e dar Yahtzee per in enfin tschintg giugaders.",
+        lb_swipe: "Trair u scurlattar per far ir il dat!",
+        lb_lock: "Tutgar per bloccar in dat!",
+        lb_web_gl: "Tes navigatur na sustegna betg WebGL!",
+        lb_help: "Tutga sin ina icone per retschaiver agid!",
+        lb_color: "Colur:",
+        lb_instr: "Visualisar ils instrucziuns:",
+        lb_anz: "Dumber da dats:",
+        lb_anz_pl: "Dumber da giugaders:",
+        bt_dice: "Bittar ils dats!",
+        bt_yahtzee: "Yahtzee!",
+        bt_start: "Cumenzar",
+        bt_back: " Enavos",
+        bt_close: " Serrar",
+        lb_dev: " Sviluppà da Gérard Tyedmers cun",
+        lb_and: " e",
+        lb_or: " u",
+        lb_model: " Creà il model 3D cun",
+        lb_puzzle: " Manchenta betg",
+        lb_yes: " Gea",
+        lb_no: " Na",
+        lb_again: " Giugar anc ina giada?",
+        lb_game: " gieu",
+        lb_games: " gieus",
+        lb_player: " Giugader",
+        lb_win: " gudagna!",
+        lb_with: " cun",
+        lb_pts: " puncts",
+        lb_name: " Tes num:",
+        lb_img: " Tes maletg:",
+        lb_played: " Gieus:",
+        lb_won: " Gieus gudignads:",
+        lb_sound: " Far ir tuns",
+        lb_1: " Puncts",
+        lb_1_txt: " Summa da tut ils puncts",
+        lb_2: " Da dus",
+        lb_2_txt: " Dumber da tut ils da dus",
+        lb_3: " Da trais",
+        lb_3_txt: " Summa da tut ils da trais",
+        lb_4: " Da quatter",
+        lb_4_txt: " Summa da tut ils da quatter",
+        lb_5: " Tschintgs",
+        lb_5_txt: " Summa da tut ils tschintgs",
+        lb_6: " Da sis",
+        lb_6_txt: " Summa da tut ils da sis",
+        lb_sum1: " Total",
+        lb_sum1_txt: " Total da la secziun sura",
+        lb_bonus: " Bonus 35 puncts",
+        lb_bonus_txt: " sch'il total > 62",
+        lb_sum2: " Total",
+        lb_sum2_txt: " Secziun sura + il bonus",
+        lb_3kind: " 3 d'ina sort",
+        lb_3kind_txt: " Summa da 3 dats identics",
+        lb_4kind: " 4 d'ina sort",
+        lb_4kind_txt: " Summa da 4 dats identics",
+        lb_full_house: " Full House 25 puncts",
+        lb_full_house_txt: " 2 e 3 dats identics",
+        lb_small_str: " Via pitschna 30 puncts",
+        lb_small_str_txt: " Sequenza da 4 dats",
+        lb_big_str: " Via gronda 40 puncts",
+        lb_big_str_txt: " Sequenza da 5 dats",
+        lb_yahtzee: " Yahtzee 50 puncts",
+        lb_yahtzee_txt: " 5 d'ina sort",
+        lb_chance: " Schanza",
+        lb_chance_txt: " Total dals 5 dats",
+        lb_sum3: " Total",
+        lb_sum3_txt: " Total da la secziun sut",
+        lb_sum4: " Total grond",
+        lb_sum4_txt: " Secziun sura e sut"
+    }];
+
     var container;
     var mesh = [];
     var camera;
@@ -35,13 +392,31 @@
     var mouseYOnMouseDown = 0;
     var timeOnMouseDown;
 
+    var inYahtzee = true;
+    var inDice = false;
+    var anzPlayer = 2;
+    var anzDices = 1;
+    var inMove = false;
+    var inLock = false;
+    var curPlayer = 1;
+    var curTry = 1;
+    var r_color = 0;
+    var gameOver = false;
+
+    var popSwipeShown = false;
+    var popLockShown = false;
+    var popHelpShown = false;
+
+    var curSpeed;
+    var totVal;
+    var upperVal;
+    var countVal = [0, 0, 0, 0, 0, 0];
     var rotX;
     var rotY;
     var rotZ;
     var rolling = false;
     var diceVal = [0, 0, 0, 0, 0];
     var locked = [false, false, false, false, false];
-    var countVal = [0, 0, 0, 0, 0, 0];
     var currentScore = [];
     var playerScore = [];
     var ii;
@@ -50,51 +425,15 @@
     }
     var totalScore = [0, 0, 0, 0, 0];
 
-    var totVal;
-    var upperVal;
-    var inDice = false;
-    var anzDices = 1;
-    var inYahtzee = true;
-    var inLock = false;
-    var inMove = false;
-    var anzPlayer = 2;
-    var curPlayer = 1;
-    var curTry = 1;
-    var curSpeed;
-    var popSwipeShown = false;
-    var popLockShown = false;
-    var popHelpShown = false;
-    var gameOver = false;
-    var lockHeight;
+    var gWindowsHeight = document.documentElement.clientHeight;
+    var gWindowsWidth = document.documentElement.clientWidth;
+    var windowHalfX = gWindowsWidth / 2;
+    var windowHalfY = gWindowsHeight / 2;
 
-    var windowHalfX = window.innerWidth / 2;
-    var windowHalfY = window.innerHeight / 2;
-
-    var gWindowsHeight;
-    var gWindowsWidth;
-
-    var $lbAnz = $("#lb_anz");
-    var $lbTry = $("#lb_try");
-    var $bt_list = $("#bt_list");
-    var $lbTotVal = $("#lb_tot_val");
-    var $imgLock0 = $("#img_lock0");
-    var $imgLock1 = $("#img_lock1");
-    var $imgLock2 = $("#img_lock2");
-    var $imgLock3 = $("#img_lock3");
-    var $imgLock4 = $("#img_lock4");
-    var $div_close_list = $("#div_close_list");
-    var $btDiceYahtzee = $("#bt_dice_yahtzee");
-    var $btDice = $("#bt_dice");
-    var $dice = $("#dice");
-    var $btYahtzee = $("#bt_yahtzee");
-    var $popupSwipe = $("#popup_swipe");
-    var $popupLock = $("#popup_lock");
-    var $popupWebGL = $("#popup_web_gl");
-    var $popupHelp = $("#popup_help");
-    var $helpTit = $("#help_tit");
-    var $helpTxt = $("#help_txt");
-    var $b_instr = $("#b_instr");
-    var g_instr = true;
+    var myShakeEvent = new Shake({
+        threshold: 8, // 15 - optional, shake strength threshold
+        timeout: 1000 // optional, determines the frequency of event generation
+    });
 
     var localStorageOK = (function () {
         var mod = "modernizr";
@@ -107,50 +446,61 @@
         }
     }());
 
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-            navigator.serviceWorker.register("sw.js").then(function (registration) {
-                console.log("ServiceWorker registration successful with scope: ", registration.scope);
-            }, function (err) {
-                console.log("ServiceWorker registration failed: ", err);
-            });
-        });
-    }
+    var $ = function (id) {
+        return document.getElementById(id);
+    };
 
-    function urlQuery(query) {
-        query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var expr = "[\\?&]" + query + "=([^&#]*)";
-        var regex = new RegExp(expr);
-        var results = regex.exec(window.location.href);
-        if (results !== null) {
-            return results[1];
-        } else {
-            return false;
+    var $lbTotVal = $("lb_tot_val");
+    var $lbTry = $("lb_try");
+    var $bt_list = $("bt_list");
+    var $imgLock0 = $("img_lock0");
+    var $imgLock1 = $("img_lock1");
+    var $imgLock2 = $("img_lock2");
+    var $imgLock3 = $("img_lock3");
+    var $imgLock4 = $("img_lock4");
+    var $game = $("iGame");
+    var $Title = $("iTitle");
+    var $pupupInfo = $("iPopupInfo");
+    var $popupSettings = $("iPopupSettings");
+    var $popupYahtzee = $("popup_yahtzee");
+    var $popupHelp = $("iPopupHelp");
+    var $helptit = $("lb_helptit");
+    var $help = $("lb_help");
+    var $grpanz = $("grp_anz");
+
+    function fShowPopup(e) {
+        e.classList.remove("popup-init");
+        e.classList.remove("popup-hide");
+        e.classList.add("popup-show");
+        if (e === $popupYahtzee) {
+            myShakeEvent.stop();
+            inDice = false;
+            if (!popHelpShown && $("b_instr").checked) {
+                setTimeout(function () {
+                    $helptit.innerHTML = "";
+                    $help.innerHTML = lLoc[nLang].lb_help;
+                    fShowPopup($popupHelp);
+                    popHelpShown = true;
+                }, 700);
+            }
         }
     }
-
-    $bt_list.click(function (e) {
-        $.mobile.changePage("#popup_yahtzee", {transition: "pop", role: "dialog"});
-        e.preventDefault();
-    });
-    $("#popup_yahtzee").mousedown(function () {
-        $popupHelp.popup("close");
-    });
-
-    var myShakeEvent = new Shake({
-        threshold: 8, // 15 - optional, shake strength threshold
-        timeout: 1000 // optional, determines the frequency of event generation
-    });
+    function fHidePopup(e) {
+        e.classList.remove("popup-show");
+        e.classList.add("popup-hide");
+        setTimeout(function(){
+            e.scrollTop = 0;
+        }, 1050);
+    }
 
     function shakeEventDidOccur() {
         var i;
         if (inYahtzee && rolling) {
             return;
         }
-        $popupSwipe.popup("close");
-        $popupLock.popup("close");
-        $lbTotVal.hide();
-        $lbTry.hide();
+        fHidePopup($popupHelp);
+        $lbTotVal.style.display = "none";
+        $lbTry.style.display = "none";
         for (i = 0; i < anzDices; i += 1) {
             if (!locked[i]) {
                 targetRotationX[i] = Math.round((targetRotationX[i] + 30 * Math.random() - 15) / Math.PI * 2) * Math.PI / 2;
@@ -159,137 +509,6 @@
             }
         }
         rolling = true;
-    }
-
-    window.addEventListener("shake", shakeEventDidOccur, false);
-
-    function contentFormatting() {
-        var i;
-        var w16;
-        gWindowsHeight = $(window).height();
-        gWindowsWidth = $(window).width();
-        windowHalfX = window.innerWidth / 2;
-        windowHalfY = window.innerHeight / 2;
-
-        if (gWindowsHeight > gWindowsWidth) {
-            lockHeight = gWindowsHeight / 7;
-            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock3").css("display"));
-            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 2.4) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock0").css("display"));
-            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock2").css("display"));
-            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX - lockHeight * 1.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock4").css("display"));
-            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 1.3) + "px; left:" + (windowHalfX + lockHeight * 0.4) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock1").css("display"));
-            $("#img_title").attr("style", "width:100%;margin-top:-10px;");
-            $("#img_title2").attr("style", "width:100%;margin-top:-20px;");
-            $("#img_title3h").show();
-            $("#img_title3q").hide();
-            $btDiceYahtzee.css({width: "100%", position: "absolute", bottom: "0", "margin-bottom": "16px"});
-            $btDice.css({width: (gWindowsWidth / 2 - 16) + "px", height: ""});
-            $btYahtzee.css({width: (gWindowsWidth / 2 - 16) + "px", height: ""});
-            $("#bt_dice_pad").attr("style", "");
-            $("#bt_yahtzee_pad").attr("style", "");
-            if (mesh[0] !== undefined && mesh[0] !== null) {
-                switch (anzDices) {
-                case 1:
-                    mesh[0].position.set(0, 0, 0);
-                    camera.position.set(0, 0, 2.2);
-                    break;
-                case 2:
-                    mesh[0].position.set(0, 0.45, 0);
-                    mesh[1].position.set(0, -0.45, 0);
-                    camera.position.set(0, 0, 3);
-                    break;
-                case 3:
-                    mesh[0].position.set(0, 0.9, 0);
-                    mesh[1].position.set(0, 0, 0);
-                    mesh[2].position.set(0, -0.9, 0);
-                    camera.position.set(0, 0, 4.2);
-                    break;
-                case 4:
-                    mesh[0].position.set(0.45, 0.45, 0);
-                    mesh[1].position.set(-0.45, 0.45, 0);
-                    mesh[2].position.set(0.45, -0.45, 0);
-                    mesh[3].position.set(-0.45, -0.45, 0);
-                    camera.position.set(0, 0, 4.2);
-                    break;
-                case 5:
-                    mesh[0].position.set(0.45, 0.9, 0);
-                    mesh[1].position.set(0.45, -0.9, 0);
-                    mesh[2].position.set(0, 0, 0);
-                    mesh[3].position.set(-0.45, 0.9, 0);
-                    mesh[4].position.set(-0.45, -0.9, 0);
-                    camera.position.set(0, 0, 5.6);
-                    break;
-                }
-            }
-        } else {
-            lockHeight = gWindowsHeight / 6;
-            $imgLock3.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock3").css("display"));
-            $imgLock0.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight * 1.7) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock0").css("display"));
-            $imgLock2.attr("style", "position:absolute; top:" + (windowHalfY - lockHeight / 2) + "px; left:" + (windowHalfX - lockHeight / 2) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock2").css("display"));
-            $imgLock4.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX - lockHeight * 2.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock4").css("display"));
-            $imgLock1.attr("style", "position:absolute; top:" + (windowHalfY + lockHeight * 0.6) + "px; left:" + (windowHalfX + lockHeight * 1.8) + "px; pointer-events:none; width:" + lockHeight + "px; height:" + lockHeight + "px; display:" + $("#img_lock1").css("display"));
-            $("#img_title").attr("style", "width:calc(46% - 15px);margin-bottom:20px;");
-            $("#img_title2").attr("style", "width:calc(31% - 10px);margin-top:0px;margin-bottom:23px;margin-left:20px;");
-            $("#img_title3h").hide();
-            $("#img_title3q").show();
-            $btDiceYahtzee.css({width: "100%", position: "absolute", "margin-bottom": ((gWindowsHeight - gWindowsWidth * 0.2 - 100) / 3.5) + "px", bottom: "0"});
-            $btDice.css({width: (gWindowsWidth / 2 - 16) + "px", height: Math.max(((gWindowsHeight - gWindowsWidth * 0.2 - 100) / 2), 40) + "px"});
-            $btYahtzee.css({width: (gWindowsWidth / 2 - 16) + "px", height: Math.max(((gWindowsHeight - gWindowsWidth * 0.2 - 100) / 2), 40) + "px"});
-            $("#bt_dice_pad").attr("style", "padding-top:" + Math.max(((gWindowsHeight - gWindowsWidth * 0.2 - 200) / 4), 0) + "px;");
-            $("#bt_yahtzee_pad").attr("style", "padding-top:" + Math.max(((gWindowsHeight - gWindowsWidth * 0.2 - 200) / 4), 0) + "px;");
-            if (mesh[0] !== undefined && mesh[0] !== null) {
-                switch (anzDices) {
-                case 1:
-                    mesh[0].position.set(0, 0, 0);
-                    camera.position.set(0, 0, 1.8);
-                    break;
-                case 2:
-                    mesh[0].position.set(0.45, 0, 0);
-                    mesh[1].position.set(-0.45, 0, 0);
-                    camera.position.set(0, 0, 2.2);
-                    break;
-                case 3:
-                    mesh[0].position.set(0.9, 0, 0);
-                    mesh[1].position.set(0, 0, 0);
-                    mesh[2].position.set(-0.9, 0, 0);
-                    camera.position.set(0, 0, 3);
-                    break;
-                case 4:
-                    mesh[0].position.set(0.45, 0.45, 0);
-                    mesh[1].position.set(-0.45, 0.45, 0);
-                    mesh[2].position.set(0.45, -0.45, 0);
-                    mesh[3].position.set(-0.45, -0.45, 0);
-                    camera.position.set(0, 0, 3);
-                    break;
-                case 5:
-                    mesh[0].position.set(0.9, 0.45, 0);
-                    mesh[1].position.set(0.9, -0.45, 0);
-                    mesh[2].position.set(0, 0, 0);
-                    mesh[3].position.set(-0.9, 0.45, 0);
-                    mesh[4].position.set(-0.9, -0.45, 0);
-                    camera.position.set(0, 0, 4);
-                    break;
-                }
-            }
-        }
-        $popupSwipe.css("max-width", (gWindowsWidth - 10) + "px");
-        $popupLock.css("max-width", (gWindowsWidth - 10) + "px");
-        $popupWebGL.css("max-width", (gWindowsWidth - 10) + "px");
-        $popupHelp.css("max-width", (gWindowsWidth - 40) + "px");
-        $("#start").css("width", (gWindowsWidth - 30) + "px");
-
-        for (i = 1; i < 6; i += 1) {
-            $("#radio" + i).attr("style", "width:" + (gWindowsWidth - 50) / 5.3 + "px; max-width: 92px;" + "height:" + (gWindowsWidth - 50) / 5.3 + "px; max-height: 92px;");
-            $("#img_color" + i).css({"max-width": "80px", width: (gWindowsWidth - 90) / 5.5 + "px"});
-            $("#img_anz" + i).width((gWindowsWidth - 10) / 5 + "px");
-        }
-        w16 = $(".w16");
-        w16.width(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
-        w16.height(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
-        setTimeout(function () {
-            w16.width(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
-            w16.height(Math.min((gWindowsWidth - 40) / 6.2, 80) + "px");
-        }, 500);
     }
 
     function onDocumentMouseMove(event) {
@@ -312,7 +531,6 @@
         var i;
         var j;
         var $bt_p_;
-        var $bt_p_ui_btn_text;
         var sequence = 0;
         for (i = 0; i < currentScore.length; i += 1) {
             currentScore[i] = 0;
@@ -352,20 +570,18 @@
         }
         currentScore[13] = totVal;
         for (i = 0; i < currentScore.length; i += 1) {
+            if (i === 6) {
+                i = 7;
+            }
             if (playerScore[curPlayer - 1][i] === null) {
-                $bt_p_ = $("#bt_" + i + "p" + curPlayer);
-                $("#lb_" + i + "p" + curPlayer).css("display", "none");
-                $bt_p_.css("display", "block");
-                $bt_p_ui_btn_text = $("#bt_" + i + "p" + curPlayer + " .ui-btn-text");
-                if ($bt_p_ui_btn_text.length) {
-                    $bt_p_ui_btn_text.text(currentScore[i]);
-                } else {
-                    $bt_p_.html(currentScore[i]);
-                }
+                $bt_p_ = $("bt_" + i + "p" + curPlayer);
+                $("lb_" + i + "p" + curPlayer).style.display = "none";
+                $bt_p_.style.display = "block";
+                $bt_p_.firstChild.innerHTML = currentScore[i];
             }
         }
-        $div_close_list.hide();
-        $.mobile.changePage("#popup_yahtzee", {transition: "pop", role: "dialog"});
+        $("iYahtzeeClose").parentElement.style.display = "none";
+        fShowPopup($popupYahtzee);
     }
 
     function lockDice() {
@@ -386,46 +602,45 @@
         if (gWindowsHeight > gWindowsWidth) {
             if (mouseX < 0 && mouseY > gWindowsHeight / 15) {
                 locked[4] = !locked[4];
-                $("#img_lock4").toggle();
-                //mesh[4].material.color.setHex(0x00BB33);
+                $imgLock4.style.display = (locked[4] ? "block" : "none");
             }
             if (mouseX > 0 && mouseY > gWindowsHeight / 15) {
                 locked[1] = !locked[1];
-                $("#img_lock1").toggle();
+                $imgLock1.style.display = (locked[1] ? "block" : "none");
             }
             if (mouseX > gWindowsHeight / (-15) && mouseX < gWindowsHeight / 15 && mouseY > gWindowsHeight / (-15) && mouseY < gWindowsHeight / 15) {
                 locked[2] = !locked[2];
-                $("#img_lock2").toggle();
+                $imgLock2.style.display = (locked[2] ? "block" : "none");
             }
             if (mouseX < 0 && mouseY < gWindowsHeight / (-15)) {
                 locked[3] = !locked[3];
-                $("#img_lock3").toggle();
+                $imgLock3.style.display = (locked[3] ? "block" : "none");
             }
             if (mouseX > 0 && mouseY < gWindowsHeight / (-15)) {
                 locked[0] = !locked[0];
-                $("#img_lock0").toggle();
+                $imgLock0.style.display = (locked[0] ? "block" : "none");
             }
 
         } else {
             if (mouseY < 0 && mouseX > gWindowsHeight / 15) {
                 locked[0] = !locked[0];
-                $("#img_lock0").toggle();
+                $imgLock0.style.display = (locked[0] ? "block" : "none");
             }
             if (mouseY > 0 && mouseX > gWindowsHeight / 15) {
                 locked[1] = !locked[1];
-                $("#img_lock1").toggle();
+                $imgLock1.style.display = (locked[1] ? "block" : "none");
             }
             if (mouseY > gWindowsHeight / (-15) && mouseY < gWindowsHeight / 15 && mouseX > gWindowsHeight / (-15) && mouseX < gWindowsHeight / 15) {
                 locked[2] = !locked[2];
-                $("#img_lock2").toggle();
+                $imgLock2.style.display = (locked[2] ? "block" : "none");
             }
             if (mouseY < 0 && mouseX < gWindowsHeight / (-15)) {
                 locked[3] = !locked[3];
-                $("#img_lock3").toggle();
+                $imgLock3.style.display = (locked[3] ? "block" : "none");
             }
             if (mouseY > 0 && mouseX < gWindowsHeight / (-15)) {
                 locked[4] = !locked[4];
-                $("#img_lock4").toggle();
+                $imgLock4.style.display = (locked[4] ? "block" : "none");
             }
         }
         for (i = 0; i < anzDices; i += 1) {
@@ -442,7 +657,7 @@
         var i;
         for (i = 0; i < 5; i += 1) {
             locked[i] = false;
-            $("#img_lock" + i).hide();
+            $("img_lock" + i).style.display = "none";
         }
     }
 
@@ -486,8 +701,8 @@
 
     function onDocumentMouseDown(event) {
         var i;
-        $lbTotVal.hide();
-        $lbTry.hide();
+        $lbTotVal.style.display = "none";
+        $lbTry.style.display = "none";
         event.preventDefault();
         container.addEventListener("mousemove", onDocumentMouseMove, false);
         container.addEventListener("mouseup", onDocumentMouseUp, false);
@@ -557,8 +772,8 @@
         inMove = false;
         if (event.touches.length === 1) {
             event.preventDefault();
-            $lbTotVal.hide();
-            $lbTry.hide();
+            $lbTotVal.style.display = "none";
+            $lbTry.style.display = "none";
             mouseXOnMouseDown = event.touches[0].pageX - windowHalfX;
             mouseYOnMouseDown = event.touches[0].pageY - windowHalfY;
             timeOnMouseDown = new Date();
@@ -574,154 +789,6 @@
             }
         }
     }
-
-    $(document).on("pageshow", "#dice", function () {
-        if (!popSwipeShown && g_instr) {
-            $popupSwipe.popup("open", {transition: "pop"});
-            $dice.mousedown(function (e) {
-                $(this).off("mousedown");
-                $popupSwipe.popup("close");
-                onDocumentMouseDown(e);
-            });
-            $dice.mouseup(function (e) {
-                $(this).off("mouseup");
-                onDocumentMouseUp(e);
-            });
-            popSwipeShown = true;
-        }
-        contentFormatting();
-        setTimeout(function () {
-            contentFormatting();
-        }, 500);
-    });
-
-    function addShadowedLight(x, y, z, color, intensity) {
-
-        var directionalLight = new THREE.DirectionalLight(color, intensity);
-        directionalLight.position.set(x, y, z);
-        scene.add(directionalLight);
-
-        directionalLight.castShadow = true;
-
-        var d = 1;
-        directionalLight.shadow.camera.left = -d;
-        directionalLight.shadow.camera.right = d;
-        directionalLight.shadow.camera.top = d;
-        directionalLight.shadow.camera.bottom = -d;
-
-        directionalLight.shadow.camera.near = 1;
-        directionalLight.shadow.camera.far = 4;
-
-        directionalLight.shadow.mapSize.width = 1024;
-        directionalLight.shadow.mapSize.height = 1024;
-
-        directionalLight.shadow.bias = -0.005;
-    }
-
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function init() {
-        if (!localStorageOK) {
-            $b_instr.val("on");
-        } else {
-            //localStorage.clear();
-            if (localStorage.getItem("s_color") === null) {
-                $("input:radio[name=color]").filter("[value = 0]").prop("checked", true);
-            } else {
-                $("input:radio[name=color]").filter("[value = " + localStorage.getItem("s_color") + "]").prop("checked", true);
-            }
-            if (localStorage.getItem("s_instr") === null) {
-                $b_instr.val("on");
-            } else {
-                $b_instr.val(localStorage.getItem("s_instr"));
-            }
-        }
-        g_instr = $b_instr.val() === "on";
-
-        $lbTotVal.hide();
-        $lbTry.hide();
-        container = document.createElement("div");
-        document.getElementById("dice").appendChild(container);
-
-        camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
-        camera.position.set(0, 0, 2.2);
-
-        scene = new THREE.Scene();
-
-        var onProgress = function (xhr) {
-            if (xhr.lengthComputable) {
-                var percentComplete = xhr.loaded / xhr.total * 100;
-                console.log(Math.round(percentComplete, 2) + "% downloaded");
-            }
-        };
-
-        var onError = function (xhr) {};
-
-        var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath("./models/");
-        mtlLoader.load("dice.mtl", function (materials) {
-            materials.preload();
-            var objLoader = new THREE.OBJLoader();
-            objLoader.setMaterials(materials);
-            objLoader.setPath("./models/");
-            objLoader.load("dice.obj", function (object) {
-                scene.add(object);
-                mesh[0] = object;
-            }, onProgress, onError);
-        });
-
-        // Lights
-        scene.add(new THREE.AmbientLight(0x777777));
-        addShadowedLight(0.5, 1, -1, 0xffffff, 0.7);
-        addShadowedLight(-1, 1, 1, 0xffffff, 1);
-
-        // renderer
-        renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-        renderer.setClearColor(0x000000, 0);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.gammaInput = true;
-        renderer.gammaOutput = true;
-
-        container.appendChild(renderer.domElement);
-
-        container.addEventListener("mousedown", onDocumentMouseDown, false);
-        container.addEventListener("touchstart", onDocumentTouchStart, false);
-        container.addEventListener("touchmove", onDocumentTouchMove, false);
-        container.addEventListener("touchend", onDocumentTouchEnd, false);
-
-        window.addEventListener("resize", onWindowResize, false);
-    }
-
-    $(document).on("pageshow", "#popup_yahtzee", function () {
-        myShakeEvent.stop();
-        inDice = false;
-        if (!popHelpShown  && g_instr) {
-            $helpTxt.html(document.webL10n.get("lb_help"));
-            $helpTit.html("");
-            $popupHelp.popup("open", {transition: "pop"});
-            popHelpShown = true;
-        }
-        contentFormatting();
-    });
-
-    if (!Detector.webgl) {
-        setTimeout(function () {
-            $popupWebGL.popup("open", {transition: "pop"});
-        }, 500);
-    } else {
-        init();
-    }
-
-    contentFormatting();
-    setTimeout(function () {
-        contentFormatting();
-    }, 500);
 
     function render() {
         var i;
@@ -799,17 +866,10 @@
             }
 
             if (inYahtzee) {
-                if (!popLockShown && curTry === 1 && !inLock && g_instr) {
-                    $popupLock.popup("open", {transition: "pop"});
-                    $dice.mousedown(function (e) {
-                        $(this).off("mousedown");
-                        $popupLock.popup("close");
-                        onDocumentMouseDown(e);
-                    });
-                    $dice.mouseup(function (e) {
-                        $(this).off("mouseup");
-                        onDocumentMouseUp(e);
-                    });
+                if (!popLockShown && curTry === 1 && !inLock && $("b_instr").checked) {
+                    $helptit.innerHTML = "";
+                    $help.innerHTML = lLoc[nLang].lb_lock;
+                    fShowPopup($popupHelp);
                     popLockShown = true;
                 }
                 if (!inLock) {
@@ -817,16 +877,16 @@
                 } else {
                     inLock = false;
                 }
-                $lbTry.html(curTry + " / 3");
-                $lbTry.show();
-                $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
+                $lbTry.innerHTML = curTry + " / 3";
+                $lbTry.style.display = "block";
+                $lbTotVal.innerHTML = lLoc[nLang].lb_player + " " + curPlayer;
                 if (curTry > 3) {
                     yahtzeeCount();
                 }
             } else {
-                $lbTotVal.html(totVal);
+                $lbTotVal.innerHTML = totVal;
             }
-            $lbTotVal.show();
+            $lbTotVal.style.display = "block";
         }
         renderer.render(scene, camera);
     }
@@ -838,16 +898,100 @@
         }
     }
 
+    function contentFormatting() {
+        gWindowsHeight = document.documentElement.clientHeight;
+        gWindowsWidth = document.documentElement.clientWidth;
+        windowHalfX = gWindowsWidth / 2;
+        windowHalfY = gWindowsHeight / 2;
+        if (gWindowsHeight > gWindowsWidth) {
+            if (mesh[0] !== undefined && mesh[0] !== null) {
+                switch (anzDices) {
+                    case 1:
+                        mesh[0].position.set(0, 0, 0);
+                        camera.position.set(0, 0, 2.2);
+                        break;
+                    case 2:
+                        mesh[0].position.set(0, 0.45, 0);
+                        mesh[1].position.set(0, -0.45, 0);
+                        camera.position.set(0, 0, 3);
+                        break;
+                    case 3:
+                        mesh[0].position.set(0, 0.9, 0);
+                        mesh[1].position.set(0, 0, 0);
+                        mesh[2].position.set(0, -0.9, 0);
+                        camera.position.set(0, 0, 4.2);
+                        break;
+                    case 4:
+                        mesh[0].position.set(0.45, 0.45, 0);
+                        mesh[1].position.set(-0.45, 0.45, 0);
+                        mesh[2].position.set(0.45, -0.45, 0);
+                        mesh[3].position.set(-0.45, -0.45, 0);
+                        camera.position.set(0, 0, 4.2);
+                        break;
+                    case 5:
+                        mesh[0].position.set(0.45, 0.9, 0);
+                        mesh[1].position.set(0.45, -0.9, 0);
+                        mesh[2].position.set(0, 0, 0);
+                        mesh[3].position.set(-0.45, 0.9, 0);
+                        mesh[4].position.set(-0.45, -0.9, 0);
+                        camera.position.set(0, 0, 5.6);
+                        break;
+                }
+            }
+        } else {
+            if (mesh[0] !== undefined && mesh[0] !== null) {
+                switch (anzDices) {
+                    case 1:
+                        mesh[0].position.set(0, 0, 0);
+                        camera.position.set(0, 0, 1.8);
+                        break;
+                    case 2:
+                        mesh[0].position.set(0.45, 0, 0);
+                        mesh[1].position.set(-0.45, 0, 0);
+                        camera.position.set(0, 0, 2.2);
+                        break;
+                    case 3:
+                        mesh[0].position.set(0.9, 0, 0);
+                        mesh[1].position.set(0, 0, 0);
+                        mesh[2].position.set(-0.9, 0, 0);
+                        camera.position.set(0, 0, 3);
+                        break;
+                    case 4:
+                        mesh[0].position.set(0.45, 0.45, 0);
+                        mesh[1].position.set(-0.45, 0.45, 0);
+                        mesh[2].position.set(0.45, -0.45, 0);
+                        mesh[3].position.set(-0.45, -0.45, 0);
+                        camera.position.set(0, 0, 3);
+                        break;
+                    case 5:
+                        mesh[0].position.set(0.9, 0.45, 0);
+                        mesh[1].position.set(0.9, -0.45, 0);
+                        mesh[2].position.set(0, 0, 0);
+                        mesh[3].position.set(-0.9, 0.45, 0);
+                        mesh[4].position.set(-0.9, -0.45, 0);
+                        camera.position.set(0, 0, 4);
+                        break;
+                }
+            }
+        }
+        camera.aspect = gWindowsWidth / gWindowsHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(gWindowsWidth, gWindowsHeight);
+    }
+
     function quit_dice() {
         var i;
         myShakeEvent.stop();
         inDice = false;
-        $lbTotVal.hide();
-        $lbTry.hide();
-        $btDiceYahtzee.show();
-        $("#grp_anz").hide();
+        $lbTotVal.style.display = "none";
+        $lbTry.style.display = "none";
+        $("bt_dice_yahtzee").classList.remove("swipe-out-bottom");
+        $grpanz.classList.remove("swipe-in-bottom");
         unlockDice();
-        $.mobile.changePage("#title", {transition: "slide", reverse: true});
+        $Title.classList.remove("swipe-out");
+        $game.classList.remove("swipe-in");
+        $Title.classList.add("swipe-out-right");
+        $game.classList.add("swipe-in-left");
         for (i = 0; i < anzDices; i += 1) {
             mesh[i].rotation.y = targetRotationX[i];
             mesh[i].rotation.x = targetRotationY[i];
@@ -855,204 +999,6 @@
         }
         rolling = false;
     }
-
-    $("#bt_quit").click(function (e) {
-        quit_dice();
-        e.preventDefault();
-    });
-
-    function close_list() {
-        myShakeEvent.start();
-        inDice = true;
-        animate();
-        if (gameOver) {
-            gameOver = false;
-            quit_dice();
-        } else {
-            $.mobile.changePage("#dice", {transition: "pop", reverse: true});
-        }
-    }
-
-    $("#bt_close_list").click(function (e) {
-        close_list();
-        e.preventDefault();
-    });
-
-    function yahtzeeSetValue(id) {
-        var i;
-        var empty = false;
-        playerScore[curPlayer - 1][id] = currentScore[id];
-        $("#lb_" + id + "p" + curPlayer).html(currentScore[id]);
-
-        totVal = 0;
-        for (i = 0; i < currentScore.length; i += 1) {
-            $("#bt_" + i + "p" + curPlayer).css("display", "none");
-            $("#lb_" + i + "p" + curPlayer).css("display", "inline");
-            totVal += playerScore[curPlayer - 1][i];
-            if (i === 5) {
-                $("#lb_sum1p" + curPlayer).html(totVal);
-                if (totVal >= 63) {
-                    $("#lb_bonus_p" + curPlayer).html(35);
-                    totVal += 35;
-                }
-                upperVal = totVal;
-                $("#lb_sum2p" + curPlayer).html(totVal);
-            }
-        }
-        $("#lb_sum3p" + curPlayer).html(totVal - upperVal);
-        $("#lb_sum4p" + curPlayer).html(totVal);
-        totalScore[curPlayer - 1] = totVal;
-        $div_close_list.show();
-
-        for (i = 0; i < currentScore.length; i += 1) {
-            if (playerScore[curPlayer - 1][i] === null && i !== 6) {
-                empty = true;
-            }
-        }
-
-        if (!empty && curPlayer === anzPlayer) {
-            i = totalScore.indexOf(Math.max.apply(Math, totalScore));
-            $helpTit.html(document.webL10n.get("lb_player") + " " + (i + 1) + " " + document.webL10n.get("lb_win"));
-            $helpTxt.html(document.webL10n.get("lb_with") + " " + totalScore[i] + " " + document.webL10n.get("lb_pts"));
-            $popupHelp.popup("open", {transition: "pop"});
-            gameOver = true;
-        } else {
-            curPlayer += 1;
-            if (curPlayer > anzPlayer) {
-                curPlayer = 1;
-            }
-            curTry = 1;
-            $lbTry.html(curTry + " / 3");
-            $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
-            unlockDice();
-            close_list();
-        }
-    }
-
-    $("[id^=bt_0p]").click(function (e) {
-        yahtzeeSetValue(0);
-        e.preventDefault();
-    });
-    $("[id^=bt_1p]").click(function (e) {
-        yahtzeeSetValue(1);
-        e.preventDefault();
-    });
-    $("[id^=bt_2p]").click(function (e) {
-        yahtzeeSetValue(2);
-        e.preventDefault();
-    });
-    $("[id^=bt_3p]").click(function (e) {
-        yahtzeeSetValue(3);
-        e.preventDefault();
-    });
-    $("[id^=bt_4p]").click(function (e) {
-        yahtzeeSetValue(4);
-        e.preventDefault();
-    });
-    $("[id^=bt_5p]").click(function (e) {
-        yahtzeeSetValue(5);
-        e.preventDefault();
-    });
-
-    $("[id^=bt_7p]").click(function (e) {
-        yahtzeeSetValue(7);
-        e.preventDefault();
-    });
-    $("[id^=bt_8p]").click(function (e) {
-        yahtzeeSetValue(8);
-        e.preventDefault();
-    });
-    $("[id^=bt_9p]").click(function (e) {
-        yahtzeeSetValue(9);
-        e.preventDefault();
-    });
-    $("[id^=bt_10p]").click(function (e) {
-        yahtzeeSetValue(10);
-        e.preventDefault();
-    });
-    $("[id^=bt_11p]").click(function (e) {
-        yahtzeeSetValue(11);
-        e.preventDefault();
-    });
-    $("[id^=bt_12p]").click(function (e) {
-        yahtzeeSetValue(12);
-        e.preventDefault();
-    });
-    $("[id^=bt_13p]").click(function (e) {
-        yahtzeeSetValue(13);
-        e.preventDefault();
-    });
-
-    function yahtzee_init() {
-        var i;
-        var j;
-        var $lb_p_;
-        for (i = 0; i < 14; i += 1) {
-            currentScore[i] = 0;
-            for (j = 0; j < 5; j += 1) {
-                playerScore[j][i] = null;
-                $("#bt_" + i + "p" + (j + 1)).css("display", "none");
-                $lb_p_ = $("#lb_" + i + "p" + (j + 1));
-                $lb_p_.css("display", "inline");
-                $lb_p_.html("");
-            }
-        }
-        for (j = 0; j < 5; j += 1) {
-            if (j < anzPlayer) {
-                $("#img_p" + (j + 1)).attr("style", "width:100%; background-color: #CC002F;");
-                $("#lb_sum1p" + (j + 1)).html(0);
-                $("#lb_sum2p" + (j + 1)).html(0);
-                $("#lb_sum3p" + (j + 1)).html(0);
-                $("#lb_sum4p" + (j + 1)).html(0);
-            } else {
-                $("#img_p" + (j + 1)).attr("style", "width:100%; background-color: #AAAAAA;");
-                $("#lb_sum1p" + (j + 1)).html("");
-                $("#lb_sum2p" + (j + 1)).html("");
-                $("#lb_sum3p" + (j + 1)).html("");
-                $("#lb_sum4p" + (j + 1)).html("");
-            }
-            $("#lb_bonus_p" + (j + 1)).html("");
-            totalScore[j] = 0;
-        }
-
-        curPlayer = 1;
-        curTry = 1;
-        unlockDice();
-
-        $lbTotVal.html(document.webL10n.get("lb_player") + " " + curPlayer);
-        $lbTry.html(curTry + " / 3");
-        $lbTotVal.show();
-        $lbTry.show();
-    }
-
-    $(window).resize(function () {
-        contentFormatting();
-        setTimeout(function () {
-            contentFormatting();
-        }, 500);
-    });
-
-    function set_number(yahtzee) {
-        inYahtzee = yahtzee;
-        if (inYahtzee) {
-            $lbAnz.html(document.webL10n.get("lb_anz_pl"));
-        } else {
-            $lbAnz.html(document.webL10n.get("lb_anz"));
-        }
-        $btDiceYahtzee.slideToggle();
-        setTimeout(function () {
-            $("#grp_anz").slideToggle();
-        }, 500);
-    }
-
-    $btDice.click(function (e) {
-        set_number(false);
-        e.preventDefault();
-    });
-    $btYahtzee.click(function (e) {
-        set_number(true);
-        e.preventDefault();
-    });
 
     function cloneDice(i) {
         mesh[i] = mesh[0].clone();
@@ -1084,22 +1030,138 @@
         contentFormatting();
     }
 
-    function closeSettings() {
-        g_instr = $b_instr.val() === "on";
-        if (localStorageOK) {
-            localStorage.setItem("s_color", $("input:radio[name=color]:checked").val());
-            localStorage.setItem("s_instr", $b_instr.val());
+    function close_list() {
+        fHidePopup($popupYahtzee);
+        myShakeEvent.start();
+        inDice = true;
+        animate();
+        if (gameOver) {
+            gameOver = false;
+            quit_dice();
         }
-        contentFormatting();
-        $.mobile.changePage("#title", {transition: "pop", reverse: true});
     }
 
-    $("#bt_closeSettings").click(function (e) {
-        closeSettings();
-        e.preventDefault();
-    });
+    function closeSettings() {
+        if (localStorageOK) {
+            localStorage.setItem("s_color", r_color);
+            localStorage.setItem("s_instr", $("b_instr").checked);
+        }
+        contentFormatting();
+        fHidePopup($popupSettings);
+    }
 
-    function displayDice(anz) {
+    function yahtzeeSetValue() {
+        var id = event.target.id.substring(3, event.target.id.indexOf("p"));
+        var i;
+        var empty = false;
+        playerScore[curPlayer - 1][id] = currentScore[id];
+        $("lb_" + id + "p" + curPlayer).innerHTML = currentScore[id];
+
+        totVal = 0;
+        for (i = 0; i < currentScore.length; i += 1) {
+            if (i === 6) {
+                i = 7;
+            }
+            $("bt_" + i + "p" + curPlayer).style.display = "none";
+            $("lb_" + i + "p" + curPlayer).style.display = "inline";
+            totVal += playerScore[curPlayer - 1][i];
+            if (i === 5) {
+                $("lb_sum1p" + curPlayer).innerHTML = totVal;
+                if (totVal >= 63) {
+                    $("lb_bonus_p" + curPlayer).innerHTML = "35";
+                    totVal += 35;
+                }
+                upperVal = totVal;
+                $("lb_sum2p" + curPlayer).innerHTML = totVal;
+            }
+        }
+        $("lb_sum3p" + curPlayer).innerHTML = totVal - upperVal;
+        $("lb_sum4p" + curPlayer).innerHTML = totVal;
+        totalScore[curPlayer - 1] = totVal;
+
+        for (i = 0; i < currentScore.length; i += 1) {
+            if (playerScore[curPlayer - 1][i] === null && i !== 6) {
+                empty = true;
+            }
+        }
+
+        if (!empty && curPlayer === anzPlayer) {
+            i = totalScore.indexOf(Math.max.apply(Math, totalScore));
+            $helptit.innerHTML = lLoc[nLang].lb_player + " " + (i + 1) + " " + lLoc[nLang].lb_win;
+            $help.innerHTML = lLoc[nLang].lb_with + " " + totalScore[i] + " " + lLoc[nLang].lb_pts;
+            fShowPopup($popupHelp);
+            gameOver = true;
+        } else {
+            curPlayer += 1;
+            if (curPlayer > anzPlayer) {
+                curPlayer = 1;
+            }
+            curTry = 1;
+            $lbTry.innerHTML = curTry + " / 3";
+            $lbTotVal.innerHTML = lLoc[nLang].lb_player + " " + curPlayer;
+            unlockDice();
+            close_list();
+        }
+    }
+
+    function yahtzee_init() {
+        var i;
+        var j;
+        var $lb_p_;
+        var $img;
+        for (i = 0; i < 14; i += 1) {
+            currentScore[i] = 0;
+            for (j = 0; j < 5; j += 1) {
+                if (i === 6) {
+                    i = 7;
+                }
+                playerScore[j][i] = null;
+                $("bt_" + i + "p" + (j + 1)).style.display = "none";
+                $lb_p_ = $("lb_" + i + "p" + (j + 1));
+                $lb_p_.style.display = "inline";
+                $lb_p_.innerHTML = "";
+            }
+        }
+        for (j = 0; j < 5; j += 1) {
+            $img = $("img_p" + (j + 1));
+            $img.style.width = "100%";
+            if (j < anzPlayer) {
+                $img.style.backgroundColor = "#CC002F";
+                $("lb_sum1p" + (j + 1)).innerHTML = "0";
+                $("lb_sum2p" + (j + 1)).innerHTML = "0";
+                $("lb_sum3p" + (j + 1)).innerHTML = "0";
+                $("lb_sum4p" + (j + 1)).innerHTML = "0";
+            } else {
+                $img.style.backgroundColor = "#AAAAAA";
+                $("lb_sum1p" + (j + 1)).innerHTML = "";
+                $("lb_sum2p" + (j + 1)).innerHTML = "";
+                $("lb_sum3p" + (j + 1)).innerHTML = "";
+                $("lb_sum4p" + (j + 1)).innerHTML = "";
+            }
+            $("lb_bonus_p" + (j + 1)).innerHTML = "";
+            totalScore[j] = 0;
+        }
+
+        curPlayer = 1;
+        curTry = 1;
+        unlockDice();
+
+        $lbTotVal.innerHTML = lLoc[nLang].lb_player + " " + curPlayer;
+        $lbTry.innerHTML = curTry + " / 3";
+        $lbTotVal.style.display = "block";
+        $lbTry.style.display = "block";
+    }
+
+    function setColor() {
+        r_color = parseInt(event.target.getAttribute("data-num"), 10);
+        Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
+            rButton.classList.remove("selected");
+        });
+        event.target.classList.add("selected");
+    }
+
+    // zu Spielfeld wechseln
+    function displayDice() {
         var color = [
             [[0.750000, 0.000000, 0.070000], [1.000000, 1.000000, 1.000000]],
             [[0.090000, 0.200000, 0.550000], [1.000000, 1.000000, 1.000000]],
@@ -1107,25 +1169,24 @@
             [[0.017000, 0.292000, 0.243000], [1.000000, 1.000000, 1.000000]],
             [[0.650000, 0.650000, 0.650000], [0.060000, 0.060000, 0.060000]]
         ];
-        var r_color = $("input:radio[name=color]:checked").val();
+        //var r_color = $("input:radio[name=color]:checked").val();
         inDice = true;
         if (inYahtzee) {
-            anzPlayer = anz;
+            anzPlayer = parseInt(event.target.getAttribute("data-num"), 10);
             numberOfDice(5);
-            $("input:radio[name=anzahl]").filter("[value=5]").prop("checked", true);
+            //$("input:radio[name=anzahl]").filter("[value=5]").prop("checked", true);
             closeSettings();
             yahtzee_init();
-            $bt_list.show();
+            $bt_list.style.display = "block";
         } else {
-            numberOfDice(anz);
-            $lbTotVal.hide();
-            $lbTry.hide();
-            $bt_list.hide();
+            numberOfDice(parseInt(event.target.getAttribute("data-num"), 10));
+            $lbTotVal.style.display = "none";
+            $lbTry.style.display = "none";
+            $bt_list.style.display = "none";
             unlockDice();
         }
         myShakeEvent.start();
         animate();
-        $.mobile.changePage("#dice", {transition: "slide"});
         mesh[0].children[0].material[0].color.setRGB(
             color[parseInt(r_color)][0][0],
             color[parseInt(r_color)][0][1],
@@ -1136,40 +1197,268 @@
             color[parseInt(r_color)][1][1],
             color[parseInt(r_color)][1][2]
         );
+        $Title.classList.remove("swipe-out-right");
+        $game.classList.remove("swipe-in-left");
+        $Title.classList.add("swipe-out");
+        $game.classList.add("swipe-in");
+        if (!popSwipeShown && $("b_instr").checked) {
+            setTimeout(function () {
+                $helptit.innerHTML = "";
+                $help.innerHTML = lLoc[nLang].lb_swipe;
+                fShowPopup($popupHelp);
+                popSwipeShown = true;
+            }, 700);
+        }
     }
 
-    $("[id^=bt_anz]").click(function (e) {
-        displayDice(Number($(this).attr("id").slice(-1)));
-        e.preventDefault();
-    });
+    function addShadowedLight(x, y, z, color, intensity) {
 
-    function showHelp(i) {
-        $helpTit.html(document.webL10n.get(i));
-        $helpTxt.html(document.webL10n.get(i + "_txt"));
-        $popupHelp.popup("open", {transition: "pop"});
+        var directionalLight = new THREE.DirectionalLight(color, intensity);
+        directionalLight.position.set(x, y, z);
+        scene.add(directionalLight);
+
+        directionalLight.castShadow = true;
+
+        var d = 1;
+        directionalLight.shadow.camera.left = -d;
+        directionalLight.shadow.camera.right = d;
+        directionalLight.shadow.camera.top = d;
+        directionalLight.shadow.camera.bottom = -d;
+
+        directionalLight.shadow.camera.near = 1;
+        directionalLight.shadow.camera.far = 4;
+
+        directionalLight.shadow.mapSize.width = 1024;
+        directionalLight.shadow.mapSize.height = 1024;
+
+        directionalLight.shadow.bias = -0.005;
     }
 
-    $(".help").click(function (e) {
-        showHelp($(this).attr("id"));
-        e.preventDefault();
-    });
+    function urlQuery(query) {
+        query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var expr = "[\\?&]" + query + "=([^&#]*)";
+        var regex = new RegExp(expr);
+        var results = regex.exec(window.location.href);
+        if (results !== null) {
+            return results[1];
+        } else {
+            return false;
+        }
+    }
 
-    document.webL10n.ready(function () {
+    function set_number(event) {
+        inYahtzee = (event.target.getAttribute("data-yahtzee") === "true");
+        if (inYahtzee) {
+            $("lb_anz").innerHTML = lLoc[nLang].lb_anz_pl;
+        } else {
+            $("lb_anz").innerHTML = lLoc[nLang].lb_anz;
+        }
+        $("bt_dice_yahtzee").classList.add("swipe-out-bottom");
+        setTimeout(function () {
+            $grpanz.classList.remove("swipe-out-bottom");
+            $grpanz.classList.add("swipe-in-bottom");
+        }, 500);
+    }
+
+    function fInit() {
+        var i;
+        var j;
+        var el1;
+        var el2;
+        var el3;
+        var el4;
+        // Localize
         // Example usage - https://grrd01.github.io/Dice/?lang=en
-        var urlParam = urlQuery("lang");
-        langReady = true;
-        if (urlParam && urlParam !== document.webL10n.getLanguage()) {
-            document.webL10n.setLanguage(urlParam);
-            langReady = false;
+        const cLang = (urlQuery("lang") || navigator.language || navigator.browserLanguage || (navigator.languages || ["en"])[0]).substring(0, 2).toLowerCase();
+        if (cLang === "de") {
+            nLang = 1;
+        } else if (cLang === "fr") {
+            nLang = 2;
+        } else if (cLang === "nl") {
+            nLang = 3;
+        } else if (cLang === "rm") {
+            nLang = 4;
         }
-    });
-    document.addEventListener("localized", function () {
-        if (langReady) {
-            $("html").attr("lang", document.webL10n.getLanguage().substr(0, 2));
-            $("meta[name=description]").attr("content", document.webL10n.get("lb_desc"));
-            $("link[rel=manifest]").attr("href", "manifest/appmanifest_" + document.webL10n.getLanguage().substr(0, 2) + ".json");
-            $("link[rel=canonical]").attr("href", "https://grrd01.github.io/Dice/?lang=" + document.webL10n.getLanguage().substr(0, 2));
+        if (nLang) {
+            document.documentElement.setAttribute("lang", cLang);
         }
-        langReady = true;
-    });
+        $("bt_dice").getElementsByTagName("div")[0].innerHTML = lLoc[nLang].bt_dice.replace(/\s/g, "\u00a0");
+        $("bt_yahtzee").getElementsByTagName("div")[0].innerHTML = lLoc[nLang].bt_yahtzee;
+
+        $("lb_dev").innerHTML = lLoc[nLang].lb_dev;
+        $("lb_and").innerHTML = lLoc[nLang].lb_and;
+        $("lb_model").innerHTML = lLoc[nLang].lb_model;
+        $("lb_puzzle").innerHTML = lLoc[nLang].lb_puzzle;
+        $("lb_and2").innerHTML = lLoc[nLang].lb_and;
+        $("lb_or").innerHTML = lLoc[nLang].lb_or;
+        $("lb_color").innerHTML = lLoc[nLang].lb_color;
+        $("lb_instr").innerHTML = lLoc[nLang].lb_instr;
+
+        document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].lb_desc);
+
+        // ServiceWorker initialisieren
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("sw.js").then(function (registration) {
+                    console.log("ServiceWorker registration successful with scope: ", registration.scope);
+                }, function (err) {
+                    console.log("ServiceWorker registration failed: ", err);
+                });
+            });
+        }
+
+        Array.from(document.getElementsByClassName("todo")).forEach(function (rRow, index) {
+            j = index;
+            if (j > 5) {j += 1;}
+            for (i = 1; i < 6; i += 1) {
+                el4 = document.createElement("td");
+                el1 = document.createElement("div");
+                el1.id = "bt_" + j + "p" + i;
+                el1.classList.add("mini-button", "xs");
+                el2 = document.createElement("div");
+                el2.className = "bttxt";
+                el1.appendChild(el2);
+                el4.appendChild(el1);
+                el3 = document.createElement("div");
+                el3.id = "lb_" + j + "p" + i;
+                el3.className = "d_block score";
+                el4.appendChild(el3);
+                rRow.appendChild(el4);
+            }
+        });
+
+
+        $("iInfo").addEventListener("click", function () {
+            fShowPopup($pupupInfo);
+        });
+        $("iInfoClose").addEventListener("click", function () {
+            fHidePopup($pupupInfo);
+        });
+        $("iSettings").addEventListener("click", function () {
+            fShowPopup($popupSettings);
+        });
+        $("iSettingsClose").addEventListener("click", function () {
+            closeSettings();
+        });
+        Array.from(document.getElementsByClassName("list-button-50")).forEach(function (rButton) {
+            rButton.addEventListener("click", function () {
+                set_number(event);
+            });
+        });
+        Array.from(document.getElementsByClassName("list-button-20")).forEach(function (rButton) {
+            rButton.addEventListener("click", function () {
+                displayDice(event);
+            });
+        });
+        Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
+            rButton.addEventListener("click", function () {
+                setColor(event);
+            });
+        });
+        Array.from(document.getElementsByClassName("help")).forEach(function (rButton) {
+            rButton.addEventListener("click", function () {
+                $helptit.innerHTML = lLoc[nLang][event.target.id];
+                $help.innerHTML = lLoc[nLang][event.target.id + "_txt"];
+                fShowPopup($popupHelp);
+            });
+        });
+        for (i = 0; i < 14; i += 1) {
+            if (i === 6) {
+                i = 7;
+            }
+            for (j = 1; j <= 5; j += 1) {
+                $("bt_" + i + "p" + j).addEventListener("click", function () {
+                    yahtzeeSetValue();
+                });
+            }
+        }
+
+        $("iClose").addEventListener("click", quit_dice);
+        $bt_list.addEventListener("click", function () {
+            $("iYahtzeeClose").parentElement.style.display = "block";
+            fShowPopup($popupYahtzee);
+        });
+        $("iYahtzeeClose").addEventListener("click", close_list);
+        $("iCloseHelp").addEventListener("click", function () {
+            fHidePopup($popupHelp);
+        });
+        $popupHelp.addEventListener("click", function () {
+            fHidePopup($popupHelp);
+        });
+
+        window.addEventListener("shake", shakeEventDidOccur, false);
+
+        if (!localStorageOK) {
+            $("b_instr").checked = true;
+        } else {
+            //localStorage.clear();
+            if (localStorage.getItem("s_color") === null) {
+                $("bt_col1").click();
+            } else {
+                $("bt_col" + (parseInt(localStorage.getItem("s_color")) + 1)).click();
+            }
+            if (localStorage.getItem("s_instr") === null) {
+                $("b_instr").checked = true;
+            } else {
+                $("b_instr").checked = (localStorage.getItem("s_instr") === "true");
+            }
+        }
+
+        $lbTotVal.style.display = "none";
+        $lbTry.style.display = "none";
+        container = document.createElement("div");
+        $game.appendChild(container);
+
+        camera = new THREE.PerspectiveCamera(35, gWindowsWidth / gWindowsHeight, 1, 15);
+        camera.position.set(0, 0, 2.2);
+
+        scene = new THREE.Scene();
+
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + "% downloaded");
+            }
+        };
+
+        var onError = function (xhr) {};
+
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath("./models/");
+        mtlLoader.load("dice.mtl", function (materials) {
+            materials.preload();
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath("./models/");
+            objLoader.load("dice.obj", function (object) {
+                scene.add(object);
+                mesh[0] = object;
+            }, onProgress, onError);
+        });
+
+        // Lights
+        scene.add(new THREE.AmbientLight(0x777777));
+        addShadowedLight(0.5, 1, -1, 0xffffff, 0.7);
+        addShadowedLight(-1, 1, 1, 0xffffff, 1);
+
+        // renderer
+        renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+        renderer.setClearColor(0x000000, 0);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(gWindowsWidth, gWindowsHeight);
+        renderer.gammaInput = true;
+        renderer.gammaOutput = true;
+
+        container.appendChild(renderer.domElement);
+
+        container.addEventListener("mousedown", onDocumentMouseDown, false);
+        container.addEventListener("touchstart", onDocumentTouchStart, false);
+        container.addEventListener("touchmove", onDocumentTouchMove, false);
+        container.addEventListener("touchend", onDocumentTouchEnd, false);
+
+        window.addEventListener("resize", contentFormatting, false);
+    }
+
+    fInit();
+
 }());

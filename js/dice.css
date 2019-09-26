@@ -270,6 +270,7 @@ nav, .mini-buttonlist, .close-button, .xs {
 }
 .popup-mini {
     width: 300px;
+    min-height: 80px;
     box-shadow: 2px 2px 2vmin 2px #000;
     max-width: calc(100vw - 40px);
     margin-top: calc(50vh - 40px);

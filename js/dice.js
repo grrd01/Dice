@@ -1078,7 +1078,6 @@
         $("lb_sum3p" + curPlayer).innerHTML = totVal - upperVal;
         $("lb_sum4p" + curPlayer).innerHTML = totVal;
         totalScore[curPlayer - 1] = totVal;
-        $("iYahtzeeClose").parentElement.style.display = "block";
 
         for (i = 0; i < currentScore.length; i += 1) {
             if (playerScore[curPlayer - 1][i] === null && i !== 6) {
@@ -1376,6 +1375,7 @@
 
         $("iClose").addEventListener("click", quit_dice);
         $bt_list.addEventListener("click", function () {
+            $("iYahtzeeClose").parentElement.style.display = "block";
             fShowPopup($popupYahtzee);
         });
         $("iYahtzeeClose").addEventListener("click", close_list);

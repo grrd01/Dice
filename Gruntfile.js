@@ -27,10 +27,22 @@ module.exports = function(grunt) {
                 files: {
                     '../../2_Build/Dice/sw.js': ['sw.js']
                 }
+            },
+            three: {
+                options: {
+                    compress: true,
+                    mangle: true,
+                    output: {
+                        comments: 'some'
+                    }
+                },
+                files: {
+                    '../../2_Build/Dice/js/shake.js': ['js/shake.js']
+                }
             }
         },
         uglify: {
-            three: {
+            one: {
                 options: {
                     banner: "/*\n* Loads a Wavefront .mtl file specifying materials\n* @author angelxuanchang\n*/\n",
                     mangle: true,
@@ -40,7 +52,7 @@ module.exports = function(grunt) {
                     '../../2_Build/Dice/js/loaders/MTLLoader.js': ['js/loaders/MTLLoader.js']
                 }
             },
-            five: {
+            two: {
                 options: {
                     banner: "/*\n* @author mrdoob / http://mrdoob.com/\n*/\n",
                     mangle: true,
@@ -50,17 +62,7 @@ module.exports = function(grunt) {
                     '../../2_Build/Dice/js/loaders/OBJLoader.js': ['js/loaders/OBJLoader.js']
                 }
             },
-            six: {
-                options: {
-                    banner: "/*\n* Author: Alex Gibson \n* https://github.com/alexgibson/shake.js \n* License: MIT license \n*/\n",
-                    mangle: true,
-                    compress: true
-                },
-                files: {
-                    '../../2_Build/Dice/js/shake.js': ['js/shake.js']
-                }
-            },
-            seven: {
+            three: {
                 options: {
                     banner: "/*\n* @author alteredq / http://alteredqualia.com/ \n* @author mr.doob / http://mrdoob.com/ \n*/\n",
                     mangle: true,

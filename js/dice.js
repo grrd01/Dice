@@ -1089,6 +1089,7 @@
             i = totalScore.indexOf(Math.max.apply(Math, totalScore));
             $helptit.innerHTML = lLoc[nLang].lb_player + " " + (i + 1) + " " + lLoc[nLang].lb_win;
             $help.innerHTML = lLoc[nLang].lb_with + " " + totalScore[i] + " " + lLoc[nLang].lb_pts;
+            $("iYahtzeeClose").parentElement.style.display = "block";
             fShowPopup($popupHelp);
             gameOver = true;
         } else {

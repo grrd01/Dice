@@ -453,9 +453,9 @@ nav, .mini-buttonlist, .close-button, .xs {
     left: 10px;
 }
 .close-button {
-    border-radius: 20px;
-    width: 20px;
-    height: 20px;
+    border-radius: 25px;
+    width: 25px;
+    height: 25px;
     margin: 5px;
 }
 .close-popup {

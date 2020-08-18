@@ -520,6 +520,9 @@ div.score {text-align: right; float: right;}
 td.score {text-align: right;}
 td.bold {font-weight: bold;}
 .bttxt {text-align: right; margin: 10px; pointer-events: none;}
+.shadow {
+    filter: drop-shadow( 2px 2px 2px #111);
+}
 
 .red {background-color: #CC002F;}
 .blue {background-color: #6666FF;}

@@ -1,10 +1,5 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="222px" height="200px" viewBox="0 -5 222 190" stroke="#fff"  fill="none" stroke-width="14" stroke-linecap="round">
-    <defs>
-        <filter id="shadow">
-            <feDropShadow dx="2" dy="2" stdDeviation="3"/>
-        </filter>
-    </defs>
-    <g transform="translate(10, 10) scale(0.645,0.645) rotate(-6)" filter="url(#shadow)">
+    <g transform="translate(10, 10) scale(0.645,0.645) rotate(-6)">
         <circle cx="244" cy="34" r="25" />
         <circle cx="104" cy="104" r="25" fill="#fff"/>
         <circle cx="244" cy="104" r="25" />

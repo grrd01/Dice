@@ -1,10 +1,5 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="222px" height="179px" viewBox="0 0 222 179" stroke="#fff"  fill="none" stroke-width="10" stroke-linecap="round">
-  <defs>
-    <filter id="shadow">
-      <feDropShadow dx="2" dy="2" stdDeviation="3"/>
-    </filter>
-  </defs>
-  <g transform="translate(-10,10) rotate(-6)" filter="url(#shadow)">
+  <g transform="translate(-10,10) rotate(-6)">
     <rect x="15" y="25" rx="10" ry="10" width="192" height="129"/>
     <path d="M15 40 C131 125, 91 125, 207 40"/>
     <line x1="15" y1="134" x2="77" y2="90"/>

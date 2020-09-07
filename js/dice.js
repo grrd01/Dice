@@ -31,7 +31,7 @@
         bt_back: " Back",
         bt_close: " Close",
         lb_dev: " Developed by Gérard Tyedmers with",
-        lb_and: " and",
+        lb_and: "and",
         lb_or: " or",
         lb_model: " 3D-Model created with",
         lb_puzzle: "Have a look at my other games:",
@@ -101,7 +101,7 @@
         bt_back: " Zurück",
         bt_close: " Schliessen",
         lb_dev: " Entwickelt von Gérard Tyedmers mit",
-        lb_and: " und",
+        lb_and: "und",
         lb_or: " oder",
         lb_model: " 3D-Modell erstellt mit",
         lb_puzzle: "Schau dir auch meine anderen Spiele an:",
@@ -171,7 +171,7 @@
         bt_back: " Retour",
         bt_close: " Fermer",
         lb_dev: " Développé par Gérard Tyedmers avec",
-        lb_and: " et",
+        lb_and: "et",
         lb_or: " ou",
         lb_model: " Modèle 3D créé avec",
         lb_puzzle: "Regardez aussi mes autres jeux:",
@@ -241,7 +241,7 @@
         bt_back: " Terug",
         bt_close: " Sluiten",
         lb_dev: " Ontwikkeld door Gérard Tyedmers met",
-        lb_and: " en",
+        lb_and: "en",
         lb_or: " of",
         lb_model: " 3D-model gemaakt met",
         lb_puzzle: "Kijk eens naar mijn andere spelletjes:",
@@ -311,7 +311,7 @@
         bt_back: " Enavos",
         bt_close: " Serrar",
         lb_dev: " Sviluppà da Gérard Tyedmers cun",
-        lb_and: " e",
+        lb_and: "e",
         lb_or: " u",
         lb_model: " Creà il model 3D cun",
         lb_puzzle: "Manchenta betg:",
@@ -1287,7 +1287,7 @@
         $("bt_yahtzee").getElementsByTagName("div")[0].innerHTML = lLoc[nLang].bt_yahtzee;
 
         $("lb_dev").innerHTML = lLoc[nLang].lb_dev;
-        $("lb_and").innerHTML = lLoc[nLang].lb_and;
+        $("lb_and").innerHTML = " " + lLoc[nLang].lb_and + " ";
         $("lb_model").innerHTML = lLoc[nLang].lb_model;
         $("lb_puzzle").innerHTML = lLoc[nLang].lb_puzzle;
         $("lb_color").innerHTML = lLoc[nLang].lb_color;

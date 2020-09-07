@@ -56,6 +56,13 @@
       "type": "image/png",
       "sizes": "512x512"
     }
+  ,
+    {
+      "src": "../i/icon_maskable.png",
+      "type": "image/png",
+      "sizes": "370x370",
+      "purpose": "maskable any"
+    }
   ],
   "screenshots": [
     {

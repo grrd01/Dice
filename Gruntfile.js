@@ -103,6 +103,7 @@ module.exports = function(grunt) {
                     {'../../2_Build/Dice/i/list.svg': 'i/list.svg'},
                     {'../../2_Build/Dice/i/lock.svg': 'i/lock.svg'},
                     {'../../2_Build/Dice/i/mail.svg': 'i/mail.svg'},
+                    {'../../2_Build/Dice/i/memo.svg': 'i/memo.svg'},
                     {'../../2_Build/Dice/i/ok.svg': 'i/ok.svg'},
                     {'../../2_Build/Dice/i/puzzle.svg': 'i/puzzle.svg'},
                     {'../../2_Build/Dice/i/settings.svg': 'i/settings.svg'},

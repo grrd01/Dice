@@ -34,7 +34,7 @@
         lb_and: " and",
         lb_or: " or",
         lb_model: " 3D-Model created with",
-        lb_puzzle: " Don't miss ",
+        lb_puzzle: "Have a look at my other games:",
         lb_yes: " Yes",
         lb_no: " No",
         lb_again: " Play again?",
@@ -104,7 +104,7 @@
         lb_and: " und",
         lb_or: " oder",
         lb_model: " 3D-Modell erstellt mit",
-        lb_puzzle: " Probier auch",
+        lb_puzzle: "Schau dir auch meine anderen Spiele an:",
         lb_yes: " Ja",
         lb_no: " Nein",
         lb_again: " Nochmals spielen?",
@@ -174,7 +174,7 @@
         lb_and: " et",
         lb_or: " ou",
         lb_model: " Modèle 3D créé avec",
-        lb_puzzle: " Ne manquez pas",
+        lb_puzzle: "Regardez aussi mes autres jeux:",
         lb_yes: " Oui",
         lb_no: " Non",
         lb_again: " Jouer à nouveau?",
@@ -244,7 +244,7 @@
         lb_and: " en",
         lb_or: " of",
         lb_model: " 3D-model gemaakt met",
-        lb_puzzle: " Mis niet",
+        lb_puzzle: "Kijk eens naar mijn andere spelletjes:",
         lb_yes: " Ja",
         lb_no: " Nee",
         lb_again: " Speel opnieuw?",
@@ -314,7 +314,7 @@
         lb_and: " e",
         lb_or: " u",
         lb_model: " Creà il model 3D cun",
-        lb_puzzle: " Manchenta betg",
+        lb_puzzle: "Manchenta betg:",
         lb_yes: " Gea",
         lb_no: " Na",
         lb_again: " Giugar anc ina giada?",
@@ -1290,8 +1290,6 @@
         $("lb_and").innerHTML = lLoc[nLang].lb_and;
         $("lb_model").innerHTML = lLoc[nLang].lb_model;
         $("lb_puzzle").innerHTML = lLoc[nLang].lb_puzzle;
-        $("lb_and2").innerHTML = lLoc[nLang].lb_and;
-        $("lb_or").innerHTML = lLoc[nLang].lb_or;
         $("lb_color").innerHTML = lLoc[nLang].lb_color;
         $("lb_instr").innerHTML = lLoc[nLang].lb_instr;
 

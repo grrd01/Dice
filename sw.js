@@ -7,7 +7,7 @@
 /*jslint devel: true, browser: true */ /*global  self  */
 
 var CACHE_NAME = "grrds-dice-cache";
-var CACHE_VERSION = "v2.7";
+var CACHE_VERSION = "v2.8";
 var CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 var urlsToCache = [
@@ -29,14 +29,17 @@ var urlsToCache = [
     "i/dice_sm_str.svg",
     "i/dice_sum.svg",
     "i/dice_yahtzee.svg",
+    "i/info.svg",
+    "i/list.svg",
     "i/lock.svg",
     "i/mail.svg",
+    "i/memo.svg",
+    "i/ok.svg",
     "i/puzzle.svg",
     "i/settings.svg",
     "i/tictactoe.svg",
     "i/title.png",
     "i/title2.png",
-    "i/info.svg",
     "i/x.svg",
     "js/Detector.js",
     "js/dice.css",

@@ -6,11 +6,11 @@
 
 /*jslint devel: true, browser: true */ /*global  self  */
 
-var CACHE_NAME = "grrds-dice-cache";
-var CACHE_VERSION = "v2.8";
-var CACHE = CACHE_NAME + "-" + CACHE_VERSION;
+const CACHE_NAME = "grrds-dice-cache";
+const CACHE_VERSION = "v2.10";
+const CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
-var urlsToCache = [
+const urlsToCache = [
     "index.html",
     "i/4inarow.svg",
     "i/dice.png",
@@ -70,14 +70,14 @@ self.addEventListener("fetch", function (event) {
                 if (response) {
                     return response;
                 }
-                var fetchRequest = event.request.clone();
+                const fetchRequest = event.request.clone();
                 return fetch(fetchRequest).then(
                     function (response) {
                         // Check if we received a valid response
                         if (!response || response.status !== 200 || response.type !== "basic") {
                             return response;
                         }
-                        var responseToCache = response.clone();
+                        let responseToCache = response.clone();
                         caches.open(CACHE)
                             .then(function (cache) {
                                 cache.put(event.request, responseToCache);

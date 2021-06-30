@@ -14,8 +14,8 @@
     "use strict";
 
     // Localization
-    var nLang = 0;
-    var lLoc = [{
+    let nLang = 0;
+    const lLoc = [{
         lb_desc: "grrd’s Dice is a 3D Dice Roller app and a Yahtzee game for one to five players.",
         lb_swipe: "Swipe or shake to roll the dice!",
         lb_lock: "Tap to lock a dice!",
@@ -367,76 +367,76 @@
         lb_sum4_txt: " Secziun sura e sut"
     }];
 
-    var container;
-    var mesh = [];
-    var camera;
-    var scene;
-    var renderer;
+    let container;
+    let mesh = [];
+    let camera;
+    let scene;
+    let renderer;
 
-    var targetRotationX = [0, 0, 0, 0, 0];
-    var targetRotationXOnMouseDown = [0, 0, 0, 0, 0];
-    var randX = [1, 0, 0, 0, 0];
+    let targetRotationX = [0, 0, 0, 0, 0];
+    let targetRotationXOnMouseDown = [0, 0, 0, 0, 0];
+    let randX = [1, 0, 0, 0, 0];
 
-    var targetRotationY = [0, 0, 0, 0, 0];
-    var targetRotationYOnMouseDown = [0, 0, 0, 0, 0];
-    var randY = [1, 0, 0, 0, 0];
+    let targetRotationY = [0, 0, 0, 0, 0];
+    let targetRotationYOnMouseDown = [0, 0, 0, 0, 0];
+    let randY = [1, 0, 0, 0, 0];
 
-    var targetRotationZ = [0, 0, 0, 0, 0];
-    var targetRotationZOnMouseDown = [0, 0, 0, 0, 0];
-    var randZ = [1, 0, 0, 0, 0];
+    let targetRotationZ = [0, 0, 0, 0, 0];
+    let targetRotationZOnMouseDown = [0, 0, 0, 0, 0];
+    let randZ = [1, 0, 0, 0, 0];
 
-    var mouseX = 0;
-    var mouseXOnMouseDown = 0;
+    let mouseX = 0;
+    let mouseXOnMouseDown = 0;
 
-    var mouseY = 0;
-    var mouseYOnMouseDown = 0;
-    var timeOnMouseDown;
+    let mouseY = 0;
+    let mouseYOnMouseDown = 0;
+    let timeOnMouseDown;
 
-    var inYahtzee = true;
-    var inDice = false;
-    var anzPlayer = 2;
-    var anzDices = 1;
-    var inMove = false;
-    var inLock = false;
-    var curPlayer = 1;
-    var curTry = 1;
-    var r_color = 0;
-    var gameOver = false;
+    let inYahtzee = true;
+    let inDice = false;
+    let anzPlayer = 2;
+    let anzDices = 1;
+    let inMove = false;
+    let inLock = false;
+    let curPlayer = 1;
+    let curTry = 1;
+    let r_color = 0;
+    let gameOver = false;
 
-    var popSwipeShown = false;
-    var popLockShown = false;
-    var popHelpShown = false;
+    let popSwipeShown = false;
+    let popLockShown = false;
+    let popHelpShown = false;
 
-    var curSpeed;
-    var totVal;
-    var upperVal;
-    var countVal = [0, 0, 0, 0, 0, 0];
-    var rotX;
-    var rotY;
-    var rotZ;
-    var rolling = false;
-    var diceVal = [0, 0, 0, 0, 0];
-    var locked = [false, false, false, false, false];
-    var currentScore = [];
-    var playerScore = [];
-    var ii;
+    let curSpeed;
+    let totVal;
+    let upperVal;
+    let countVal = [0, 0, 0, 0, 0, 0];
+    let rotX;
+    let rotY;
+    let rotZ;
+    let rolling = false;
+    let diceVal = [0, 0, 0, 0, 0];
+    let locked = [false, false, false, false, false];
+    let currentScore = [];
+    let playerScore = [];
+    let ii;
     for (ii = 0; ii < 5; ii += 1) {
         playerScore[ii] = [];
     }
-    var totalScore = [0, 0, 0, 0, 0];
+    let totalScore = [0, 0, 0, 0, 0];
 
-    var gWindowsHeight = document.documentElement.clientHeight;
-    var gWindowsWidth = document.documentElement.clientWidth;
-    var windowHalfX = gWindowsWidth / 2;
-    var windowHalfY = gWindowsHeight / 2;
+    let gWindowsHeight = document.documentElement.clientHeight;
+    let gWindowsWidth = document.documentElement.clientWidth;
+    let windowHalfX = gWindowsWidth / 2;
+    let windowHalfY = gWindowsHeight / 2;
 
-    var myShakeEvent = new Shake({
+    const myShakeEvent = new Shake({
         threshold: 8, // 15 - optional, shake strength threshold
         timeout: 1000 // optional, determines the frequency of event generation
     });
 
-    var localStorageOK = (function () {
-        var mod = "modernizr";
+    const localStorageOK = (function () {
+        const mod = "modernizr";
         try {
             localStorage.setItem(mod, mod);
             localStorage.removeItem(mod);
@@ -446,29 +446,33 @@
         }
     }());
 
-    var $ = function (id) {
+    const $ = function (id) {
         return document.getElementById(id);
     };
 
-    var $lbTotVal = $("lb_tot_val");
-    var $lbTry = $("lb_try");
-    var $bt_list = $("bt_list");
-    var $imgLock0 = $("img_lock0");
-    var $imgLock1 = $("img_lock1");
-    var $imgLock2 = $("img_lock2");
-    var $imgLock3 = $("img_lock3");
-    var $imgLock4 = $("img_lock4");
-    var $game = $("iGame");
-    var $Title = $("iTitle");
-    var $pupupInfo = $("iPopupInfo");
-    var $popupSettings = $("iPopupSettings");
-    var $popupYahtzee = $("popup_yahtzee");
-    var $popupHelp = $("iPopupHelp");
-    var $helptit = $("lb_helptit");
-    var $help = $("lb_help");
-    var $grpanz = $("grp_anz");
+    const $lbTotVal = $("lb_tot_val");
+    const $lbTry = $("lb_try");
+    const $bt_list = $("bt_list");
+    const $imgLock0 = $("img_lock0");
+    const $imgLock1 = $("img_lock1");
+    const $imgLock2 = $("img_lock2");
+    const $imgLock3 = $("img_lock3");
+    const $imgLock4 = $("img_lock4");
+    const $game = $("iGame");
+    const $Title = $("iTitle");
+    const $pupupInfo = $("iPopupInfo");
+    const $popupSettings = $("iPopupSettings");
+    const $popupYahtzee = $("popup_yahtzee");
+    const $popupHelp = $("iPopupHelp");
+    const $helptit = $("lb_helptit");
+    const $help = $("lb_help");
+    const $grpanz = $("grp_anz");
 
     function fShowPopup(e) {
+        document.querySelectorAll(".page:not(.swipe-out) > fieldset")[0].disabled = true;
+        if (e === $popupHelp) {
+            document.querySelectorAll("#popup_yahtzee > fieldset")[0].disabled = true;
+        }
         e.classList.remove("popup-init");
         e.classList.remove("popup-hide");
         e.classList.add("popup-show");
@@ -486,6 +490,12 @@
         }
     }
     function fHidePopup(e) {
+        if (document.getElementsByClassName("popup-show").length === 1) {
+            document.querySelectorAll(".page:not(.swipe-out) > fieldset")[0].disabled = false;
+        }
+        if (e === $popupHelp) {
+            document.querySelectorAll("#popup_yahtzee > fieldset")[0].disabled = false;
+        }
         e.classList.remove("popup-show");
         e.classList.add("popup-hide");
         setTimeout(function(){
@@ -494,7 +504,7 @@
     }
 
     function shakeEventDidOccur() {
-        var i;
+        let i;
         if (inYahtzee && rolling) {
             return;
         }
@@ -512,7 +522,7 @@
     }
 
     function onDocumentMouseMove(event) {
-        var i;
+        let i;
         mouseX = event.clientX - windowHalfX;
         mouseY = event.clientY - windowHalfY;
         if (inYahtzee && rolling) {
@@ -528,10 +538,10 @@
     }
 
     function yahtzeeCount() {
-        var i;
-        var j;
-        var $bt_p_;
-        var sequence = 0;
+        let i;
+        let j;
+        let $bt_p_;
+        let sequence = 0;
         for (i = 0; i < currentScore.length; i += 1) {
             currentScore[i] = 0;
         }
@@ -585,7 +595,7 @@
     }
 
     function lockDice() {
-        var i;
+        let i;
         for (i = 0; i < anzDices; i += 1) {
             if (!locked[i]) {
                 targetRotationX[i] = targetRotationXOnMouseDown[i];
@@ -654,7 +664,7 @@
     }
 
     function unlockDice() {
-        var i;
+        let i;
         for (i = 0; i < 5; i += 1) {
             locked[i] = false;
             $("img_lock" + i).style.display = "none";
@@ -662,7 +672,7 @@
     }
 
     function mouseOutMouseUp(event) {
-        var i;
+        let i;
         mouseX = event.clientX - windowHalfX;
         mouseY = event.clientY - windowHalfY;
 
@@ -700,7 +710,7 @@
     }
 
     function onDocumentMouseDown(event) {
-        var i;
+        let i;
         $lbTotVal.style.display = "none";
         $lbTry.style.display = "none";
         event.preventDefault();
@@ -723,7 +733,7 @@
     }
 
     function onDocumentTouchEnd(event) {
-        var i;
+        let i;
         event.preventDefault();
         if (inYahtzee && rolling) {
             return;
@@ -747,7 +757,7 @@
     }
 
     function onDocumentTouchMove(event) {
-        var i;
+        let i;
         inMove = true;
         if (event.touches.length === 1) {
             event.preventDefault();
@@ -767,7 +777,7 @@
     }
 
     function onDocumentTouchStart(event) {
-        var i;
+        let i;
         timeOnMouseDown = new Date();
         inMove = false;
         if (event.touches.length === 1) {
@@ -791,8 +801,8 @@
     }
 
     function render() {
-        var i;
-        var j;
+        let i;
+        let j;
         curSpeed = 0;
         for (i = 0; i < anzDices; i += 1) {
             mesh[i].rotation.y += (targetRotationX[i] - mesh[i].rotation.y) * 0.05;
@@ -980,7 +990,7 @@
     }
 
     function quit_dice() {
-        var i;
+        let i;
         myShakeEvent.stop();
         inDice = false;
         $lbTotVal.style.display = "none";
@@ -992,6 +1002,7 @@
         $game.classList.remove("swipe-in");
         $Title.classList.add("swipe-out-right");
         $game.classList.add("swipe-in-left");
+        document.getElementsByTagName("FIELDSET")[0].disabled = false;
         for (i = 0; i < anzDices; i += 1) {
             mesh[i].rotation.y = targetRotationX[i];
             mesh[i].rotation.x = targetRotationY[i];
@@ -1012,7 +1023,7 @@
     }
 
     function numberOfDice(anz) {
-        var i;
+        let i;
         if (anz > anzDices) {
             for (i = anzDices; i < anz; i += 1) {
                 if (mesh[i] === undefined || mesh[i] === null) {
@@ -1050,10 +1061,10 @@
         fHidePopup($popupSettings);
     }
 
-    function yahtzeeSetValue() {
-        var id = event.target.id.substring(3, event.target.id.indexOf("p"));
-        var i;
-        var empty = false;
+    function yahtzeeSetValue(e) {
+        const id = e.target.id.substring(3, e.target.id.indexOf("p"));
+        let i;
+        let empty = false;
         playerScore[curPlayer - 1][id] = currentScore[id];
         $("lb_" + id + "p" + curPlayer).innerHTML = currentScore[id];
 
@@ -1106,10 +1117,10 @@
     }
 
     function yahtzee_init() {
-        var i;
-        var j;
-        var $lb_p_;
-        var $img;
+        let i;
+        let j;
+        let $lb_p_;
+        let $img;
         for (i = 0; i < 14; i += 1) {
             currentScore[i] = 0;
             for (j = 0; j < 5; j += 1) {
@@ -1153,17 +1164,17 @@
         $lbTry.style.display = "block";
     }
 
-    function setColor() {
-        r_color = parseInt(event.target.getAttribute("data-num"), 10);
+    function setColor(e) {
+        r_color = parseInt(e.target.getAttribute("data-num"), 10);
         Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
             rButton.classList.remove("selected");
         });
-        event.target.classList.add("selected");
+        e.target.classList.add("selected");
     }
 
     // zu Spielfeld wechseln
-    function displayDice() {
-        var color = [
+    function displayDice(e) {
+        const color = [
             [[0.750000, 0.000000, 0.070000], [1.000000, 1.000000, 1.000000]],
             [[0.090000, 0.200000, 0.550000], [1.000000, 1.000000, 1.000000]],
             [[0.900000, 0.500000, 0.005000], [1.000000, 1.000000, 1.000000]],
@@ -1173,14 +1184,14 @@
         //var r_color = $("input:radio[name=color]:checked").val();
         inDice = true;
         if (inYahtzee) {
-            anzPlayer = parseInt(event.target.getAttribute("data-num"), 10);
+            anzPlayer = parseInt(e.target.getAttribute("data-num"), 10);
             numberOfDice(5);
             //$("input:radio[name=anzahl]").filter("[value=5]").prop("checked", true);
             closeSettings();
             yahtzee_init();
             $bt_list.style.display = "block";
         } else {
-            numberOfDice(parseInt(event.target.getAttribute("data-num"), 10));
+            numberOfDice(parseInt(e.target.getAttribute("data-num"), 10));
             $lbTotVal.style.display = "none";
             $lbTry.style.display = "none";
             $bt_list.style.display = "none";
@@ -1198,6 +1209,7 @@
             color[parseInt(r_color)][1][1],
             color[parseInt(r_color)][1][2]
         );
+        document.getElementsByTagName("FIELDSET")[0].disabled = true;
         $Title.classList.remove("swipe-out-right");
         $game.classList.remove("swipe-in-left");
         $Title.classList.add("swipe-out");
@@ -1214,13 +1226,13 @@
 
     function addShadowedLight(x, y, z, color, intensity) {
 
-        var directionalLight = new THREE.DirectionalLight(color, intensity);
+        const directionalLight = new THREE.DirectionalLight(color, intensity);
         directionalLight.position.set(x, y, z);
         scene.add(directionalLight);
 
         directionalLight.castShadow = true;
 
-        var d = 1;
+        const d = 1;
         directionalLight.shadow.camera.left = -d;
         directionalLight.shadow.camera.right = d;
         directionalLight.shadow.camera.top = d;
@@ -1237,9 +1249,9 @@
 
     function urlQuery(query) {
         query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var expr = "[\\?&]" + query + "=([^&#]*)";
-        var regex = new RegExp(expr);
-        var results = regex.exec(window.location.href);
+        const expr = "[\\?&]" + query + "=([^&#]*)";
+        const regex = new RegExp(expr);
+        const results = regex.exec(window.location.href);
         if (results !== null) {
             return results[1];
         } else {
@@ -1247,8 +1259,8 @@
         }
     }
 
-    function set_number(event) {
-        inYahtzee = (event.target.getAttribute("data-yahtzee") === "true");
+    function set_number(e) {
+        inYahtzee = (e.target.getAttribute("data-yahtzee") === "true");
         if (inYahtzee) {
             $("lb_anz").innerHTML = lLoc[nLang].lb_anz_pl;
         } else {
@@ -1261,13 +1273,34 @@
         }, 500);
     }
 
+    document.onkeydown = function (e) {
+        // mit Pfeiltasten navigieren
+        switch (e.key) {
+            case "Escape":
+                let aOpenPopups =  document.getElementsByClassName("popup-show");
+                let nOpenPopups =  aOpenPopups.length;
+                if (nOpenPopups > 0) {
+                    if (aOpenPopups[nOpenPopups - 1] === $popupYahtzee) {
+                        if ($("iYahtzeeClose").parentElement.style.display === "block") {
+                            close_list();
+                        }
+                    } else {
+                        fHidePopup(aOpenPopups[nOpenPopups - 1]);
+                    }
+                } else if ($game.classList.contains("swipe-in") === true) {
+                    quit_dice();
+                }
+                break;
+        }
+    }
+
     function fInit() {
-        var i;
-        var j;
-        var el1;
-        var el2;
-        var el3;
-        var el4;
+        let i;
+        let j;
+        let el1;
+        let el2;
+        let el3;
+        let el4;
         // Localize
         // Example usage - https://grrd01.github.io/Dice/?lang=en
         const cLang = (urlQuery("lang") || navigator.language || navigator.browserLanguage || (navigator.languages || ["en"])[0]).substring(0, 2).toLowerCase();
@@ -1283,8 +1316,8 @@
         if (nLang) {
             document.documentElement.setAttribute("lang", cLang);
         }
-        $("bt_dice").getElementsByTagName("div")[0].innerHTML = lLoc[nLang].bt_dice.replace(/\s/g, "\u00a0");
-        $("bt_yahtzee").getElementsByTagName("div")[0].innerHTML = lLoc[nLang].bt_yahtzee;
+        $("bt_dice").getElementsByTagName("span")[0].innerHTML = lLoc[nLang].bt_dice.replace(/\s/g, "\u00a0");
+        $("bt_yahtzee").getElementsByTagName("span")[0].innerHTML = lLoc[nLang].bt_yahtzee;
 
         $("lb_dev").innerHTML = lLoc[nLang].lb_dev;
         $("lb_and").innerHTML = " " + lLoc[nLang].lb_and + " ";
@@ -1311,10 +1344,10 @@
             if (j > 5) {j += 1;}
             for (i = 1; i < 6; i += 1) {
                 el4 = document.createElement("td");
-                el1 = document.createElement("div");
+                el1 = document.createElement("button");
                 el1.id = "bt_" + j + "p" + i;
                 el1.classList.add("mini-button", "xs");
-                el2 = document.createElement("div");
+                el2 = document.createElement("span");
                 el2.className = "bttxt";
                 el1.appendChild(el2);
                 el4.appendChild(el1);
@@ -1340,24 +1373,24 @@
             closeSettings();
         });
         Array.from(document.getElementsByClassName("list-button-50")).forEach(function (rButton) {
-            rButton.addEventListener("click", function () {
-                set_number(event);
+            rButton.addEventListener("click", function (e) {
+                set_number(e);
             });
         });
         Array.from(document.getElementsByClassName("list-button-20")).forEach(function (rButton) {
-            rButton.addEventListener("click", function () {
-                displayDice(event);
+            rButton.addEventListener("click", function (e) {
+                displayDice(e);
             });
         });
         Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
-            rButton.addEventListener("click", function () {
-                setColor(event);
+            rButton.addEventListener("click", function (e) {
+                setColor(e);
             });
         });
         Array.from(document.getElementsByClassName("help")).forEach(function (rButton) {
-            rButton.addEventListener("click", function () {
-                $helptit.innerHTML = lLoc[nLang][event.target.id];
-                $help.innerHTML = lLoc[nLang][event.target.id + "_txt"];
+            rButton.addEventListener("click", function (e) {
+                $helptit.innerHTML = lLoc[nLang][e.target.id];
+                $help.innerHTML = lLoc[nLang][e.target.id + "_txt"];
                 fShowPopup($popupHelp);
             });
         });
@@ -1366,8 +1399,8 @@
                 i = 7;
             }
             for (j = 1; j <= 5; j += 1) {
-                $("bt_" + i + "p" + j).addEventListener("click", function () {
-                    yahtzeeSetValue();
+                $("bt_" + i + "p" + j).addEventListener("click", function (e) {
+                    yahtzeeSetValue(e);
                 });
             }
         }
@@ -1413,20 +1446,20 @@
 
         scene = new THREE.Scene();
 
-        var onProgress = function (xhr) {
+        const onProgress = function (xhr) {
             if (xhr.lengthComputable) {
-                var percentComplete = xhr.loaded / xhr.total * 100;
+                const percentComplete = xhr.loaded / xhr.total * 100;
                 console.log(Math.round(percentComplete, 2) + "% downloaded");
             }
         };
 
-        var onError = function (xhr) {};
+        const onError = function (xhr) {};
 
-        var mtlLoader = new THREE.MTLLoader();
+        const mtlLoader = new THREE.MTLLoader();
         mtlLoader.setPath("./models/");
         mtlLoader.load("dice.mtl", function (materials) {
             materials.preload();
-            var objLoader = new THREE.OBJLoader();
+            const objLoader = new THREE.OBJLoader();
             objLoader.setMaterials(materials);
             objLoader.setPath("./models/");
             objLoader.load("dice.obj", function (object) {

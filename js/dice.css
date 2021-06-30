@@ -34,6 +34,13 @@ body {
     background: linear-gradient(#444, #222);
 }
 
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+    display: grid;
+}
+
 .content {
     margin: 5px;
 }
@@ -247,7 +254,7 @@ nav, .mini-buttonlist, .close-button, .xs {
     bottom: 0;
     width: calc(100% - 10px);
 }
-.list-button:hover, .mini-button:hover, .close-button:hover {
+.list-button:hover, .mini-button:hover, .close-button:hover, .list-button:focus, .mini-button:focus, .close-button:focus {
     background-image: linear-gradient(#555555, #383838), linear-gradient(#ccc, #555 10px, #222 100%);
 }
 .list-button:active, .mini-button:active, .close-button:active {
@@ -410,7 +417,18 @@ nav, .mini-buttonlist, .close-button, .xs {
 .buffer {
     height: 40px;
 }
+button {
+    color: white;
+    font-size: 0;
+}
 
+button > span {
+    font-size: large;
+    display: block;
+}
+button:focus {
+    outline: none;
+}
 .button {
     float: right;
     border:  1px transparent;
@@ -421,30 +439,27 @@ nav, .mini-buttonlist, .close-button, .xs {
     background-origin: border-box;
     background-clip: content-box, border-box;
     padding: 1px;
-    height: 40px;
-    width: 100px;
+    height: 42px;
+    width: 102px;
     cursor: pointer;
     text-align: center;
     font-weight: bold;
 }
-.button:hover, .selected:hover {
+.button:hover, .selected:hover, .button:focus, .selected:focus {
     background-image: linear-gradient(#ff2162, #931120), linear-gradient(#ffcacc, #f34a43 12px, #65111a 100%);
 }
 .button:active, .selected:active {
     background-image: linear-gradient(#830110, #de0139), linear-gradient(#55010a, #e33a33 calc(100% - 12px), #ffbabc 100%);;
 }
-.button-span {
-    margin-top: 8px;
-}
-.button-span:active {
-    margin-top: 10px;
+.button:active > .button-span {
+    margin-top: 5px;
 }
 .button-span > img {
     margin-bottom: -3px;
 }
 .mini-button {
-    width: 59px;
-    height: 40px;
+    width: 60px;
+    height: 42px;
     padding: 1px 0 1px 0;
     display: inline-block;
 }
@@ -509,8 +524,9 @@ a:link {
 a:visited {
     color: #de0139;
 }
-a:hover {
+a:hover, a:focus {
     color: #ff2162;
+    outline: none;
 }
 a:active {
     color: #ff2162;
@@ -563,7 +579,7 @@ td.bold {font-weight: bold;}
     }
     #img_title3q {width:calc(22% - 40px); margin-left: 20px;}
     #img_title3h {display: none;}
-    .list-button > div {
+    .list-button > span {
         margin-top: 10vh;
         margin-bottom: 10vh;
         pointer-events: none;
@@ -610,7 +626,7 @@ td.bold {font-weight: bold;}
     }
     #img_title3q {display: none;}
     #img_title3h {display: block; margin: 40px auto 0 auto; width: 55%;}
-    .list-button > div {
+    .list-button > span {
         margin-top: 20px;
         margin-bottom: 20px;
         pointer-events: none;
@@ -648,7 +664,8 @@ td.bold {font-weight: bold;}
 
 /* Toggle-Button */
 .tgl {
-    display: none;
+    opacity: 0;
+    position: absolute;
 }
 .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
     box-sizing: border-box;
@@ -740,3 +757,11 @@ td.bold {font-weight: bold;}
 .tgl-skewed:checked + .tgl-btn:active:after {
     left: 10%;
 }
+.tgl-skewed:checked:hover + .tgl-btn, .tgl-skewed:checked:focus + .tgl-btn {
+    background-image: linear-gradient(#ff2162, #931120), linear-gradient(#ffcacc, #f34a43 12px, #65111a 100%);;
+}
+.tgl-skewed:not(:checked):hover + .tgl-btn, .tgl-skewed:not(:checked):focus + .tgl-btn {
+    background: linear-gradient(#bbb, #666),
+    linear-gradient(#ddd, #666 10px, #333 100%);
+}
+

@@ -476,6 +476,8 @@
         e.classList.remove("popup-init");
         e.classList.remove("popup-hide");
         e.classList.add("popup-show");
+        // Fix for Firefox OnKeydown
+        document.activeElement.blur();
         if (e === $popupYahtzee) {
             myShakeEvent.stop();
             inDice = false;

@@ -16,7 +16,7 @@
     "grunt-contrib-uglify": "^4.0.1",
     "grunt-replace": "^1.0.1",
     "grunt-svgmin": "^5.0.0",
-    "grunt-terser": "^0.1.0",
+    "grunt-terser": "^2.0.0",
     "load-grunt-tasks": "^4.0.0"
   }
 }

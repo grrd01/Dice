@@ -7,7 +7,7 @@
 /*jslint devel: true, browser: true */ /*global  self  */
 
 const CACHE_NAME = "grrds-dice-cache";
-const CACHE_VERSION = "v2.10";
+const CACHE_VERSION = "v2.11";
 const CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 const urlsToCache = [
@@ -36,6 +36,7 @@ const urlsToCache = [
     "i/memo.svg",
     "i/ok.svg",
     "i/puzzle.svg",
+    "i/reversi.svg",
     "i/settings.svg",
     "i/tictactoe.svg",
     "i/title.png",

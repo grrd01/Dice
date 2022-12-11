@@ -208,7 +208,7 @@ fieldset {
 }
 .list-button {
     display: inline-block;
-    width: calc(50vw - 12px);
+    flex-grow: 1;
     text-align: center;
     padding: 1px 0 1px 0;
     margin-left: 1px;
@@ -224,15 +224,6 @@ fieldset {
     border-bottom-right-radius: 10px;
     padding: 1px 1px 1px 0;
     margin-left: 1px;
-}
-.list-button-50 {
-    width: calc(50vw - 12px);
-}
-.list-button-20 {
-    width: calc(20% - 1.5px);
-}
-.list-button-col {
-    width: calc(20% - 1.5px);
 }
 .mini-button, .close-button {
     padding: 1px;

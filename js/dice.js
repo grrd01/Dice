@@ -1168,7 +1168,7 @@
 
     function setColor(e) {
         r_color = parseInt(e.target.getAttribute("data-num"), 10);
-        Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
+        Array.from(document.getElementById("grp_col").children).forEach(function (rButton) {
             rButton.classList.remove("selected");
         });
         e.target.classList.add("selected");
@@ -1374,17 +1374,17 @@
         $("iSettingsClose").addEventListener("click", function () {
             closeSettings();
         });
-        Array.from(document.getElementsByClassName("list-button-50")).forEach(function (rButton) {
+        Array.from(document.getElementById("grp_2").children).forEach(function (rButton) {
             rButton.addEventListener("click", function (e) {
                 set_number(e);
             });
         });
-        Array.from(document.getElementsByClassName("list-button-20")).forEach(function (rButton) {
+        Array.from(document.getElementById("grp_5").children).forEach(function (rButton) {
             rButton.addEventListener("click", function (e) {
                 displayDice(e);
             });
         });
-        Array.from(document.getElementsByClassName("list-button-col")).forEach(function (rButton) {
+        Array.from(document.getElementById("grp_col").children).forEach(function (rButton) {
             rButton.addEventListener("click", function (e) {
                 setColor(e);
             });

@@ -7,7 +7,7 @@
 /*jslint devel: true, browser: true */ /*global  self  */
 
 const CACHE_NAME = "grrds-dice-cache";
-const CACHE_VERSION = "v2.11";
+const CACHE_VERSION = "v2.12";
 const CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 const urlsToCache = [

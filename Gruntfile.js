@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '../../2_Build/Dice/js/dice.js': ['js/dice.js']
+                    'dist/js/dice.js': ['js/dice.js']
                 }
             },
             two: {
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '../../2_Build/Dice/sw.js': ['sw.js']
+                    'dist/sw.js': ['sw.js']
                 }
             },
             three: {
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '../../2_Build/Dice/js/shake.js': ['js/shake.js']
+                    'dist/js/shake.js': ['js/shake.js']
                 }
             }
         },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../2_Build/Dice/js/loaders/MTLLoader.js': ['js/loaders/MTLLoader.js']
+                    'dist/js/loaders/MTLLoader.js': ['js/loaders/MTLLoader.js']
                 }
             },
             two: {
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../2_Build/Dice/js/loaders/OBJLoader.js': ['js/loaders/OBJLoader.js']
+                    'dist/js/loaders/OBJLoader.js': ['js/loaders/OBJLoader.js']
                 }
             },
             three: {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    '../../2_Build/Dice/js/Detector.js': ['js/Detector.js']
+                    'dist/js/Detector.js': ['js/Detector.js']
                 }
             }
 
@@ -83,33 +83,33 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: [
-                    {'../../2_Build/Dice/i/4inarow.svg': 'i/4inarow.svg'},
-                    {'../../2_Build/Dice/i/dice_1.svg': 'i/dice_1.svg'},
-                    {'../../2_Build/Dice/i/dice_2.svg': 'i/dice_2.svg'},
-                    {'../../2_Build/Dice/i/dice_3.svg': 'i/dice_3.svg'},
-                    {'../../2_Build/Dice/i/dice_3kind.svg': 'i/dice_3kind.svg'},
-                    {'../../2_Build/Dice/i/dice_4.svg': 'i/dice_4.svg'},
-                    {'../../2_Build/Dice/i/dice_4kind.svg': 'i/dice_4kind.svg'},
-                    {'../../2_Build/Dice/i/dice_5.svg': 'i/dice_5.svg'},
-                    {'../../2_Build/Dice/i/dice_6.svg': 'i/dice_6.svg'},
-                    {'../../2_Build/Dice/i/dice_chance.svg': 'i/dice_chance.svg'},
-                    {'../../2_Build/Dice/i/dice_full_h.svg': 'i/dice_full_h.svg'},
-                    {'../../2_Build/Dice/i/dice_lg_str.svg': 'i/dice_lg_str.svg'},
-                    {'../../2_Build/Dice/i/dice_plus.svg': 'i/dice_plus.svg'},
-                    {'../../2_Build/Dice/i/dice_sm_str.svg': 'i/dice_sm_str.svg'},
-                    {'../../2_Build/Dice/i/dice_sum.svg': 'i/dice_sum.svg'},
-                    {'../../2_Build/Dice/i/dice_yahtzee.svg': 'i/dice_yahtzee.svg'},
-                    {'../../2_Build/Dice/i/info.svg': 'i/info.svg'},
-                    {'../../2_Build/Dice/i/list.svg': 'i/list.svg'},
-                    {'../../2_Build/Dice/i/lock.svg': 'i/lock.svg'},
-                    {'../../2_Build/Dice/i/mail.svg': 'i/mail.svg'},
-                    {'../../2_Build/Dice/i/memo.svg': 'i/memo.svg'},
-                    {'../../2_Build/Dice/i/ok.svg': 'i/ok.svg'},
-                    {'../../2_Build/Dice/i/puzzle.svg': 'i/puzzle.svg'},
-                    {'../../2_Build/Dice/i/reversi.svg': 'i/reversi.svg'},
-                    {'../../2_Build/Dice/i/settings.svg': 'i/settings.svg'},
-                    {'../../2_Build/Dice/i/tictactoe.svg': 'i/tictactoe.svg'},
-                    {'../../2_Build/Dice/i/x.svg': 'i/x.svg'}
+                    {'dist/i/4inarow.svg': 'i/4inarow.svg'},
+                    {'dist/i/dice_1.svg': 'i/dice_1.svg'},
+                    {'dist/i/dice_2.svg': 'i/dice_2.svg'},
+                    {'dist/i/dice_3.svg': 'i/dice_3.svg'},
+                    {'dist/i/dice_3kind.svg': 'i/dice_3kind.svg'},
+                    {'dist/i/dice_4.svg': 'i/dice_4.svg'},
+                    {'dist/i/dice_4kind.svg': 'i/dice_4kind.svg'},
+                    {'dist/i/dice_5.svg': 'i/dice_5.svg'},
+                    {'dist/i/dice_6.svg': 'i/dice_6.svg'},
+                    {'dist/i/dice_chance.svg': 'i/dice_chance.svg'},
+                    {'dist/i/dice_full_h.svg': 'i/dice_full_h.svg'},
+                    {'dist/i/dice_lg_str.svg': 'i/dice_lg_str.svg'},
+                    {'dist/i/dice_plus.svg': 'i/dice_plus.svg'},
+                    {'dist/i/dice_sm_str.svg': 'i/dice_sm_str.svg'},
+                    {'dist/i/dice_sum.svg': 'i/dice_sum.svg'},
+                    {'dist/i/dice_yahtzee.svg': 'i/dice_yahtzee.svg'},
+                    {'dist/i/info.svg': 'i/info.svg'},
+                    {'dist/i/list.svg': 'i/list.svg'},
+                    {'dist/i/lock.svg': 'i/lock.svg'},
+                    {'dist/i/mail.svg': 'i/mail.svg'},
+                    {'dist/i/memo.svg': 'i/memo.svg'},
+                    {'dist/i/ok.svg': 'i/ok.svg'},
+                    {'dist/i/puzzle.svg': 'i/puzzle.svg'},
+                    {'dist/i/reversi.svg': 'i/reversi.svg'},
+                    {'dist/i/settings.svg': 'i/settings.svg'},
+                    {'dist/i/tictactoe.svg': 'i/tictactoe.svg'},
+                    {'dist/i/x.svg': 'i/x.svg'}
                 ]
             }
         },
@@ -122,7 +122,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'i',
                     src: ['*.{png,jpg,gif}'],
-                    dest: '../../2_Build/Dice/i/'
+                    dest: 'dist/i/'
                 }]
             }
         },
@@ -132,7 +132,7 @@ module.exports = function(grunt) {
                     banner: "/*\n* grrd's Dice\n* Copyright (c) 2015 Gerard Tyedmers, grrd@gmx.net\n* Licensed under the MPL License\n*/\n"
                 },
                 files: {
-                    '../../2_Build/Dice/js/dice.css': ['js/dice.css']
+                    'dist/js/dice.css': ['js/dice.css']
                 }
             }
         },
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     src: 'index.html',
-                    dest: '../../2_Build/Dice'
+                    dest: 'dist'
                 }]
             }
         },
@@ -162,20 +162,21 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ['../../2_Build/Dice/index.html'], dest: '../../2_Build/Dice/'}
+                    {expand: true, flatten: true, src: ['dist/index.html'], dest: 'dist/'}
                 ]
             }
         },
         copy: {
             main: {
                 files: [
-                    {expand: true, src: ['locales/**'], dest: '../../2_Build/Dice/'},
-                    {expand: true, flatten: true, src: ['manifest/*'], dest: '../../2_Build/Dice/manifest/'},
-                    {expand: true, flatten: true, src: ['models/*'], dest: '../../2_Build/Dice/models/'},
-                    {expand: true, flatten: true, src: ['i/*.ico'], dest: '../../2_Build/Dice/i/'},
-                    {expand: true, flatten: true, src: ['js/build/*'], dest: '../../2_Build/Dice/js/build/'},
-                    {expand: true, flatten: true, src: ['**.txt'], dest: '../../2_Build/Dice/'},
-                    {expand: true, flatten: true, src: ['**.md'], dest: '../../2_Build/Dice/'}
+                    {expand: true, src: ['locales/**'], dest: 'dist/'},
+                    {expand: true, flatten: true, src: ['manifest/*'], dest: 'dist/manifest/'},
+                    {expand: true, flatten: true, src: ['models/*'], dest: 'dist/models/'},
+                    {expand: true, flatten: true, src: ['i/*.ico'], dest: 'dist/i/'},
+                    {expand: true, flatten: true, src: ['js/build/*'], dest: 'dist/js/build/'},
+                    {expand: true, flatten: true, src: ['**.txt'], dest: 'dist/'},
+                    {expand: true, flatten: true, src: ['**.md'], dest: 'dist/'},
+                    {expand: true, flatten: true, src: ['CNAME'], dest: 'dist/'}
                 ]
             }
         }
